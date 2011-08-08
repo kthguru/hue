@@ -5,10 +5,10 @@ from distutils.cmd import Command
 from distutils.command.build import build
 
 if (sys.version_info >= (2, 6, 0)):
-    raise ValueError("This extension should not be used with "
-                     + "Python 2.6 or later (already built in), "
-                     + "and has not been tested with Python 2.3.4 "
-                     + "or earlier.")
+    sys.stderr.write("Skipping building ssl-1.15 because" +
+                     "it is a built-in module in Python" +
+                     "2.6 and later.\n")
+    sys.exit(0)
 elif (sys.version_info < (2, 3, 5)):
     sys.stderr.write("Warning:  This code has not been tested "
                      + "with versions of Python less than 2.3.5.\n")
@@ -166,7 +166,7 @@ if sys.platform == 'win32':
 else:
     ssl_incs, ssl_libs, libs = find_ssl()
 
-testdir = os.path.join(get_python_lib(False, True), "test")                                 
+testdir = os.path.join(get_python_lib(False), "test")                                 
 
 setup(name='ssl',
       version='1.15',
