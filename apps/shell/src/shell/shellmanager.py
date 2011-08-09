@@ -42,6 +42,8 @@ from eventlet.green import time
 from hadoop.cluster import all_mrclusters, get_all_hdfs
 
 LOG = logging.getLogger(__name__)
+SHELL_OUTPUT_LOGGER = logging.getLogger("shell_output")
+SHELL_INPUT_LOGGER = logging.getLogger("shell_input")
 
 _SETUID_PROG = os.path.join(os.path.dirname(__file__), 'build', 'setuid')
 
@@ -75,7 +77,7 @@ class Shell(object):
     try:
       tty.setraw(parent)
     except tty.error:
-      LOG.debug("Could not set parent fd to raw mode, user will see echoed input.")
+      LOG.debug("Could not set parent fd to raw mode, user will see duplicated input.")
 
     subprocess_env[constants.HOME] = user_info.pw_dir
     command_to_use = [_SETUID_PROG, str(user_info.pw_uid), str(user_info.pw_gid)]
@@ -97,6 +99,11 @@ class Shell(object):
       os.close(child)
       raise
 
+    SHELL_OUTPUT_LOGGER.info("Created subprocess with command '%s' for user '%s'. PID: %d. Shell ID: %s" %
+                                                             (command_to_use, username, p.pid,shell_id,))
+
+    SHELL_INPUT_LOGGER.info("Created subprocess with command '%s' for user '%s'. PID: %d. Shell ID: %s" %
+                                                             (command_to_use, username, p.pid,shell_id,))
     # State that shouldn't be touched by any other classes.
     self._output_buffer_length = 0
     self._commands = []
@@ -202,13 +209,15 @@ class Shell(object):
 
     Returns a dictionary with {return_code: bool}.
     """
-    LOG.debug("Command received for pid %d : '%s'" % (self.pid, repr(command),))
+    SHELL_INPUT_LOGGER.info("Command received for pid %d : '%s'" % (self.pid, repr(command),))
     # TODO(bc): Track the buffer size to avoid calling getvalue() every time
     if len(self._write_buffer.getvalue()) >= shell.conf.SHELL_WRITE_BUFFER_LIMIT.get():
-      LOG.debug("Write buffer too full, dropping command")
+      SHELL_INPUT_LOGGER.info("Write buffer too full, dropping command '%s' for pid %d" %
+                                                               (repr(command), self.pid,))
       return { constants.BUFFER_EXCEEDED : True }
     else:
-      LOG.debug("Write buffer has room. Adding command to end of write buffer.")
+      SHELL_INPUT_LOGGER.info("Adding command '%s' to end of write buffer for pid %d" %
+                                                               (repr(command), self.pid,))
       self._append_to_write_buffer(command)
       eventlet.spawn_n(self._write_child_when_able)
       return { constants.SUCCESS : True }
@@ -276,6 +285,7 @@ class Shell(object):
       elif e.errno != errno.EAGAIN:
         format_str = "Encountered error while writing to process with PID %d:%s"
         LOG.error(format_str % (self.pid, e))
+        SHELL_INPUT_LOGGER.error(format_str % (self.pid, e))
         self.mark_for_cleanup()
     else: # This else clause is on the try/except above, not the if/elif
       if bytes_written != len(buffer_contents):
@@ -304,6 +314,7 @@ class Shell(object):
     result = None
     try:
       next_output = os.read(ofd, shell.conf.SHELL_OS_READ_AMOUNT.get())
+      SHELL_OUTPUT_LOGGER.info("Output from process with PID %d: '%s'" % (self.pid, next_output,))
       self._read_buffer.seek(self._output_buffer_length)
       self._read_buffer.write(next_output)
       length = len(next_output)
@@ -321,6 +332,7 @@ class Shell(object):
       elif e.errno != errno.EAGAIN:
         format_str = "Encountered error while reading from process with PID %d : %s"
         LOG.error( format_str % (self.subprocess.pid, e))
+        SHELL_OUTPUT_LOGGER.error(format_str % (self.subprocess.pid, e))
         self.mark_for_cleanup()
     else:
       more_available = length >= shell.conf.SHELL_OS_READ_AMOUNT.get()
@@ -345,10 +357,15 @@ class Shell(object):
       try:
         LOG.debug("Sending SIGKILL to process with PID %d" % (self.subprocess.pid,))
         os.kill(self.subprocess.pid, signal.SIGKILL)
-        # We could try figure out which exit statuses are fine and which ones are errors.
-        # But that would be difficult to do correctly since os.wait might block.
+        wait_result = os.waitpid(self.subprocess.pid, 0)
+        msg = "Subprocess with PID %d exited with status %d" % wait_result
       except OSError:
-        pass # This means the subprocess was already killed, which happens if the command was "quit"
+        msg = "Subprocess with PID %d killed successfully" % (self.subprocess.pid,)
+        # This means the subprocess was already killed, which happens if the command was "quit"
+        # This can also happen if the waitpid call results in an error, which we don't care about.
+      LOG.info(msg)
+      SHELL_OUTPUT_LOGGER.info(msg)
+      SHELL_INPUT_LOGGER.info(msg)
     finally:
       self.destroyed = True
 
@@ -495,7 +512,7 @@ class ShellManager(object):
     user_metadata = self._meta[username]
     shell_id = user_metadata.get_next_id()
     try:
-      LOG.debug("Trying to create a %s shell for user %s" % (shell_name, username))
+      LOG.debug("Trying to create a '%s' shell for user '%s' with command '%s'" % (shell_name, username, repr(command)))
       # Let's make a copy of the subprocess's environment since the Shell constructor will modify
       # the dictionary we pass in.
       subprocess_env = self._env_by_short_name.get(shell_name, {}).copy()
@@ -519,7 +536,7 @@ class ShellManager(object):
       response = "User '%s' has no shell with ID '%s'" % (username, shell_id)
     else:
       shell_instance.mark_for_cleanup()
-      response = "Shell successfully killed"
+      response = "Shell successfully marked for cleanup"
     LOG.debug(response)
     return response
 
