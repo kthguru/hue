@@ -99,10 +99,12 @@ class Shell(object):
       os.close(child)
       raise
 
-    SHELL_OUTPUT_LOGGER.info("%s - shell_id:%s pid:%d - args:%s" %
-                                                             (username, shell_id, p.pid, command_to_use,))
-    SHELL_INPUT_LOGGER.info("%s - shell_id:%s pid:%d - args:%s" %
-                                                             (username, shell_id, p.pid, command_to_use,))
+    msg_format =  "%s - shell_id:%s pid:%d - args:%s"
+    msg_args = (username, shell_id, p.pid, ' '.join(command_to_use))
+    msg = msg_format % msg_args
+    SHELL_OUTPUT_LOGGER.info(msg)
+    SHELL_INPUT_LOGGER.info(msg)
+
     # State that shouldn't be touched by any other classes.
     self._output_buffer_length = 0
     self._commands = []
@@ -326,7 +328,7 @@ class Shell(object):
         pass
       elif e.errno != errno.EAGAIN:
         format_str = "Encountered error while reading from process with PID %d : %s"
-        LOG.error( format_str % (self.pid, e))
+        LOG.error(format_str % (self.pid, e))
         SHELL_OUTPUT_LOGGER.error(format_str % (self.pid, e))
         self.mark_for_cleanup()
     else:

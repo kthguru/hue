@@ -53,7 +53,7 @@ def create(request):
     key_name = request.POST.get(constants.KEY_NAME, "")
   else:
     key_name = request.GET.get(constants.KEY_NAME, "")
-  SHELL_INPUT_LOGGER.info("%s %s - Create '%s' shell" % 
+  SHELL_INPUT_LOGGER.info("%s %s - Create '%s' shell" %
                 (request.META.get('REMOTE_ADDR'), user.username, key_name))
   result = shell_manager.try_create(user, key_name)
   if request.method == "POST":
@@ -74,7 +74,7 @@ def kill_shell(request):
   shell_manager = ShellManager.global_instance()
   username = request.user.username
   shell_id = request.POST[constants.SHELL_ID]
-  SHELL_INPUT_LOGGER.info("%s %s - shell_id:%s - Kill shell" % 
+  SHELL_INPUT_LOGGER.info("%s %s - shell_id:%s - Kill shell" %
                  (request.META.get('REMOTE_ADDR'), username, shell_id))
   result = shell_manager.kill_shell(username, shell_id)
   return HttpResponse(result)
@@ -121,18 +121,13 @@ def retrieve_output(request):
     shell_pairs = utils.parse_shell_pairs(request)
   except ValueError:
     shell_pairs = []
-  shell_ids = [item[0] for item in shell_pairs]
-  SHELL_OUTPUT_LOGGER.info("%s %s - shell_ids:%s - Retrieving output" %
-              (request.META.get('REMOTE_ADDR'), username, repr(shell_ids)))
   result = shell_manager.retrieve_output(username, hue_instance_id, shell_pairs)
-  log_output = {}
   for key, value in result.iteritems():
-    if type(value) == dict:
-      if constants.OUTPUT in value:
-        log_output[key] = value[constants.OUTPUT]
-  log_output = repr(log_output)
-  SHELL_OUTPUT_LOGGER.info("%s %s - Output : '%s'" %
-              (request.META.get('REMOTE_ADDR'), username, log_output))
+    if isinstance(value, dict) and constants.OUTPUT in value:
+      log_format = '%s %s - shell_id:%s - Output: "%s"'
+      log_args = (request.META.get('REMOTE_ADDR'), username, key,
+                                        repr(value[constants.OUTPUT]))
+      SHELL_OUTPUT_LOGGER.info(log_format % log_args)
   return HttpResponse(simplejson.dumps(result), mimetype="application/json")
 
 def add_to_output(request):
@@ -146,10 +141,6 @@ def add_to_output(request):
     shell_pairs = utils.parse_shell_pairs(request)
   except ValueError:
     shell_pairs = []
-
-  shell_ids = [item[0] for item in shell_pairs]
-  SHELL_OUTPUT_LOGGER.info("%s %s - shell_ids:%s - Retrieving output" %
-              (request.META.get('REMOTE_ADDR'), username, repr(shell_ids)))
   result = shell_manager.add_to_output(username, hue_instance_id, shell_pairs)
   return HttpResponse(simplejson.dumps(result), mimetype="application/json")
 
