@@ -21,9 +21,9 @@
   </head>
   <body>
     <div class="toolbar">
-      <div class="fb-actions" data-filters="ArtButtonBar">
-        <a class="fb-upload" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height' : 16}" href="${url('filebrowser.views.upload')}?dest=${path|u}&next=${current_request_path|u}">Upload Files</a>
-        <a class="fb-mkdir" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${url('filebrowser.views.mkdir')}?path=${path|u}&next=${current_request_path|u}">New Directory</a>
+      <div class="fb-actions Bar">
+        <a class="fb-upload Button" href="${url('filebrowser.views.upload')}?dest=${path|u}&next=${current_request_path|u}">Upload Files</a>
+        <a class="fb-mkdir Button" href="${url('filebrowser.views.mkdir')}?path=${path|u}&next=${current_request_path|u}">New Directory</a>
       </div>
     </div>
     ${dir.list_table_chooser(files, path_enc, current_request_path)}

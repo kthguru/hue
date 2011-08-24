@@ -68,7 +68,7 @@
             </select>
           </li>
           <li class="jframe-inline">
-            <input type="text" name="tasktext" class="jtv_filter" data-filters="OverText, ArtInput" data-art-input-type="search" title="text filter"
+            <input type="text" name="tasktext" class="jtv_filter" data-filters="OverText" title="text filter"
               % if tasktext:
                 value="${tasktext}"
               % endif

@@ -30,33 +30,33 @@
   <div class="toolbar">
     <div class="fv-path draggable" data-filters="FitText">${path}</div>
 
-    <div class="fv-actions" data-filters="ArtButtonBar">
+    <div class="fv-actions Bar">
       % if view['mode'] == "binary":
-        <a class="fv-viewText" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${base_url}?offset=${view['offset']}&length=${view['length']}&mode=text&compression=${view['compression']}">View As Text</a>
+        <a class="fv-viewText Button" href="${base_url}?offset=${view['offset']}&length=${view['length']}&mode=text&compression=${view['compression']}">View As Text</a>
       % endif
 
       % if view['mode'] == "text":
-        <a class="fv-viewBinary" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${base_url}?offset=${view['offset']}&length=${view['length']}&mode=binary&compression=${view['compression']}">View As Binary</a>
+        <a class="fv-viewBinary Button" href="${base_url}?offset=${view['offset']}&length=${view['length']}&mode=binary&compression=${view['compression']}">View As Binary</a>
       % endif
 
       % if view['compression'] != "gzip" and path.endswith('.gz'):
-        <a class="fv-viewGzip" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=gzip">Preview As Gzip</a>
+        <a class="fv-viewGzip Button" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=gzip">Preview As Gzip</a>
       % endif
 
       % if view['compression'] != "avro" and path.endswith('.avro'):
-        <a class="fv-viewAvro" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=avro">Preview As Avro</a>
+        <a class="fv-viewAvro Button" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=avro">Preview As Avro</a>
       % endif
 
       % if view['compression'] and view['compression'] != "none":
-        <a class="fv-viewGzip" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=none">Stop preview</a>
+        <a class="fv-viewGzip Button" href="${base_url}?offset=0&length=2000&mode=${view['mode']}&compression=none">Stop preview</a>
       % endif
 
       % if editable and view['compression'] == "none":
-        <a class="fv-editFile" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${url('filebrowser.views.edit', path=path_enc)}" target="FileEditor">Edit File</a>
+        <a class="fv-editFile Button" href="${url('filebrowser.views.edit', path=path_enc)}" target="FileEditor">Edit File</a>
       % endif
-       <a class="fv-download" data-filters="ArtButton" target="_blank" data-icon-styles="{'width': 16, 'height': 16}" href="${url('filebrowser.views.download', path=path_enc)}">Download</a>
-       <a class="fv-viewLocation" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16}" href="${url('filebrowser.views.view', path=dirname_enc)}" target="FileBrowser">View File Location</a>
-       <a class="jframe-refresh large" data-filters="ArtButton">Refresh</a>
+       <a class="fv-download Button" target="_blank" href="${url('filebrowser.views.download', path=path_enc)}">Download</a>
+       <a class="fv-viewLocation Button" href="${url('filebrowser.views.view', path=dirname_enc)}" target="FileBrowser">View File Location</a>
+       <a class="jframe-refresh large Button">Refresh</a>
     </div>
   </div>
   <div class="fv-navhead">

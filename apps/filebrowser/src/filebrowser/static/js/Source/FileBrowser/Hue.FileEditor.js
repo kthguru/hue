@@ -75,9 +75,7 @@ Hue.FileEditor = new Class({
 				if (!buttons) return;
 				['saveAs', 'save'].each(function(button) {
 					var link = new Element("a", {
-						'class': 'fe-' + button + 'Button',
-						'data-filters': 'ArtButton',
-						'data-icon-styles': "{'width': 16, 'height': 16}",
+						'class': 'fe-' + button + 'Button Button',
 						'events': {
 							'click': function (e) {
 								e.preventDefault();

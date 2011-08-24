@@ -44,16 +44,16 @@
                 </select>
               </li>
               <li class="jframe-inline">
-                <input type="text" class="jt_filter" data-filters="OverText, ArtInput" data-art-input-type="search" name="user" title="User Name Filter" value="${user_filter}"/>
+                <input type="text" class="jt_filter" data-filters="OverText" name="user" title="User Name Filter" value="${user_filter}"/>
               </li>
               <li class="jframe-inline">
-                <input type="text" class="jt_filter" data-filters="OverText, ArtInput" data-art-input-type="search" name="text" title="Text Filter" value="${text_filter}"/>
+                <input type="text" class="jt_filter" data-filters="OverText" name="text" title="Text Filter" value="${text_filter}"/>
               </li>
             </form>
           </ul>
         </div>
-    
-    
+
+
         <table data-filters="HtmlTable" class="selectable sortable" cellpadding="0" cellspacing="0">
           <thead>
             <tr>
@@ -88,7 +88,7 @@
               <td class="jt_mrs">
 
                 ${comps.mr_graph(job)}
-              
+
               </td>
               <td>${job.queueName}</td>
               <td>${job.priority.lower()}</td>
