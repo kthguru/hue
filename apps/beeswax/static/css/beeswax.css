@@ -327,7 +327,7 @@ div.beeswax table.delimiter_preview tbody td {
 	background-color: white;
 	color: black;
 	font-weight: normal;
-} 
+}
 div.beeswax .bw-select_delim dt {
 	padding: 5px 0px;
 }
@@ -815,10 +815,10 @@ div.beeswax .watch_results .bw-save_query_results label.overTxtLabel {
 div.beeswax .watch_results .bw-save_query_results input[type=text]{
 	margin-left: 17px;
 }
-div.beeswax .watch_results .bw-save_query_results a[data-filters*=ArtButton] {
+div.beeswax .watch_results .bw-save_query_results a.Button {
 	margin-left: 17px;
 }
-div.beeswax .watch_results .bw-save_query_results div[data-filters*=ArtButton] {
+div.beeswax .watch_results .bw-save_query_results div.Button {
 	margin-top: 5px;
 }
 div.beeswax .watch_results .bw-save_query_results a.hue-choose_file {
@@ -1092,7 +1092,7 @@ div.beeswax .context-menu {
 }
 div.beeswax .context-menu * {
 	white-space: nowrap;
-} 
+}
 div.beeswax .context-menu li {
 	border-bottom: 1px solid #ccc;
 	padding: 3px;

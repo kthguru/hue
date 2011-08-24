@@ -92,10 +92,10 @@
 	margin-top: 10px;
 }
 .beeswax div.bw-welcome a.bw-import-button {
-	background: url(/beeswax/art/import_data.png) no-repeat;
+	background: url(/beeswax/static/art/import_data.png) no-repeat;
 }
 .beeswax div.bw-welcome a.bw-load-sample-button {
-	background: url(/beeswax/art/load_samples.png) no-repeat;
+	background: url(/beeswax/static/art/load_samples.png) no-repeat;
 }
 
 /* breadcrumb */
@@ -104,16 +104,15 @@
 	z-index: 0;
 }
 .beeswax ul[data-filters*=Breadcrumb] li {
+	float: right;
 	height: 23px;
-	background: url(/beeswax/art/breadcrumb.png) top right;
-	margin-left: -16px;
-	padding-left: 12px;
+	background: url(/beeswax/static/art/breadcrumb.png) top right no-repeat;
 }
 .beeswax ul[data-filters*=Breadcrumb] li.tabSelected {
-	background: url(/beeswax/art/breadcrumb.png) right -23px no-repeat;
+	background: url(/beeswax/static/art/breadcrumb.png) right -23px no-repeat;
 }
 .beeswax ul[data-filters*=Breadcrumb] li.hue-bc-error {
-	background: url(/beeswax/art/breadcrumb.png) right 23px no-repeat;
+	background: url(/beeswax/static/art/breadcrumb.png) right 23px no-repeat;
 }
 .beeswax ul[data-filters*=Breadcrumb] li:first-child {
 	margin-left: 0px;
@@ -137,7 +136,7 @@
 	font-weight: bold;
 }
 .beeswax div.hue-bc-section {
-	background: url(/beeswax/art/icon_huge.png) no-repeat;
+	background: url(/beeswax/static/art/icon_huge.png) no-repeat;
 	min-height: 165px;
 	padding-left: 170px;
 	padding-top: 10px;
@@ -240,7 +239,7 @@ a.hue-multipart-next:hover, .beeswax .bw-add_column button:hover, .beeswax input
 	border-radius: 5px;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
-	background: #9ACEF5 url(/beeswax/art/checkback.png) 6px -29px no-repeat;
+	background: #9ACEF5 url(/beeswax/static/art/checkback.png) 6px -29px no-repeat;
 	border: 1px solid #457396;
 	clear: both;
 	color: #457396;
@@ -316,10 +315,10 @@ a.hue-multipart-next:hover, .beeswax .bw-add_column button:hover, .beeswax input
 	color: #003f6f;
 	text-shadow: 1px 1px #d0e6f7;
 	border: 1px solid #003f6f;
-	background: #75bcf1 url(/beeswax/art/checkback.png) 6px 8px no-repeat;
+	background: #75bcf1 url(/beeswax/static/art/checkback.png) 6px 8px no-repeat;
 }
 .beeswax .bw-partition_key label.hue-bw-selected {
-	background: #75bcf1 url(/beeswax/art/checkback.png) 6px 3px no-repeat;;
+	background: #75bcf1 url(/beeswax/static/art/checkback.png) 6px 3px no-repeat;;
 }
 .beeswax .bw-file_formats dt {
 	visibility: hidden;
@@ -511,7 +510,7 @@ a.hue-multipart-next:hover, .beeswax .bw-add_column button:hover, .beeswax input
 	width:361px;
 }
 .beeswax .bw-partition_key label {
-	background: #9ACEF5 url(/beeswax/art/checkback.png) 6px -34px no-repeat;
+	background: #9ACEF5 url(/beeswax/static/art/checkback.png) 6px -34px no-repeat;
 	height:20px;
 	line-height:19px;
 	width:150px;
