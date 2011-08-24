@@ -29,7 +29,7 @@ ${wrappers.head("Beeswax: Table List", section='tables')}
 <div id="show_tables" class="view">
   <div class="toolbar">
     <div class="bw-input-filter">
-      <input type="text" class="jframe-hidden" data-filters="OverText, ArtInput, FilterInput" data-art-input-type="search"
+      <input type="text" class="jframe-hidden" data-filters="OverText, FilterInput"
         title="Filter by Name"
         data-filter-elements="td.bw-tables_table" data-filter-parents="tr" value=""/>
     </div>
