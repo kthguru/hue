@@ -24,6 +24,8 @@ ${wrappers.head("Beeswax: My Queries", section='my queries')}
 ##
 ## ----------------- Saved queries -------------------
 ##
+<h2>My Queries</h2>
+
 <div id="my_queries" class="view">
   <div data-filters="Tabs">
     <ul class="toolbar bw-my_queries_tabs tabs clearfix">
@@ -136,7 +138,7 @@ ${wrappers.head("Beeswax: My Queries", section='my queries')}
               <td>${models.QueryHistory.STATE[query.last_state]}</td>
               <td class="bw-query_result">
                 % if qcontext and query.last_state != models.QueryHistory.STATE.expired.index:
-                  <a href="${ url('beeswax.views.watch_query', id=query.id) }?context=${qcontext|u}" class="bw-view_result" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16, 'top': 2}">View</a>
+                  <a href="${ url('beeswax.views.watch_query', id=query.id) }?context=${qcontext|u}" class="bw-view_result Button">View</a>
                 % else:
                   ~
                 % endif

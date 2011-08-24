@@ -1,0 +1,244 @@
+.jframe-window-toolbar {
+	position: absolute;
+}
+.jframe-window-toolbar .userman_logo {
+	position: absolute;
+	top: 24px;
+	left: 14px;
+}
+
+/* Navigation Bar */
+.jframe-window-toolbar .nav {
+	position: absolute;
+	top: 25px;
+	left: 70px;
+	width: 450px;
+}
+
+.jframe-window-toolbar .desktop-menu {
+    position: absolute;
+    top: 25px;
+    left: 300px;
+    width: 300px;
+}
+
+.subnav {
+	left: 70px;
+	top: 57px;
+}
+
+/* Icons */
+.nav_icon {
+	padding: 0px 6px 0px 18px;
+}
+
+.toolbar .Bar .Button {
+	padding: 2px 6px;
+	height: 24px;
+}
+
+.toolbar .Bar .Button span {
+	display: inline-block;
+	font-size: 12px;
+	font-weight: 550;
+	color: #000;
+	background-color: transparent;
+}
+
+.toolbar .Bar .Button.selected {
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#99ccff', endColorstr='#6699cc');
+	background: -webkit-gradient(linear, left top, left bottom, from(#9cf), to(#69c));
+	background: -moz-linear-gradient(top,  #9cf,  #69c);
+}
+
+.toolbar .Bar .Button span.refresh_icon {
+	background-image: url(/userman/static/art/refresh.png);
+	background-repeat: no-repeat;
+	text-indent: -5000px;
+	width: 12px;
+	min-width: 12px;
+	overflow: hidden;
+	padding: 0 2px;
+}
+
+/* All buttons should have the same padding. */
+.Button:link,
+.Button:hover,
+.Button:focus,
+.Button:active,
+.Button:visited,
+.Button {
+	background-position: left center;
+	padding: 6px 8px 6px 8px;
+}
+
+a.Button:link,
+a.Button:hover,
+a.Button:focus,
+a.Button:active,
+a.Button:visited,
+a.Button {
+	text-decoration: none;
+}
+
+input.Button {
+	white-space: nowrap;
+}
+
+a.Button span {
+	padding: 0 0 0 20px;
+	white-space: nowrap;
+	min-height: 16px;
+	min-width: 16px;
+}
+
+a.Button.disabled span {
+	color: #999;
+}
+
+input.Button:link,
+input.Button:hover,
+input.Button:focus,
+input.Button:active,
+input.Button:visited,
+input.Button {
+	font-weight: bold;
+}
+
+/* Context Menu */
+ul.context-menu a {
+	display: block !important;
+	height: 16px;
+	padding-left: 23px;
+}
+
+/* All links within HtmlTables should be disabled. */
+table[data-filters*=HtmlTable] a,
+table[data-filters*=HtmlTable] a:link,
+table[data-filters*=HtmlTable] a:hover,
+table[data-filters*=HtmlTable] a:visited {
+  text-decoration: none !important;
+}
+
+/* FIXME this should be moved to the shared.css */
+table[data-filters*="HtmlTable"] th {
+  background: none repeat scroll 0 0 #FFFFFF;
+  border: medium none;
+  height: 20px;
+  line-height: 20px;
+  overflow: hidden;
+  padding: 0 8px;
+  white-space: nowrap;
+	background-color: #eee;
+}
+
+table[data-filters*=HtmlTable] thead th {
+	font-weight: bold;
+	border: 1px solid #B2B2B2;
+	border-width: 0 0 1px 0;
+	background: url(art/th_back.png);
+}
+
+h1 {
+	background-color: #ccc; border-bottom: 1px solid #888;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+	background: -moz-linear-gradient(top,  #eee,  #ccc);
+	padding: 8px;
+	height: 24px;
+}
+
+h2 {
+}
+
+/* Navigation and breadcrumb */
+.navigation {
+    position: relative;
+    width: 100%;
+}
+
+.breadcrumb {
+	position: relative;
+	top: 2px;
+	height: 20px;
+	padding: 0 0 0 10px;
+	background-color: #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#eee));
+	background: -moz-linear-gradient(top,  #fff,  #eee);
+}
+
+.breadcrumb a {
+	padding: 0 4px 0 0;
+}
+
+.select_all_none {
+	float: right;
+	margin-bottom: 8px;
+}
+
+a.icon_filler {
+  display: block;
+  float: left;
+  height: 10px;
+  left: -4px;
+  overflow: hidden;
+  position: relative;
+  text-indent: -200px;
+  top: 4px;
+  width: 10px;
+}
+
+input[type=checkbox].disabled {
+	filter:alpha(opacity=80);
+	-moz-opacity:0.8;
+	-khtml-opacity: 0.8;
+	opacity: 0.8;
+}
+
+/* Empty for now */
+
+h2 {
+	background-color: #eee;
+	background: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc));
+	background: -moz-linear-gradient(top,  #eee,  #ccc);
+	border-bottom: 1px solid #666;
+	height: 36px;
+	position: relative;
+	width: 100%;
+}
+
+h2 span {
+	padding: 2px 0 0 25px;
+	margin-left: 10px;
+	background-position: left center;
+}
+
+h2 .Button span {
+	margin-left: 0px;
+}
+
+/* The actual title text */
+form {
+	background-color: #eee;
+}
+
+.table-depth-0 td,
+.table-depth-1 td,
+.table-depth-2 td,
+.table-depth-3 td,
+.table-depth-4 td,
+.table-depth-5 td,
+.table-depth-6 td,
+.table-depth-7 td,
+.table-depth-8 td,
+.table-depth-9 td {
+	padding-right: 0 !important;
+}
+
+.checkbox {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.alignRight {
+	text-align: right;
+}

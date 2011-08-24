@@ -35,22 +35,16 @@
         <label>New Query</label>
       % endif
       <ul class="query_edit_actions clearfix">
-        <li class="bw-query_save_buttons" data-filters="ArtButtonBar">
+        <li class="bw-query_save_buttons Bar">
           <a href="${ url('beeswax.views.execute_query') }"
-            class="bw-query_new" data-filters="ArtButton"
-            data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">New</a>
-
+            class="bw-query_new Button">New</a>
           % if design and not design.is_auto and design.name:
-            <input type="submit" name="saveform-save" value="Save" class="bw-query_save" data-filters="ArtButton"
-              data-icon-styles="{'width':16,'height':16, 'left':7}"/>
+            <input type="submit" name="saveform-save" value="Save" class="bw-query_save Button"/>
           % endif
-          <input type="submit" name="saveform-saveas" value="Save As..." class="bw-query_save_as" data-filters="ArtButton"
-            data-icon-styles="{'width':16,'height':16, 'left':7}"/>
-          <a href="#settings" class="bw-query_settings_toggle" data-filters="ArtButton" data-icon-styles="{'width':16, 'height': 16}">Advanced</a>
-          <input type="submit" name="button-explain" value="Explain" class="bw-query_explain" data-filters="ArtButton"
-           data-icon-styles="{'width':16,'height':16, left: 7}"/>
-          <input type="submit" name="button-submit" value="Execute" class="bw-query_execute" data-filters="ArtButton"
-           data-icon-styles="{'width':16,'height':16, 'left':52, 'top':3}"/>
+          <input type="submit" name="saveform-saveas" value="Save As..." class="bw-query_save_as Button"/>
+          <a href="#settings" class="bw-query_settings_toggle Button">Advanced</a>
+          <input type="submit" name="button-explain" value="Explain" class="bw-query_explain Button"/>
+          <input type="submit" name="button-submit" value="Execute" class="bw-query_execute Button"/>
         </li>
       </ul>
     </dt>
@@ -92,15 +86,17 @@ ${wrappers.head('Hive Query', section='query')}
 % endif
 
 <div class="view" id="execute">
-  <form action="${action}" method="POST" data-filters="FormValidator, SizeTo" data-size-to-height="0" style="overflow:hidden">
-    <div class="resizable" data-filters="SplitView">
+  <form action="${action}" method="POST" data-filters="FormValidator">
+    <table>
       <%
         if form.settings.forms or form.file_resources.forms or form.functions.forms:
           width = 230
         else:
           width = 0
       %>
-      <div class="left_col" style="width: ${width}px;">
+      <tbody>
+      <tr>
+      <td style="width: ${width}px;">
         <a name="settings"></a>
         <dl class="jframe_padded bw-query_settings">
           <dt class="hue-dt_cap">Hive Settings</dt>
@@ -154,7 +150,7 @@ ${wrappers.head('Hive Query', section='query')}
                   data_filters="OverText",
                 ))}
                 <div class="jframe-button_subbar_below clearfix">
-                  <a class="hue-choose_file" data-filters="ArtButton" data-chooseFor="${f['path'].html_name | n}" data-icon-styles="{'width':16, 'height':16, 'top':2}">Choose a File</a>
+                  <a class="hue-choose_file Button" data-chooseFor="${f['path'].html_name | n}">Choose a File</a>
                 </div>
                 ${comps.field(f['_exists'], hidden=True)}
               % endfor
@@ -201,7 +197,7 @@ ${wrappers.head('Hive Query', section='query')}
               ${comps.field(form.query["is_parameterized"],
                   notitle = True,
                   tag = "checkbox",
-                  button_text = "Enable Parameterization", 
+                  button_text = "Enable Parameterization",
                   help = "If checked (the default), you can include parameters like $parameter_name in your query, and users will be prompted for a value when the query is run.",
                   help_attrs= dict(
                     data_help_direction='11'
@@ -224,8 +220,8 @@ ${wrappers.head('Hive Query', section='query')}
             </dl>
           </dd>
         </dl>
-      </div>
-      <div class="right_col">
+      </td>
+      <td>
         % if on_success_url:
           <input type="hidden" name="on_success_url" value="${on_success_url}"/>
         % endif
@@ -259,8 +255,10 @@ ${wrappers.head('Hive Query', section='query')}
           ${query()}
         % endif
 
-      </div>
-    </div>
+      </td>
+    </tr>
+  </tbody>
+  </table>
   </form>
 </div>
 ${wrappers.foot()}

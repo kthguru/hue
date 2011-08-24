@@ -68,7 +68,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
           expression.)
           </p>
           <dl class="bw-format clearfix">
-            <% 
+            <%
               selected = table_form["row_format"].data or table_form["row_format"].field.initial
             %>
             <dt class="bw-format-delimited relays" data-filters="DataGroupToggle" data-group-toggle="{'group': '.bw-config-data li', 'show':'.bw-delim-options'}">
@@ -153,7 +153,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
           </ul>
           <dl>
             ${comps.field(table_form["file_format"],
-              render_default=True, 
+              render_default=True,
               klass="bw-file_formats",
               notitle=True
             )}
@@ -185,7 +185,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
           <dl>
             <div class="bw-default_location">
               ${comps.field(table_form["use_default_location"],
-                render_default=True, 
+                render_default=True,
                 help="Store your table in the default location (controlled by Hive, and typically <code>/user/hive/warehouse/table_name</code>)."
               )}
             </div>
@@ -197,7 +197,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
                   data_filters="OverText",
                   alt='/user/user_name/data_dir'
                 )
-              )}<a class="hue-choose_file" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16, 'top': 3, 'left': 6 }" data-chooseFor="table-external_location">Choose File</a>
+              )}<a class="hue-choose_file Button" data-chooseFor="table-external_location">Choose File</a>
             </div>
           </dl>
           <a href="#step6" class="hue-multipart-next">Final Step: Configure Table Columns &raquo;</a>
@@ -232,7 +232,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
                         )
                       )}
                     </div>
-                    % if is_partition_form == False: 
+                    % if is_partition_form == False:
                       <div class="bw-array_type jframe-inline">
                         ${comps.field(
                             form["array_type"],
@@ -250,7 +250,7 @@ ${wrappers.head('Create a Table', toolbar=has_tables, section='new table')}
                       </div>
                     % endif
                     ${unicode(form["_exists"]) | n}
-                    
+
                   </dl>
                 </dd>
               </div>

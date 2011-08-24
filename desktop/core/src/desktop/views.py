@@ -205,6 +205,9 @@ def index(request):
     send_dbug_messages=desktop.conf.SEND_DBUG_MESSAGES.get()
   ))
 
+def basic(request):
+  return render("basic.mako", request, dict())
+
 def serve_404_error(request, *args, **kwargs):
   """Registered handler for 404. We just return a simple error"""
   access_warn(request, "404 not found")

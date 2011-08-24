@@ -18,19 +18,19 @@
 %>
 
 <%def name="field(
-  field, 
-  render_default=False, 
+  field,
+  render_default=False,
   data_filters=None,
-  hidden=False, 
-  notitle=False, 
-  tag='input', 
-  klass=None, 
-  attrs=None, 
-  value=None, 
-  help=False, 
-  help_attrs=None, 
-  dd_attrs=None, 
-  dt_attrs=None, 
+  hidden=False,
+  notitle=False,
+  tag='input',
+  klass=None,
+  attrs=None,
+  value=None,
+  help=False,
+  help_attrs=None,
+  dd_attrs=None,
+  dt_attrs=None,
   title_klass=None,
   button_text=False
   )">
@@ -52,14 +52,14 @@
     attrs = {}
   if not render_default:
     attrs.setdefault('type', 'text')
-    
+
   if data_filters:
     attrs.data_filters = data_filters
-  
+
   classes = []
   if klass:
     classes.append(klass)
-  if hidden: 
+  if hidden:
     classes.append("jframe-hidden")
   cls = ' '.join(classes)
 
@@ -121,14 +121,16 @@
   ${pageref(page.num_pages())}
 </%def>
 <%def name="pagination(page)">
+  % if page.total_count() > 0:
   <div class="toolbar bw-designs_toolbar bw-navigation">
-    <p class="bw-showing_msg">Showing ${page.start_index()} to ${page.end_index()} of ${page.total_count()} items</p>
-    <div class="bw-nav_links">
+    <span class="bw-showing_msg">Showing ${page.start_index()} to ${page.end_index()} of ${page.total_count()} items</span>
+    <span>
       <a title="Beginning of List" ${toppage(page)} class="bw-firstBlock">Beginning of List</a>
       <a title="Previous Page" ${prevpage(page)} class="bw-prevBlock">Previous Page</a>
-      <p>page ${page.number} of ${page.num_pages()}</p>
+      <span>page ${page.number} of ${page.num_pages()}</span>
       <a title="Next page" ${nextpage(page)} class="bw-nextBlock">Next Page</a>
       <a title="End of List" ${bottompage(page)} class="bw-lastBlock">End of List</a>
-    </div>
+    </span>
   </div>
+  % endif
 </%def>

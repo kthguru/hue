@@ -16,16 +16,17 @@
 <%namespace name="wrappers" file="header_footer.mako" />
 ${wrappers.head("Beeswax: Table List", section='tables')}
   <div class="toolbar">
-    <div class="bw-show_tables_subnav" data-filters="ArtButtonBar">
+    <div class="bw-show_tables_subnav Bar">
       % if not examples_installed:
-        <a href="${ url('beeswax.views.install_examples') }" data-filters="ArtButton" class="bw-install_samples" data-icon-styles="{'width': 16, 'height': 16, 'top': 1}">install samples</a>
+        <a href="${ url('beeswax.views.install_examples') }" class="bw-install_samples Button">install samples</a>
       % endif
-      <a href="${ url('beeswax.create_table.index') }" data-filters="ArtButton" class="bw-new_table" data-icon-styles="{'width': 16, 'height': 16, 'top': 1}">new table</a>
+      <a href="${ url('beeswax.create_table.index') }" class="bw-new_table Button">new table</a>
     </div>
   </div>
 
+<h2>Tables</h2>
+
 <div id="show_tables" class="view">
-  <h2 class="jframe-hidden">Tables</h2>
   <div class="toolbar">
     <div class="bw-input-filter">
       <input type="text" class="jframe-hidden" data-filters="OverText, ArtInput, FilterInput" data-art-input-type="search"

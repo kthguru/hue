@@ -17,7 +17,32 @@
 ---
 description: Beeswax (the Hive UI)
 provides: [Hue.Beeswax]
-requires: [JFrame/JFrame.Browser, clientcide/TabSwapper, More/Form.Validator.Inline, hue-shared/DynamicTextarea, hue-shared/Hue.JFrame.Chooser]
+requires: [
+  JFrame/JFrame.Browser,
+  JFrame/JFrame,
+  hue-shared/Hue.JBrowser,
+  clientcide/TabSwapper,
+  JFrame/Behavior.HtmlTableKeyboard,
+  JFrame/Behavior.HtmlTableRestore,
+  More/Form.Validator.Inline,
+  hue-shared/DynamicTextarea,
+  hue-shared/Hue.JFrame.Chooser,
+  Core/Cookie,
+  Core/DomReady,
+  Core/Element.Event,
+  Core/Element.Dimensions,
+  Core/Element.Style,
+  Core/Fx.Tween,
+  Core/Request.HTML,
+  Core/Selectors,
+  More/Element.Delegation,
+  More/HtmlTable.Resize,
+  More/Spinner,
+  More/URI,
+  JFrame/JFrame.Keys,
+  hue-shared/Hue.JFrame.Target,
+  hue-shared/Hue.JFrame.ConfirmUnencodeAndPost,
+]
 script: Hue.Beeswax.js
 
 ...

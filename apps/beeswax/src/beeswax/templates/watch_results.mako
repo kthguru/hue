@@ -30,10 +30,10 @@ ${wrappers.head("Beeswax: Query Results", section='query')}
               <li><a target="_blank" href="${download_urls["csv"]}" class="bw-download_csv">Download as CSV</a>
               <li><a target="_blank" href="${download_urls["xls"]}" class="bw-download_xls">Download as XLS</a>
               <li data-filters="CollapsingElements"><a class="bw-save collapser jframe_ignore" href="${url('beeswax.views.save_results', query.id)}">Save</a>
-                <div class="collapsible jframe-hidden bw-save_query_results" style="display:none" data-filters="Accordion"> 
+                <div class="collapsible jframe-hidden bw-save_query_results" style="display:none" data-filters="Accordion">
                   <form action="${url('beeswax.views.save_results', query.id) }" method="POST">
                     ## Writing the save_target fields myself so I can match them to their respective text input fields.
-                    <div> 
+                    <div>
                       <input id="id_save_target_0" type="radio" name="save_target" value="to a new table" class="toggle" checked="checked"/>
                       <label for="id_save_target_0">In a new table</label>
                     </div>
@@ -42,7 +42,7 @@ ${wrappers.head("Beeswax: Query Results", section='query')}
                       alt="table_name"
                     ))}
                     <div>
-                      <input id="id_save_target_1" type="radio" name="save_target" value="to HDFS directory" class="toggle"> 
+                      <input id="id_save_target_1" type="radio" name="save_target" value="to HDFS directory" class="toggle">
                       <label for="id_save_target_1">In an HDFS directory</label>
                     </div>
                     <div class="target">
@@ -50,9 +50,9 @@ ${wrappers.head("Beeswax: Query Results", section='query')}
                       data_filters="OverText",
                       alt="/user/dir"
                       ))}
-                      <a data-filters="ArtButton" class="hue-choose_file" data-icon-styles="{'width': 16, 'height': 16, 'top': 1, 'left': 4 }" data-chooseFor="target_dir">Choose File</a>
+                      <a class="hue-choose_file Button" data-chooseFor="target_dir">Choose File</a>
                     </div>
-                    <input type="submit" value="Save" name="save" data-filters="ArtButton"> 
+                    <input type="submit" value="Save" name="save" class="Button">
                   </form>
                 </div>
               </li>
@@ -75,7 +75,7 @@ ${wrappers.head("Beeswax: Query Results", section='query')}
               </ul>
             % else:
               <p class="bw-no_jobs">No Hadoop jobs were launched in running this query.</p>
-            % endif 
+            % endif
           </ul>
         </dd>
       </dl>
@@ -98,7 +98,7 @@ ${wrappers.head("Beeswax: Query Results", section='query')}
         <li>
           % if error:
             <div class="jframe-error jframe_padded">
-              <h3 class="jframe-hidden">Error!</h3> 
+              <h3 class="jframe-hidden">Error!</h3>
               <pre>${error_message}</pre>
             </div>
           % else:

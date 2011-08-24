@@ -19,6 +19,7 @@ from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('beeswax',
   url(r'^$', 'views.index'),
+  url(r'^load_in_frame$', 'views.load_in_frame'),
   url(r'^tables$', 'views.show_tables'),
   url(r'^table/(?P<table>\w+)$', 'views.describe_table'),
   url(r'^table/(?P<table>\w+)/partitions$', 'views.describe_partitions'),

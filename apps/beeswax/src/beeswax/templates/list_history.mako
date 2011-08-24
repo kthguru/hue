@@ -42,30 +42,25 @@ ${wrappers.head("Beeswax: Query History", section='history')}
   % endif
 </%def>
 
-<div class="toolbar">
-  <div class="bw-input-filter">
-    <input type="text" class="jframe-hidden" data-filters="OverText, ArtInput, FilterInput" data-art-input-type="search"
-      title="Filter by Name"
-      data-filter-elements="tbody tr" value=""/>
-  </div>
-</div>
+<h2>Query History:</h2>
+
 <div id="list_history" class="view">
   ${comps.pagination(page)}
 
-  <div class="bw-show_group toolbar">
+  <span class="bw-show_group toolbar">
       Show:
     % if filter_params.get('user') == '_all':
       <%
         my_querydict = filter_params.copy()
         my_querydict['user'] = request.user.username
       %>
-      <a href="?${my_querydict.urlencode()}" class="bw-show_group_mine" data-filters="ArtButton">mine</a>
+      <a href="?${my_querydict.urlencode()}" class="bw-show_group_mine Button">mine</a>
     % else:
       <%
         my_querydict = filter_params.copy()
         my_querydict['user'] = '_all'
       %>
-      <a href="?${my_querydict.urlencode()}" class="bw-show_group_all" data-filters="ArtButton">everyone's</a>
+      <a href="?${my_querydict.urlencode()}" class="bw-show_group_all Button">everyone's</a>
     % endif
 
     % if filter_params.get('auto_query', None):
@@ -73,17 +68,16 @@ ${wrappers.head("Beeswax: Query History", section='history')}
         my_querydict = filter_params.copy()
         my_querydict['auto_query'] = ''
       %>
-      <a href="?${my_querydict.urlencode()}" class="bw-show_group_noauto" data-filters="ArtButton">user queries</a>
+      <a href="?${my_querydict.urlencode()}" class="bw-show_group_noauto Button">user queries</a>
     % else:
       <%
         my_querydict = filter_params.copy()
         my_querydict['auto_query'] = 'on'
       %>
-      <a href="?${my_querydict.urlencode()}" class="bw-show_group_auto" data-filters="ArtButton">auto actions</a>
+      <a href="?${my_querydict.urlencode()}" class="bw-show_group_auto Button">auto actions</a>
     % endif
-  </div>
+  </span>
 
-  <h3 class="jframe-hidden">Query History:</h3>
   <table data-filters="HtmlTable" class="selectable" cellpadding="0" cellspacing="0">
     <thead>
       <tr>
@@ -124,7 +118,7 @@ ${wrappers.head("Beeswax: Query History", section='history')}
         <td>${models.QueryHistory.STATE[query.last_state]}</td>
         <td class="bw-query_result">
           % if qcontext and query.last_state != models.QueryHistory.STATE.expired.index:
-            <a href="${ url('beeswax.views.watch_query', id=query.id) }?context=${qcontext|u}" class="bw-view_result" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16, 'top': 2}">Results</a>
+            <a href="${ url('beeswax.views.watch_query', id=query.id) }?context=${qcontext|u}" class="bw-view_result Button">Results</a>
           % else:
             ~
           % endif

@@ -1263,3 +1263,6 @@ def explain_directly(request, query_str, query_msg, design):
   context = ("design", design)
   return render('explain.mako', request,
     dict(query=query_str, explanation=explanation.textual, query_context=context))
+
+def load_in_frame(request):
+  return render("load_in_frame.mako", request, {})

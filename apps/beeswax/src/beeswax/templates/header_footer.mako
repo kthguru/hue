@@ -15,7 +15,7 @@
 ## limitations under the License.
 ##
 ##
-## no spaces in this method please; we're declaring a CSS class, and ART uses this value for stuff, and it splits on spaces, and 
+## no spaces in this method please; we're declaring a CSS class, and ART uses this value for stuff, and it splits on spaces, and
 ## multiple spaces and line breaks cause issues
 <%!
 def is_selected(section, matcher):
@@ -28,34 +28,44 @@ def is_selected(section, matcher):
 <%def name="head(title='Beeswax for Hive', toolbar=True, section=False)">
 <html>
   <head>
+    <meta http-equiv="x-ua-compatible" content="IE=8">
     <title>${title}</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/shared.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/windows.css"/>
+    <!--
+    <link rel="stylesheet" type="text/css" href="/static/css/desktop.css"/>
+    -->
+    <link rel="stylesheet" type="text/css" href="/static/css/hue-deprecated.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/js/ThirdParty/jframe/Assets/jframe.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/app-common.css" />
+    <link rel="stylesheet" type="text/css" href="/beeswax/static/css/beeswax2.css" />
+    <link rel="stylesheet" type="text/css" href="/static/oocss/Button.css" />
+    <link rel="stylesheet" type="text/css" href="/static/oocss/Bar.css" />
+    <link rel="stylesheet" type="text/css" href="/static/oocss/Bar.Paginator.css" />
+    <link rel="stylesheet" type="text/css" href="/static/oocss/Grid.css" />
+    <link rel="stylesheet" type="text/css" href="/static/oocss/Icon.css" />
+   </head>
   </head>
-  <body class="hue-shared">
+  <body class="hue-shared jframe-shared beeswax">
   <div class="toolbar">
     <a href="${ url('beeswax.views.index') }"><img src="/beeswax/static/art/beeswax-logo.png" width="55" height="55" alt="Beeswax" class="beeswax_logo"></a>
     % if toolbar:
-    <ul class="bw-nav" data-filters="ArtButtonBar">
-      <li><a href="${ url('beeswax.views.execute_query') }" 
-        class="bw-nav_icon bw-query_nav ${is_selected(section, 'query')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">Query Editor</a></li>
-      <li><a href="${ url('beeswax.views.my_queries') }"
-        class="bw-nav_icon bw-my_queries_nav ${is_selected(section, 'my queries')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">My Queries</a></li>
-      <li><a href="${ url('beeswax.views.list_designs') }" 
-        class="bw-nav_icon bw-queries_nav ${is_selected(section, 'saved queries')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">Saved Queries</a></li>
-    ## <li><a href="${ url('beeswax.views.edit_report') }" class="bw-nav_icon bw-new_report_gen_nav ${is_selected(section, 'report generator')}" data-filters="ArtButton" data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">Report Generator</a></li>
-      <li><a href="${ url('beeswax.views.list_query_history') }" 
-        class="bw-nav_icon bw-history_nav ${is_selected(section, 'history')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">History</a></li>
-      <li><a href="${ url('beeswax.views.show_tables') }" 
-        class="bw-nav_icon bw-tables_nav ${is_selected(section, 'tables')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">Tables</a></li>
-      <li><a href="${ url('beeswax.views.configuration') }" 
-        class="bw-nav_icon bw-config_nav ${is_selected(section, 'hive configuration')}" data-filters="ArtButton"
-        data-icon-styles="{'width': 16, 'height': 16, 'top': 4, 'left': 5}">Settings</a>
-      </li>
-      <li><a class="jframe-refresh large" data-filters="ArtButton">Refresh</a></li>
+    <span class="Bar">
+      <a href="${ url('beeswax.views.execute_query') }"
+        class="Button roundLeft ${is_selected(section, 'query')}"><span class="bw-query_nav nav_icon">Query Editor</span></a>
+      <a href="${ url('beeswax.views.my_queries') }"
+        class="Button ${is_selected(section, 'my queries')}"><span class="bw-my_queries_nav nav_icon">My Queries</span></a>
+      <a href="${ url('beeswax.views.list_designs') }"
+        class="Button ${is_selected(section, 'saved queries')}"><span class="bw-queries_nav nav_icon">Saved Queries</span></a>
+    ## <a href="${ url('beeswax.views.edit_report') }" class="nav_icon bw-new_report_gen_nav ${is_selected(section, 'report generator')}">Report Generator</a>
+      <a href="${ url('beeswax.views.list_query_history') }"
+        class="Button ${is_selected(section, 'history')}"><span class="bw-history_nav nav_icon">History</span></a>
+      <a href="${ url('beeswax.views.show_tables') }"
+        class="Button ${is_selected(section, 'tables')}"><span class="bw-tables_nav nav_icon">Tables</span></a>
+      <a href="${ url('beeswax.views.configuration') }"
+        class="Button ${is_selected(section, 'hive configuration')}"><span class="bw-config_nav nav_icon">Settings</span></a>
+      <a class="Button roundRight jframe-refresh"><span class="bw-refresh_icon">Refresh</span></a>
     </ul>
     % endif
   </div>
@@ -63,6 +73,13 @@ def is_selected(section, matcher):
 </%def>
 
 <%def name="foot()">
+  <script type="text/javascript" src="/depender/build?client=true&require=beeswax/Hue.Beeswax"></script>
+  <script type="text/javascript">
+  window.addEvent('domready', function () {
+    Behavior.instance = new Behavior();
+    Behavior.instance.apply(document.documentElement);
+  });
+  </script>
   </body>
 </html>
 </%def>

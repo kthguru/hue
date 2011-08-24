@@ -13,21 +13,33 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-Hue.Desktop.register({
-	Beeswax: {
-		name: 'Beeswax for Hive',
-		require: ['beeswax/Hue.BeeswaxInFrame'],
-		launch: function(path, options) {
-			// options.displayHistory = false;
-			return new Hue.BeeswaxInFrame(path, options);
+/*
+---
+description: Beeswax (the Hive UI) IFrame Loader
+provides: [Hue.BeeswaxInFrame]
+requires: [JFrame/JFrame.Browser]
+script: Hue.BeeswaxInFrame.js
+
+...
+*/
+(function(){
+	Hue.BeeswaxInFrame = new Class({
+
+		Extends: JFrame.Browser,
+
+		options: {
+			displayHistory: false,
+			height: 350,
+			className: 'art',
+			windowTitler: function(title) {
+				return "Beeswax";
+			},
+			jframeOptions: {}
 		},
-		// css: '/beeswax/static/css/beeswax.css',
-		menu: {
-			id: 'hue-beeswax-menu',
-			img: {
-				src: '/beeswax/static/art/beeswax-logo.png'
-			}
-		},
-		help: '/help/beeswax/'
-	}
-});
+
+		initialize: function(path, options) {
+			this.parent(path || '/beeswax/load_in_frame', options);
+			// if (!Hue.Desktop.helpInstance || Hue.Desktop.helpInstance.isDestroyed()) Hue.Desktop.helpInstance = this;
+		}
+	});
+}());

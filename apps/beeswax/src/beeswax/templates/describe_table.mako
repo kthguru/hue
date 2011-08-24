@@ -39,10 +39,12 @@ ${wrappers.head("Beeswax Table Metadata: " + table.tableName, section='tables')}
   </div>
 </%def>
 
-<div id="describe_table resizable" class="view" data-filters="SplitView">
-  <div class="left_col">
-    <h2>${table.tableName}</h2>
-    <div class="jframe_padded">
+<table id="describe_table" class="view">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top">
+        <h2>${table.tableName}</h2>
+        <div class="jframe_padded">
       <dl>
         % if table.parameters.get("comment", False):
           <dt class="hue-dt_cap">Description</dt>
@@ -65,12 +67,11 @@ ${wrappers.head("Beeswax Table Metadata: " + table.tableName, section='tables')}
                         klass='bw-loadPath',
                         data_filters="OverText",
                         alt='/user/data'))}
-                      <div class="clearfix" data-filters="ArtButtonBar">
-                        <a class="hue-choose_file" data-filters="ArtButton" 
-                          data-icon-styles="{'width': 16, 'height': 16, 'top': 1, 'left': 4 }" data-chooseFor="path">Choose File</a>
-                        <input type="submit" class="bw-loadSubmit" data-filters="ArtButton" value="Submit"/>
+                      <div class="clearfix Bar">
+                        <a class="hue-choose_file Button" data-chooseFor="path">Choose File</a>
+                        <input type="submit" class="bw-loadSubmit Button" value="Submit"/>
                       </div>
-                      
+
                       % for pf in load_form.partition_columns:
                         ${comps.field(load_form[pf], render_default=True)}
                       % endfor
@@ -88,8 +89,8 @@ ${wrappers.head("Beeswax Table Metadata: " + table.tableName, section='tables')}
         </dd>
       </dl>
     </div>
-  </div>
-  <div class="right_col">
+  </td>
+  <td>
     <div data-filters="Tabs">
       <ul class="toolbar tabs">
         % if top_rows is not None:
@@ -132,8 +133,10 @@ ${wrappers.head("Beeswax Table Metadata: " + table.tableName, section='tables')}
         % endif
       </ul>
     </div>
-  </div>
-</div>
-  
+  </td>
+</tr>
+</tbody>
+</table>
+
 
 ${wrappers.foot()}

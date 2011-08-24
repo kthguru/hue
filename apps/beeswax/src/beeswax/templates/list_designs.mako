@@ -20,9 +20,10 @@ from django.template.defaultfilters import timesince
 <%namespace name="wrappers" file="header_footer.mako" />
 ${wrappers.head("Beeswax: Queries", section='saved queries')}
 
+<h2>Saved Queries</h2>
+
 <div id="list_designs" class="view">
   ${comps.pagination(page)}
-  <h2 class="jframe-hidden">Saved Queries:</h2>
   <table data-filters="HtmlTable" class="selectable" cellpadding="0" cellspacing="0">
     <thead>
       <tr>
@@ -53,8 +54,8 @@ ${wrappers.head("Beeswax: Queries", section='saved queries')}
           % else:
             ${design.name}
           % endif
-          
-          
+
+
           <ul class="jframe-hidden context-menu">
             % if may_edit:
               % if design.type == models.SavedQuery.REPORT:

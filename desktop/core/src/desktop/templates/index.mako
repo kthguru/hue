@@ -34,7 +34,7 @@
   <link rel="stylesheet" href="/static/oocss/Icon.css">
 
   <script src="/depender/build?client=true&require=hue-shared/DesktopLoader"></script>
-  <!--[if IE 8]>
+  <!--[if gte IE 8]>
       <script>
           window.ie8 = true;
       </script>
@@ -52,7 +52,7 @@
         $(document.body).removeClass('warned');
       });
       if (!Cookie.read('desktop-browser-warned')) $(document.body).addClass('warned');
-      if (!ie8) alert("Hue does not currently support any version of Internet Explorer other than IE8.");
+      if (!ie8) alert("Hue does not currently support any version of Internet Explorer older than Internet Explorer 8.");
     }
     var appName = "Hue";
     Depender.require({
