@@ -17,17 +17,12 @@
 import datetime
 from django.template.defaultfilters import urlencode, escape
 %>
-<%def name="header(path, current_request_path=False, toolbar=True, cwd_set=True, show_upload=True)">
-  <html>
-    <head>
-      <title>${path}</title>
-    </head>
-    <body>
+<%def name="toolbar(path, current_request_path=False, toolbar=True, cwd_set=True, show_upload=True)">
 
       % if toolbar:
-      <div class="toolbar">
+        <div class="header toolbar">
 
-        <a href="${url('filebrowser.views.view', path='/')}"><img src="/filebrowser/static/art/icon_large.png" class="fb_icon"/></a>
+        <a class="logo" href="${url('filebrowser.views.view', path='/')}"><img src="/filebrowser/static/art/icon_large.png" class="logo"/></a>
         % if current_request_path:
           <div class="fb-actions Bar">
             % if home_directory:
@@ -48,7 +43,7 @@ from django.template.defaultfilters import urlencode, escape
       % endif
 </%def>
 
-<%def name="footer()">
+<%def name="uploadToolbar()">
       <div class="fb-uploader jframe-hidden">
         <a class="fb-cancel-upload">Close</a>
         <ul class="fb-upload-list"></ul>
@@ -57,6 +52,4 @@ from django.template.defaultfilters import urlencode, escape
           you can <a target="hue_upload" href="${ url('filebrowser.views.upload') }">upload without flash</a>.
         </div>
       </div>
-    </body>
-  </html>
 </%def>

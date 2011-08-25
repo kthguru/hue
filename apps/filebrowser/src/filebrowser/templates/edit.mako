@@ -22,9 +22,8 @@
   path_enc = urlencode(path)
   dirname_enc = urlencode(dirname)
 %>
-<html>
-<head><title>${truncate(filename)} :: File Editor</title></head>
-<body>
+${wrappers.head(truncate(filename) + " :: File Editor")}
+
 <div class="toolbar">
   <div class="fe-path">${truncate(path, 91)}</div>
   <div class="fe-buttons Bar">
@@ -51,6 +50,5 @@
     <input class="jframe-hidden" type="submit" name="save" value="saveAs">
     <input class="jframe-hidden" type="submit" name="save" value="save">
 </form>
-</body>
-</html>
 
+${wrappers.foot()}

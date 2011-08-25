@@ -15,7 +15,10 @@
 ## limitations under the License.
 <%namespace name="edit" file="editor_components.mako" />
 <%namespace name="comps" file="fb_components.mako" />
-${comps.header('Change Permissions: ' + path.split('/')[-1])}
+<%namespace name="wrappers" file="header_footer.mako" />
+
+${wrappers.head('Change Permissions: ' + path.split('/')[-1])}
+${comps.toolbar('Change Permissions: ' + path.split('/')[-1])}
 
 <div class="prompt_popup">
 <form action="/filebrowser/chmod?next=${next|u}" method="POST" enctype="multipart/form-data">
@@ -60,4 +63,5 @@ ${comps.header('Change Permissions: ' + path.split('/')[-1])}
 <div class="jframe-hidden">Go back to where you were: <a href="${next|u}">${next}</a>.</div>
 
 
-${comps.footer()}
+${comps.uploadToolbar()}
+${wrappers.foot()}

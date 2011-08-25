@@ -14,12 +14,10 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 <%namespace name="comps" file="fb_components.mako" />
+<%namespace name="wrappers" file="header_footer.mako" />
 <%namespace name="dir" file="listdir_components.mako" />
-<html>
-  <head>
-    <title>${path}</title>
-  </head>
-  <body>
+
+${wrappers.head('Choose: ' + path.split('/')[-1])}
     <div class="toolbar">
       <div class="fb-actions Bar">
         <a class="fb-upload Button" href="${url('filebrowser.views.upload')}?dest=${path|u}&next=${current_request_path|u}">Upload Files</a>
@@ -27,4 +25,5 @@
       </div>
     </div>
     ${dir.list_table_chooser(files, path_enc, current_request_path)}
-${comps.footer()}
+${comps.uploadToolbar()}
+${wrappers.foot()}

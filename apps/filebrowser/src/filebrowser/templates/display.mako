@@ -24,6 +24,9 @@
   dirname_enc = urlencode(view['dirname'])
   base_url = url('filebrowser.views.view', path=path_enc)
 %>
+<%namespace name="wrappers" file="header_footer.mako" />
+${wrappers.head(truncate(filename) + " :: File Viewer")}
+
 <html>
 <head><title>${truncate(filename)} :: File Viewer</title></head>
 <body>
@@ -150,6 +153,4 @@
       </div>
     </div>
   </div>
-</body>
-</html>
-
+${wrappers.foot()}

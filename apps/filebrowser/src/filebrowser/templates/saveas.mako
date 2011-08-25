@@ -14,9 +14,9 @@
 ## See the License for the specific language governing permissions and
 ## limitations under the License.
 <%namespace name="edit" file="editor_components.mako" />
-<html>
-  <head><title>Save File As...</title></head>
-  <body>
+<%namespace name="wrappers" file="header_footer.mako" />
+
+${wrappers.head('Save File As...')}
     % if form.errors:
       <div class="alert_popup">
         % for field in form:
@@ -35,5 +35,5 @@
           <input type="submit" class="jframe-hidden" name="save" value="save"/>
       </form>
     </div>
-  </body>
-</html>
+
+${wrappers.foot()}

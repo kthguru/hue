@@ -17,10 +17,10 @@
 import datetime
 from django.template.defaultfilters import urlencode, escape, stringformat, date, filesizeformat, time
 %>
+<%namespace name="wrappers" file="header_footer.mako" />
 
-<html>
-<head><title>File Operation</title></head>
-<body>
+${wrappers.head('File Operations')}
+
 <h1>${form.op}</h1>
 ## Not sure if enctype breaks anything if used for things other than file upload.
 <form action="" method="POST" enctype="multipart/form-data">
@@ -28,5 +28,5 @@ ${form.as_p()|n}
 <input type="submit" value="Submit" />
 Go back to where you were: <a href="${urlencode(next)}">${next}</a>.
 </form>
-</body>
-</html>
+
+${wrappers.foot()}

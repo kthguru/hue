@@ -15,7 +15,10 @@
 ## limitations under the License.
 <%namespace name="edit" file="editor_components.mako" />
 <%namespace name="comps" file="fb_components.mako" />
-${comps.header('Upload Files')}
+<%namespace name="wrappers" file="header_footer.mako" />
+
+${wrappers.head('Upload Files')}
+${comps.toolbar('Upload Files')}
 
 <div class="prompt_popup">
 <form action="/filebrowser/upload?next=${next|u}" method="POST" enctype="multipart/form-data">
@@ -30,5 +33,5 @@ ${comps.header('Upload Files')}
 
 <div class="jframe-hidden">Go back to where you were: <a href="${next|u}">${next}</a>.</div>
 
-
-${comps.footer()}
+${comps.uploadToolbar()}
+${wrappers.foot()}
