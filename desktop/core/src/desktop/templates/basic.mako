@@ -34,27 +34,69 @@
       div.dispose();
     }
 
-    function loadApp(url) {
-			var div = new Element('div', {
+    function loadApp(url, name) {
+      var div = new Element('div', {
         'style': 'width: 900px; height: 800px; position: absolute; top: 20px; left: 20px; background-color: #ccc'
-			});
-      div.makeResizable();
+      });
       div.makeDraggable();
 
-			var close = new Element('input', {
-				'type': 'button',
-				'value': 'Close'
-			});
+      var close = new Element('input', {
+        'type': 'button',
+        'value': 'Close'
+      });
 
-			var iframe = new Element('iframe', {
-				'src': url,
-				'style': 'width: 800px; height: 750px'
-			});
+      var iframe = new Element('iframe', {
+        'src': url,
+        'name': name,
+        'style': 'width: 800px; height: 750px'
+      });
 
-			close.addEvent('click', destroy);
+      close.addEvent('click', destroy);
 
-			close.inject(div);
-			iframe.inject(div);
+      close.inject(div);
+      iframe.inject(div);
+
+      div.inject(document.body);
+    }
+
+    function loadAppClosure(url, name) {
+      var destroyInClosure = function(e) {
+
+        var close = e.target;
+        var div = close.getParent();
+
+        close.removeEvent('click', destroyInClosure);
+        var iframe = div.childNodes[1];
+        iframe.src = "about:blank";
+
+        div.fireEvent('destroy');
+        div.dispose();
+
+        div = null;
+        iframe = null;
+        close = null;
+      };
+
+      var div = new Element('div', {
+        'style': 'width: 900px; height: 800px; position: absolute; top: 20px; left: 20px; background-color: #ccc'
+      });
+      div.makeDraggable();
+
+      var close = new Element('input', {
+        'type': 'button',
+        'value': 'Close'
+      });
+
+      var iframe = new Element('iframe', {
+        'src': url,
+        'name': name,
+        'style': 'width: 800px; height: 750px'
+      });
+
+      close.addEvent('click', destroyInClosure);
+
+      close.inject(div);
+      iframe.inject(div);
 
       div.inject(document.body);
     }
@@ -98,13 +140,22 @@
   </script>
 </head>
 <body>
-  <button onclick="loadApp('/beeswax/')">Beeswax</button>
-  <button onclick="loadApp('/help')">Help</button>
-  <button onclick="loadApp('/userman/users')">Userman</button>
-  <button onclick="loadApp('/jobbrowser/jobs')">Job Browser</button>
-  <button onclick="loadApp('/jobsub/list/')">Job Designer</button>
-  <button onclick="loadApp('/flume/flows')">Flume</button>
-  <button onclick="loadApp('/filebrowser')">File Browser</button>
+  <button onclick="loadAppClosure('/beeswax/', 'Beeswax')">Beeswax Closure</button>
+  <button onclick="loadAppClosure('/help', 'Help')">Help Closure</button>
+  <button onclick="loadAppClosure('/userman/users', 'UserMan')">Userman Closure</button>
+  <button onclick="loadAppClosure('/jobbrowser/jobs', 'JobBrowser')">Job Browser Closure</button>
+  <button onclick="loadAppClosure('/jobsub/list/', 'JobSub')">Job Designer Closure</button>
+  <button onclick="loadAppClosure('/flume/flows')", 'Flume'>Flume Closure</button>
+  <button onclick="loadAppClosure('/filebrowser', 'FileBrowser')">File Browser Closure</button>
+  <br/>
+
+  <button onclick="loadApp('/beeswax/', 'Beeswax')">Beeswax</button>
+  <button onclick="loadApp('/help', 'Help')">Help</button>
+  <button onclick="loadApp('/userman/users', 'UserMan')">Userman</button>
+  <button onclick="loadApp('/jobbrowser/jobs', 'JobBrowser')">Job Browser</button>
+  <button onclick="loadApp('/jobsub/list/', 'JobSub')">Job Designer</button>
+  <button onclick="loadApp('/flume/flows', 'Flume')">Flume</button>
+  <button onclick="loadApp('/filebrowser', 'FileBrowser')">File Browser</button>
 
 </body>
 </html>

@@ -40,7 +40,7 @@
       </script>
   <![endif]-->
   <script>
-  
+
   window.addEvent('domready', function(){
     if (Browser.Engine.trident) {
       //if we're in IE, there's a note about the fact that Hue doesn't love IE
@@ -57,6 +57,7 @@
     var appName = "Hue";
     Depender.require({
       scripts: ["More/Fx.Elements"],
+
       callback: function(){
         //get the background images
         var bgEls = $('bg').getElements('img');
@@ -71,7 +72,7 @@
         new Fx.Elements(bgEls, {
           duration: 500
         }).start(styles);
-        
+
         //configure the clientcide assets location.
         Clientcide.setAssetLocation("/static/js/ThirdParty/clientcide/Assets");
         var growled = {};
@@ -85,11 +86,11 @@
           var launching = 'Launching ' + appName;
           var msg = loading;
           if (Hue.Desktop.hasLoaded(component)) msg = launching;
-          if (!FlashMessage.checkForFlashMessage(loading) && 
-              !FlashMessage.checkForFlashMessage(launching) && 
+          if (!FlashMessage.checkForFlashMessage(loading) &&
+              !FlashMessage.checkForFlashMessage(launching) &&
               !$$('.loadingmsg').length) {
                 growled[component] = FlashMessage.flash({
-                  message: msg, 
+                  message: msg,
                   duration: 10000
                 });
           }
@@ -101,9 +102,11 @@
           }
         };
         Hue.Desktop.initialize({
+          /*
           onBeforeLoad: launchGrowl,
           onBeforeLaunch: launchGrowl,
           onAfterLaunch: clearGrowl
+          */
         });
         //fade out the hue-loading message
         (function(){
@@ -185,8 +188,6 @@
   </script>
 </head>
 <body>
-  <ul id="desktop-menu" class="desktop-menu" style="position:absolute; top: -100000px;">
-  </ul>
   <div id="bg">
   </div>
   <div id="browserWarn">Hue is best experienced in <a target="browsers" href="http://getfirefox.com">Mozilla Firefox</a>, <a target="browsers" href="http://www.apple.com/safari/">Apple Safari</a>, or <a target="browsers" href="http://www.google.com/chrome">Google Chrome</a> <a id="closeWarning"></a></div>
@@ -229,7 +230,6 @@
       var state = Hue.Desktop.getState();
       var options = {};
       if (state && state.background) options.current = state.background;
-      new BackgroundManager($('bg'), $('desktop-menu'), options);
       if (Browser.Engine.trident) $(document.body).addClass('IEroot');
       $(document.body).addClass(Browser.Engine.name);
     })();

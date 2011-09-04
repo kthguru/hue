@@ -24,6 +24,7 @@ urlpatterns = patterns('',
 
   # Base view
   url(r'^$', 'django.views.generic.simple.redirect_to', { "url": "/filebrowser/view/" }),
+  url(r'jframe$', 'filebrowser.views.jframe', name='jframe'),
 
   url(r'listdir(?P<path>/.*)', 'filebrowser.views.listdir', name='listdir'),
   url(r'display(?P<path>/.*)', 'filebrowser.views.display', name='display'),

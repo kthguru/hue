@@ -18,15 +18,7 @@
 description: Beeswax (the Hive UI)
 provides: [Hue.Beeswax]
 requires: [
-  JFrame/JFrame.Browser,
-  JFrame/JFrame,
-  hue-shared/Hue.JBrowser,
-  clientcide/TabSwapper,
-  JFrame/Behavior.HtmlTableKeyboard,
-  JFrame/Behavior.HtmlTableRestore,
-  More/Form.Validator.Inline,
-  hue-shared/DynamicTextarea,
-  hue-shared/Hue.JFrame.Chooser,
+  More-Behaviors/Behavior.FormRequest,
   Core/Cookie,
   Core/DomReady,
   Core/Element.Event,
@@ -39,14 +31,24 @@ requires: [
   More/HtmlTable.Resize,
   More/Spinner,
   More/URI,
+  hue-shared/Hue.JBrowser,
+  More/Form.Validator.Inline,
+  clientcide/TabSwapper,
+  hue-shared/DynamicTextarea,
+  hue-shared/Hue.JFrame.Chooser,
+  JFrame/JFrame.Browser,
+  JFrame/JFrame,
+  JFrame/Behavior.HtmlTableKeyboard,
+  JFrame/Behavior.HtmlTableRestore,
   JFrame/JFrame.Keys,
   hue-shared/Hue.JFrame.Target,
-  hue-shared/Hue.JFrame.ConfirmUnencodeAndPost,
+  hue-shared/Hue.JFrame.ConfirmUnencodeAndPost
 ]
 script: Hue.Beeswax.js
 
 ...
 */
+/*
 ART.Sheet.define('window.beeswax.browser', {
 	'min-width': 740
 });
@@ -54,8 +56,9 @@ ART.Sheet.define('window.beeswax.browser', {
 ART.Sheet.define('splitview.bw-editor', {
 	'right-background-color': '#333'
 });
-
+*/
 (function(){
+	Hue = window.Hue || {};
 
 	Hue.Beeswax = new Class({
 

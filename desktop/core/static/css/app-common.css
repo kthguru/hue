@@ -1,25 +1,9 @@
-.jframe-window-toolbar {
-	position: absolute;
-}
-.jframe-window-toolbar .userman_logo {
-	position: absolute;
-	top: 24px;
-	left: 14px;
+.header {
+	height: 75px;
 }
 
-/* Navigation Bar */
-.jframe-window-toolbar .nav {
-	position: absolute;
-	top: 25px;
-	left: 70px;
-	width: 450px;
-}
-
-.jframe-window-toolbar .desktop-menu {
-    position: absolute;
-    top: 25px;
-    left: 300px;
-    width: 300px;
+.logo {
+	float: left;
 }
 
 .subnav {
@@ -30,6 +14,10 @@
 /* Icons */
 .nav_icon {
 	padding: 0px 6px 0px 18px;
+}
+
+.toolbar {
+	clear: both;
 }
 
 .toolbar .Bar .Button {

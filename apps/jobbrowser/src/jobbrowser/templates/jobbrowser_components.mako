@@ -20,7 +20,7 @@
       <title>${title}</title>
     </head>
     <body>
-      % if toolbar: 
+      % if toolbar:
       <div class="toolbar">
         <a href="/jobbrowser/jobs/"><img src="/jobbrowser/static/art/icon_large.png" class="jt_icon"/></a>
       </div>
@@ -28,6 +28,17 @@
 </%def>
 
 <%def name="footer()">
+  <script type="text/javascript" src="/depender/build?client=true&require=beeswax/Hue.Beeswax"></script>
+  <script type="text/javascript">
+  window.addEvent('domready', function () {
+    Behavior.instance = new Behavior();
+    Behavior.instance.apply(document.documentElement);
+    $$("a").each(function(el){
+      console.log(el.get("target"));
+    });
+  });
+  </script>
+
     </body>
   </html>
 </%def>
@@ -41,7 +52,7 @@
       <thead>
          <tr>
            <th class="jt_counter_display_name">Counter Name</th>
-           <th class="jt_counter_total">Value</th>   
+           <th class="jt_counter_total">Value</th>
         </tr>
       </thead>
       <tbody>
@@ -71,7 +82,7 @@
            <th class="jt_counter_display_name">Name</th>
            <th class="jt_counter_maps_total">Maps Total</th>
            <th class="jt_counter_reduces_total">Reduces Total</th>
-           <th class="jt_counter_total">Total</th>   
+           <th class="jt_counter_total">Total</th>
         </tr>
       </thead>
       <tbody>

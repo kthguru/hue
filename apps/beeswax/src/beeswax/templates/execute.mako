@@ -87,16 +87,16 @@ ${wrappers.head('Hive Query', section='query')}
 
 <div class="view" id="execute">
   <form action="${action}" method="POST" data-filters="FormValidator">
-    <table>
       <%
         if form.settings.forms or form.file_resources.forms or form.functions.forms:
           width = 230
         else:
           width = 0
       %>
-      <tbody>
-      <tr>
-      <td style="width: ${width}px;">
+<table>
+<tr>
+<td>
+        <div style="width: ${width}px;">
         <a name="settings"></a>
         <dl class="jframe_padded bw-query_settings">
           <dt class="hue-dt_cap">Hive Settings</dt>
@@ -220,11 +220,13 @@ ${wrappers.head('Hive Query', section='query')}
             </dl>
           </dd>
         </dl>
-      </td>
-      <td>
+
         % if on_success_url:
           <input type="hidden" name="on_success_url" value="${on_success_url}"/>
         % endif
+        </div>
+</td>
+<td>
 
         % if error_messages or log:
           <div data-filters="Tabs">
@@ -254,11 +256,10 @@ ${wrappers.head('Hive Query', section='query')}
         % else:
           ${query()}
         % endif
+</td>
+</tr>
+</table>
 
-      </td>
-    </tr>
-  </tbody>
-  </table>
   </form>
 </div>
 ${wrappers.foot()}

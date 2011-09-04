@@ -65,6 +65,7 @@ dynamic_patterns = patterns('',
   (r'^log_frontend_event$', 'desktop.views.log_frontend_event'),
   # Top level web page!
   (r'^$', 'desktop.views.index'),
+  (r'^jbasic', 'desktop.views.jbasic'),
   (r'^basic', 'desktop.views.basic'),
 )
 

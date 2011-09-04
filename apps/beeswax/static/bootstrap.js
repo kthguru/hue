@@ -18,8 +18,45 @@ Hue.Desktop.register({
 		name: 'Beeswax for Hive',
 		require: ['beeswax/Hue.BeeswaxInFrame'],
 		launch: function(path, options) {
+			var url = "/beeswax";
 			// options.displayHistory = false;
-			return new Hue.BeeswaxInFrame(path, options);
+      var div = new Element('div', {
+        'style': 'width: 900px; height: 800px; position: absolute; top: 20px; left: 20px; background-color: #ccc'
+      });
+
+      var close = new Element('input', {
+        'type': 'button',
+        'value': 'Close'
+      });
+
+      var iframe = new Element('iframe', {
+        'src': url,
+        'style': 'width: 800px; height: 750px'
+      });
+
+      var destroyInClosure = function(e) {
+
+        var close = e.target;
+        var div = close.getParent();
+
+        close.removeEvent('click', destroyInClosure);
+        var iframe = div.childNodes[1];
+        iframe.src = "about:blank";
+
+        div.fireEvent('destroy');
+        div.dispose();
+
+        div = null;
+        iframe = null;
+        close = null;
+      };
+
+      close.addEvent('click', destroyInClosure);
+
+      close.inject(div);
+      iframe.inject(div);
+
+			return div;
 		},
 		// css: '/beeswax/static/css/beeswax.css',
 		menu: {

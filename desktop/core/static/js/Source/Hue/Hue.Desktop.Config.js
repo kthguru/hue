@@ -25,7 +25,7 @@ script: Hue.Desktop.Config.js
 
 window.addEvent('domready', function(){
 	$(document.body).addEvent('contextmenu', function(e){
-		if (!dbug.enabled) e.preventDefault();
+		// if (!dbug.enabled) e.preventDefault();
 	});
 
 	//this sizer method will ensure that windows are always reachable and ever larger than the window

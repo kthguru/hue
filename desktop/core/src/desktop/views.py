@@ -208,6 +208,9 @@ def index(request):
 def basic(request):
   return render("basic.mako", request, dict())
 
+def jbasic(request):
+  return render("jbasic.mako", request, dict())
+
 def serve_404_error(request, *args, **kwargs):
   """Registered handler for 404. We just return a simple error"""
   access_warn(request, "404 not found")

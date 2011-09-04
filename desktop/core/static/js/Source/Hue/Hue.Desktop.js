@@ -196,13 +196,13 @@ Hue.Desktop = CCS.Desktop = {
 		instance - (object) the instance of that application
 	*/
 	addInstance: function(component, instance){
-		instance._hueComponent = component;
-		if (!this.instances[component]) this.instances[component] = [];
-		this.instances[component].include(instance);
+		// instance._hueComponent = component;
+		// if (!this.instances[component]) this.instances[component] = [];
+		// this.instances[component].include(instance);
 		//on destroy, remove the instance from the list of instances
 		//add Hue-<COMPONENT> - mostly just used for selecting apps in windmill.
-		instance.addEvent('destroy', this.removeInstance.bind(this, [component, instance]));
-		$(instance).addClass('Hue-'+component.toUpperCase());
+		// instance.addEvent('destroy', this.removeInstance.bind(this, [component, instance]));
+		// $(instance).addClass('Hue-'+component.toUpperCase());
 		instance.inject($('hue-desktop'));
 	},
 
@@ -278,20 +278,25 @@ Hue.Desktop = CCS.Desktop = {
 			var launcher = this.launchers[component];
 			//throw errors if we're debugging
 			var attempt = function(){
-				var launched = launcher.apply(this, args);
+				launched = launcher.apply(this, args);
+				/*
 				if (this.plugins[component]) {
 					this.plugins[component].each(function(plugin){
 						if (plugin.launch) plugin.launch(launched, args);
 					});
 				}
+				*/
 				this.addInstance(component, launched);
+				/*
 				var after = function(){
 					this.fireEvent('afterLaunch', component);
 					launched.removeEvent('afterLaunch', after);
+					launched = null;
 				}.bind(this);
 				launched.addEvent('load', after);
-				callback(launched);
-				return launched;
+				*/
+				// callback(launched);
+				return null;// launched;
 			}.bind(this);
 
 			return dbug.conditional(attempt, function(e){

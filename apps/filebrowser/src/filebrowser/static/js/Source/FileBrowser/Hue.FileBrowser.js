@@ -17,7 +17,17 @@
 ---
 description: File Browser
 provides: [Hue.FileBrowser, Hue.FileChooser, Hue.FileSaver, CCS.FileBrowser, CCS.FileChooser, CCS.FileSaver]
-requires: [hue-shared/Hue.JBrowser, fancyupload/FancyUpload3.Attach, More/URI, More/Fx.Reveal, Widgets/Element.Data]
+requires: [hue-shared/Hue.JBrowser,
+fancyupload/FancyUpload3.Attach,
+More/URI,
+More/Fx.Reveal,
+Widgets/Element.Data,
+More-Behaviors/Behavior.FormRequest,
+More-Behaviors/Behavior.HtmlTable,
+JFrame/Behavior.ContextMenu,
+JFrame/JFrame,
+JFrame/Behavior.HtmlTableKeyboard,
+JFrame/Behavior.HtmlTableRestore]
 script: Hue.FileBrowser.js
 
 ...

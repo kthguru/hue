@@ -40,7 +40,7 @@ from avro import datafile, io
 
 from desktop.lib import i18n
 from desktop.lib.django_util import make_absolute, render_json
-from desktop.lib.django_util import PopupException, format_preserving_redirect
+from desktop.lib.django_util import PopupException, format_preserving_redirect, render
 from filebrowser.lib.rwx import filetype, rwx
 from filebrowser.lib import xxd
 from filebrowser.forms import RenameForm, UploadForm, MkDirForm, RmDirForm, RmTreeForm, \
@@ -803,3 +803,6 @@ def truncate(toTruncate, charsToKeep=50):
     return truncated
   else:
     return toTruncate
+
+def jframe(request):
+  return render('jframe.mako', request, {})

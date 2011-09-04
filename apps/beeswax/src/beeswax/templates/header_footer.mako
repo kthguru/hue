@@ -75,10 +75,14 @@ def is_selected(section, matcher):
 <%def name="foot()">
   <script type="text/javascript" src="/depender/build?client=true&require=beeswax/Hue.Beeswax"></script>
   <script type="text/javascript">
+
   window.addEvent('domready', function () {
-    Behavior.instance = new Behavior();
-    Behavior.instance.apply(document.documentElement);
+    var options = {
+      element: document.body
+    }
+    new Hue.Beeswax(window.location.href, options);
   });
+
   </script>
   </body>
 </html>
