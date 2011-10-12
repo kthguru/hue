@@ -1,0 +1,661 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <!-- A common head. Must extract, perhaps with a placeholder to insert some application specific stuff -->
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <!-- Note: We concatenate the h1 content with this title, so this page would appear as "Page Name - Clouder Desktop" -->
+    <title> - Cloudera Desktop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="/static/cms/css/boilerplate.css?v=3.0u3"/>
+    <link rel="stylesheet" href="/static/cms/css/cms.css?v=3.0u3"/>
+    <link rel="stylesheet" href="/static/ext/jquery/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />
+    <script type="text/javascript" src="/static/ext/jquery/js/jquery-1.6.2.min.js"></script>
+    <script type="text/javascript">jQuery.noConflict();</script>
+  </head>
+  <body class="Fill">
+    <!-- BEGIN: Common header. Must extract -->
+    <table class="AppHeader">
+      <tbody>
+        <tr>
+          <td>
+            <a class="appName" href="/cmf/">
+              <span class="logo label_productName_desktop"></span>
+              <span class="hidden productName">Desktop</span>
+            </a>
+            <span class="AppTabSet">
+              <a href="/cmf/services/status" class="header ">Services</a>
+              <a href="/cmf/hardware/hosts" class="selected">Hosts</a>
+              <a href="/cmf/monitor/activities" >Activities</a>
+              <a href="/cmf/process/all/logs/search" >Logs</a>
+              <a href="/cmf/events" >Events</a>
+              <a href="/cmf/reports" >Reports</a>
+            </span>
+          </td>
+          <td class="alignRight">
+            <form action="/cmf/search" class="BasicSearch">
+              <label class="hidden" title="Search by Service, Role or Host Name" for="BasicSearch">Search</label>
+              <span class="inputAndGo"><input id="BasicSearch" title="Search by Service, Role or Host Name" type="text" name="q"/><span class="go" title="Search"></span></span>
+            </form>
+          </td>
+          <td class="AppLinks"><a id="settingsTab" href="/cmf/settings"><span class="IconGear32x32" style="vertical-align: text-bottom" title="Administration"></span></a>
+            <a id="helpAppLink" href="/cmf/help/scm-help-guide" target="_blank">Help</a>
+            <a href="http://support.cloudera.com/" target="_blank">Support</a>
+            <a href="/j_spring_security_logout">Logout</a>
+          </td>
+        </tr>
+      </tbody>
+    </table><!-- AppHeader -->
+    <!-- END: Common Header -->
+    <h1>Page Name</h1>
+    <div id="Main">
+      <form action="do" method="post">
+        <!-- All components should be region based. A region may or may not have a RegionTitle. -->
+        <div class="Region">
+          <div class="RegionTitle">
+            <h2>Hosts</h2>
+          </div>
+          <div class="RegionContent">
+            <div class="toolbar">
+              Selected:
+              <input type="submit" name="action" title="Assign a rack to these hosts" value="Set Rack" />
+              <input type="submit" name="action" title="Delete these hosts from SCM" value="Delete" />
+            </div>
+            <div id="hosts" class="YScroll">
+              <div class="XScroll">
+                <table class="DataTable" id="hostsTable">
+                  <thead>
+                    <tr>
+                      <th class="widthMin">
+                        <input type="checkbox" title="Select all rows" id="checkAll"/>
+                      </th>
+                      <th><div>Name</div></th>
+                      <th><div>IP</div></th>
+                      <th><div>Rack</div></th>
+                      <th><div>Health</div></th>
+                      <th><div>Last Heartbeat</div></th>
+                      <th><div>Number of Cores</div></th>
+                      <th><div>Disk Usage</div></th>
+                      <th><div>Load Average</div></th>
+                      <th><div>Physical Memory</div></th>
+                      <th><div>Virtual Memory</div></th>
+                    </tr>
+                    <tr class="cmfTableFilterRow ">
+                      <th class="noSort">&nbsp;</th>
+                      <th><input class="filter" id="filterName" type="text"/></th>
+                      <th><input class="filter" id="filterIp" type="text"/></th>
+                      <th><input class="filter" id="filterRack" type="text"/></th>
+                      <th>
+                        <select class="filter" id="filterHealth">
+                          <option value="">All</option>
+                          <option value="Checks disabled">Checks disabled</option>
+                          <option value="History unavailable">History unavailable</option>
+                          <option value="Unknown">Unknown</option>
+                          <option value="Good">Good</option>
+                          <option value="Concerning">Concerning</option>
+                          <option value="Bad">Bad</option>
+                        </select>
+                      </th>
+                      <th>
+                        <select class="filter" id="filterHBeat">
+                          <option value="">All</option>
+                          <option value="0s-30s">Under 30 seconds</option>
+                          <option value="0s-1m">Under 1 minute</option>
+                          <option value="1m+">Over 1 minute</option>
+                          <option value="2m+">Over 2 minutes</option>
+                          <option value="5m+">Over 5 minutes</option>
+                          <option value="10m+">Over 10 minutes</option>
+                        </select>
+                      </th>
+                      <th>
+                        <input class="filter" id="filterNumCores" type="text"/>
+                      </th>
+                      <th>
+                        <select class="filter" name="filterDiskUsage" id="filterDiskUsage">
+                          <option value="">All</option>
+                          <option value="High">High Usage</option>
+                          <option value="Med">Med Usage</option>
+                          <option value="Low">Low Usage</option>
+                        </select>
+                      </th>
+                      <th><input class="filter" id="filterLoad" type="text"/></th>
+                      <th>
+                        <select class="filter" id="filterPMem">
+                          <option value="">All</option>
+                          <option value="High">High Usage</option>
+                          <option value="Med">Med Usage</option>
+                          <option value="Low">Low Usage</option>
+                        </select>
+                      </th>
+                      <th>
+                        <select class="filter" id="filterVMem">
+                          <option value="">All</option>
+                          <option value="High">High Usage</option>
+                          <option value="Med">Med Usage</option>
+                          <option value="Low">Low Usage</option>
+                        </select>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="30"/></td>
+                      <td>
+                        <a href="/cmf/hardware/hosts/30/status">c0424.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.141</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:41.457Z">
+                        5.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td>
+                        <div class="CapacityUsage priorityLow">
+                          <span class="reading">116.6 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.14405%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.7 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:7.44119%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">37.5 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.31053%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="75"/></td>
+                      <td>
+                        <a href="/cmf/hardware/hosts/75/status">c0515.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.167</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:43.193Z">
+                        3.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">110.9 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:2.98946%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.17</td>
+                              <td>0.05</td>
+                              <td>0.01</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.9 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:8.16705%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">38.6 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.32007%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="11"/></td>
+                      <td>
+                        <a href="/cmf/hardware/hosts/11/status">c0421.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.138</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:44.914Z">
+                        1.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">114.4 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.08282%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">2.1 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:8.98084%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">42.6 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.35274%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="44"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/44/status">c0423.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.140</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:41.958Z">
+                        4.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">115.3 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.10665%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.02</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.8 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:7.55815%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">33.6 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.27850%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="64"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/64/status">c0537.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.189</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:45.009Z">
+                        1.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">118.1 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.18291%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.9 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:8.08165%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">24.3 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.20115%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="87"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/87/status">c0522.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.174</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:43.945Z">
+                        2.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">120.4 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.24423%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.9 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:8.21564%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">70.6 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.58440%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="56"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/56/status">c0420.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.137</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:41.948Z">
+                        4.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">115.0 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.09967%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.01</td>
+                              <td>0.04</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.8 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:7.78143%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">54.5 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.45138%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="83"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/83/status">c0513.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.165</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:43.741Z">
+                        2.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">114.3 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.08059%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.9 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:8.23205%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">47.6 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.39428%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="66"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/66/status">c0535.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.187</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:44.915Z">
+                        1.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">118.9 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.20493%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.17</td>
+                              <td>0.06</td>
+                              <td>0.02</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">2.2 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:9.33782%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">62.2 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.51498%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="12"/></td>
+
+                      <td>
+                        <a href="/cmf/hardware/hosts/12/status">c0422.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.139</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:45.310Z">
+                        1.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">116.1 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:3.12858%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                              <td>0.00</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">1.9 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:7.88615%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">50.4 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.41751%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><input type="checkbox" name="id" value="1"/></td>
+                      <td>
+                        <a href="/cmf/hardware/hosts/1/status">c0215.hal.cloudera.com</a>
+                      </td>
+                      <td>172.29.81.62</td>
+                      <td>/default</td>
+                      <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
+                      <td title="2011-10-12T05:07:45.386Z">
+                        1.0s ago
+                        <span class="hidden filterValue">
+                          0s-30s 0s-1m
+                        </span>
+                      </td>
+                      <td>16</td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">192.3 GiB/3.6 TiB</span>
+                          <span class="bar" style="width:5.18325%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td class="containsTable">
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>1.09</td>
+                              <td>1.02</td>
+                              <td>1.04</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">3.4 GiB/23.5 GiB</span>
+                          <span class="bar" style="width:14.70469%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                      <td><div class="CapacityUsage priorityLow">
+                          <span class="reading">80.5 MiB/11.8 GiB</span>
+                          <span class="bar" style="width:0.66663%"></span>
+                          <span class="hidden filterValue"> priorityLow</span>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script type="text/javascript">
+    <!--
+      jQuery(function($){
+        $("#hosts").AutoOverFlow2();
+      });
+    -->
+    </script>
+    <script type="text/javascript" src="/static/ext/jquery/plugins/jquery-plugins-all-3.7.min.js"></script>
+  </body>
+</html>
