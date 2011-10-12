@@ -1,0 +1,68 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+// CSS Hacks used to preserve selector specificity
+// http://paulirish.com/2009/browser-specific-css-hacks/
+
+textarea { overflow: auto; } /* www.sitepoint.com/blogs/2010/08/20/ie-remove-textarea-scrollbars/ */
+
+legend {
+	margin-left: -7px;
+}
+
+input[type="checkbox"] {
+	vertical-align: baseline;
+}
+
+input[type="radio"] {
+	vertical-align: baseline;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+	margin: 0 2px;
+}
+
+/* Hand cursor on clickable input elements */
+label,
+input[type="button"],
+input[type="submit"],
+input[type="image"],
+button {
+	cursor: pointer;
+}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button,
+input,
+select,
+textarea {
+	margin: 0;
+	vertical-align: baseline;
+}
+
+/* Colors for form validity */
+// input:valid,
+// textarea:valid {}
+
+input:invalid,
+textarea:invalid {
+	border-radius: 1px;
+	-moz-box-shadow: 0px 0px 5px red;
+	-webkit-box-shadow: 0px 0px 5px red;
+	box-shadow: 0px 0px 5px red;
+}
+.no-boxshadow input:invalid,
+.no-boxshadow textarea:invalid {
+	background-color: #f0dddd;
+}
+
+/* Make buttons play nice in IE:
+   www.viget.com/inspire/styling-the-button-element-in-internet-explorer/ */
+button {
+	width: auto;
+	overflow: visible;
+}
+
+.form {
+  padding: 20px;
+}

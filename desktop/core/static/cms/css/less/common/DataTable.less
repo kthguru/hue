@@ -1,0 +1,253 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+.DataTable {
+	.borderBox;
+	border: 1px solid #fff;
+	border-right-width: 0;
+	border-bottom-width: 0;
+	border-collapse: separate;
+	width: 100%;
+	max-width: 100%;
+}
+
+.DataTable td,
+.DataTable th {
+	padding: 4px 6px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	line-height: 16px;
+}
+
+.DataTable td.wrap,
+.DataTable th.wrap {
+	white-space: normal;
+}
+
+.DataTable th.table-th-sort {
+	text-align: left;
+	.backgroundGradientY(#d6d6d6, #bbb);
+}
+
+.DataTable th .table-th-sort-span {
+	float: right;
+}
+
+.DataTable th {
+	color: #595959;
+}
+
+.DataTable tbody tr {
+	background-color: #eee;
+	border-bottom: 1px solid #595959;
+}
+
+.DataTable tbody tr.even,
+.DataTable tbody tr:nth-child(even) {
+	background-color: @dataTableEven;
+}
+
+.DataTable tbody tr.odd,
+.DataTable tbody tr:nth-child(odd) {
+	background-color: @dataTableOdd;
+}
+
+.DataTable tbody.noStripe tr.even,
+.DataTable tbody.noStripe tr:nth-child(even),
+.DataTable tbody.noStripe tr.odd,
+.DataTable tbody.noStripe tr:nth-child(odd) {
+	background-color: transparent;
+}
+
+.DataTable tbody td {
+  border-bottom: 1px solid #ccc;
+}
+
+
+/**
+ * Nested table should not have alternating color
+ * and borders.
+ */
+.DataTable table,
+.DataTable table tr:nth-child(even),
+.DataTable table tr:nth-child(odd),
+.DataTable table tr,
+.DataTable table tbody td {
+	background-color: transparent;
+	border-width: 0;
+}
+
+.DataTable th {
+	padding: 4px 6px;
+	text-align: left;
+	.backgroundGradientY(#eee, #ccc);
+	border-right: 1px solid #fff;
+}
+
+
+.DataTable table,
+.DataTable table tr ,
+.DataTable table th ,
+.DataTable table td {
+	border: none;
+}
+
+.DataTable p {
+	margin: 0;
+}
+
+/* sorting_asc and sorting_desc belong to DataTables */
+.DataTable th.sorting_asc,
+.DataTable th.sorting_desc {
+	text-align: left;
+	.backgroundGradientY(#d6d6d6, #bbb);
+	div {
+		background-repeat: no-repeat;
+		background-position: right;
+		margin-right: 12px;
+		margin-left: 0;
+		width: 100%;
+		&.alignRight {
+			background-position: left;
+		}
+	}
+}
+
+.DataTable th.sorting_asc,
+.DataTable th.sorting_desc,
+.DataTable th.sorting {
+	cursor: pointer;
+}
+
+.DataTable.defaultRight th,
+.DataTable.defaultRight td {
+	text-align: right;
+}
+
+.DataTable.defaultRight th.alignLeft,
+.DataTable.defaultRight td.alignLeft {
+	text-align: left;
+}
+
+// Reverse the sort icon for defaultRight DataTables.
+.DataTable.defaultRight th.sorting_desc,
+.DataTable.defaultRight th.sorting_asc {
+	text-align: right;
+	div {
+		margin-right: 12px;
+		margin-left: 0;
+		background-position: left;
+		&.alignLeft {
+			background-position: right;
+		}
+	}
+}
+
+.DataTable th.sorting_asc div {
+	background-image: url('/static/cms/icons/bullet_arrow_up.png');
+}
+
+.DataTable th.sorting_desc div {
+	background-image: url('/static/cms/icons/bullet_arrow_down.png');
+}
+
+.DataTable .cmfTableFilterRow {
+	th,
+	td {
+		.backgroundGradientY(#555, #888);
+		border-bottom-color: #333;
+
+		select,
+		input[type=text],
+		input[type=search] {
+			width:100%;
+			max-width:24ex;
+		}
+	}
+}
+
+.DataTable .cmfTableFilterRow > th {
+	.backgroundGradientY(#555, #888);
+	border-bottom-color: #666;
+}
+
+.DataTable td > a,
+.DataTable td > span {
+	vertical-align: top;
+}
+
+.DataTable td p {
+	padding-top: 0;
+}
+
+.DataTable .selectable {
+	cursor: pointer;
+}
+
+.DTTT_selectable tbody {
+	tr.DTTT_selected {
+		td {
+			color: #FFF;
+			background-color: @darkBlueBackground;
+			.Icon.arrowUp {
+				background-position: 0 -64px;
+			}
+			.Icon.expand,
+			.Icon.arrowRight {
+				background-position: 0 -80px;
+			}
+			.Icon.collapse,
+			.Icon.arrowDown {
+				background-position: 0 -96px;
+			}
+			.Icon.arrowLeft {
+				background-position: 0 -112px;
+			}
+		}
+		.backgroundGradientY(#2c7fb3, @darkBlueBackground);
+	}
+
+	tr {
+		cursor: pointer;
+	}
+}
+
+.DataTable tr.selected {
+		.backgroundGradientY(#2c7fb3, @darkBlueBackground);
+		td {
+			color: #FFF;
+		}
+}
+
+.DataTable .sectionHead,
+.sectionHead {
+	padding: 6px 8px;
+	font-size: @fontSizeC;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 0 1px 0 #333;
+	.backgroundGradientY(#666, #888);
+}
+
+.sectionHead .notSelected {
+	font-weight: normal;
+	color: #ccc;
+}
+
+.sectionHead .selected a,
+.sectionHead .selected a:visited {
+	color: #fff;
+	text-decoration: none;
+	cursor: default;
+}
+
+.sectionHead .notSelected a,
+.sectionHead .notSelected a:visited {
+	color: #ccc;
+}
+
+.DataTable th label,
+.DataTable td label,
+.DataTable td label span,
+.DataTable th label span {
+	vertical-align: top;
+}

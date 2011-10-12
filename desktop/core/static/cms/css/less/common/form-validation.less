@@ -1,0 +1,49 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+// @group Config input
+
+input[type=text][cmf-validity~=ERROR]{
+	color: #c10d0a;
+	background-color: #febfc0;
+	border: 2px solid;
+}
+
+input[type=text][cmf-validity]:invalid{
+	color: #c10d0a;
+	background-color: #febfc0;
+	border: 2px solid;
+}
+
+input[type=text][cmf-validity~=ERROR]::-webkit-input-placeholder{
+	color: #cc6766;
+}
+input[type=text][cmf-validity~=ERROR]:-moz-placeholder{
+	color: #cc6766;
+}
+
+// @end Config input
+
+// @group Validation Message
+
+label.error,
+.cmfParamState.error,
+.cmfInvalid {
+	clear: both;
+	color: #c10d0a;
+}
+
+.cmfParamState.warning {
+	clear: both;
+	color: #997711;
+}
+
+.cmfParamState.check {
+	clear: both;
+	color: @checkGreen;
+}
+
+label.error {
+	display: block;
+}
+// @end
+

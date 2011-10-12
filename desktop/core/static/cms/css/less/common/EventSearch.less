@@ -1,0 +1,256 @@
+/* Copyright (c) 2011 Cloudera, Inc. All rights reserved. */
+@import "widths.less";
+@import "mixins.less";
+
+//----------------------------------------------
+// Common styles
+//----------------------------------------------
+
+.SearchControlsContainer {
+    background-color: @gray90;
+    .controlsTable {
+        .width1of1;    
+    }
+}
+
+.SearchResultsContainer {
+    .borderTop(@gray80);
+    padding: 10px 15px;
+    .resultsInnerContainer {
+        .borderRadius(4px);
+        .borderAll(@gray80);
+        .resultsSummary {
+            margin: 1px 1px 0px 1px;
+            .backgroundGradientY(@gray90, @gray85);
+            height: 22px;
+            padding-top: 2px;
+            padding-left: 4px;
+            font-size: @fontSizeB;
+        }
+    }
+    
+    .sectionHead {
+        margin: 0px 1px;
+    }
+}
+
+.SearchWidget {
+    .controlsTable {
+        .width1of1;
+    }
+    .SearchResultsContainer {
+        border-top: 0px;
+    }
+    .component {
+        padding-right: 5px;
+        .cmfParamName {
+            padding-right: 5px;
+        }
+    }
+    .subComponent {
+        padding-right: 2px;
+        .nowrap;
+    }
+}
+
+.eventCodeChooseLabel {
+  cursor: pointer;
+}
+
+.eventCodeChooseLabel:hover {
+  text-decoration: underline;
+}
+
+.horizontalList {
+    list-style-type: none;
+    .width1of1;
+    margin-left: 0px;
+    display: inline-block;
+    li {
+        float: left;
+    }
+}
+
+.selectAllOrNone {
+    .selectAll {
+        float: left;
+        .unselectable;
+        padding-right: 3px;
+    }
+}
+
+.componentHeader {
+    padding-bottom: 4px;
+    .borderBottom(@gray60, dashed);
+}
+
+//----------------------------------------------
+// Events-specific styles
+//----------------------------------------------
+
+#eventChart {
+    width: 50%;
+    .borderLeft(@gray80);
+    padding: 0px;
+}
+
+#eventControlsTable {
+	padding: 10px 0px;
+	border-collapse: separate;
+	border-spacing: 10px 0px;
+	.componentHeader {
+	   margin-bottom: 5px;
+	}
+	.hosts {
+		.width1of1;
+		margin-bottom: 10px;
+		.addHostsField {
+			display: inline-block;
+			.width1of1;
+		}
+	}
+	.keywordsAndSearch {
+		margin-top:5px;
+		.cmfParamName {
+			width:10%;
+		}
+		.keywordField {
+			width:70%;
+			input {
+				.width1of1;
+			}
+		}
+		.searchButton {
+			width:20%;
+			text-align:center;
+		}
+	}
+}
+
+.EventResultsContainer {
+    .eventRowExpander {
+        cursor: pointer;
+        background-position: -16px -128px;
+    }
+    .eventRowExpander:hover {
+        border: 1px solid #999999; 
+        font-weight: normal;
+        color: #212121;
+    }
+}
+
+.DataTable {
+    tbody {
+        tr.even {
+            background-color: @dataTableEven;
+        }
+        tr.odd {
+            background-color: @dataTableOdd;
+        }
+        tr.details {
+            background-color: white;
+        }
+        tr.alert td{
+            color: @alertRed;
+        }
+    }
+}
+
+
+//----------------------------------------------
+// Logs-specific styles
+//----------------------------------------------
+
+#logSearchControlsContainer {
+    .componentBody {
+        padding: 5px 0px;
+        border-collapse: separate;
+        border-spacing: 10px 4px;
+        .width1of1;
+        .paramInput {
+            padding-left: 10px;
+            width: 75%;
+        }
+    }
+}
+
+#logChart {
+    .borderLeft(@gray80);
+}
+
+#logSearchHeaderTable {
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+#logSearchHeaderTable > tr > td {
+    .width1of2;
+}
+
+
+.PaginationLinks {
+    float: right;
+    margin-right: 3px;
+    a {
+        float: left;
+        font-size: @fontSizeC;
+        text {
+            float: left;
+        }
+        span {
+            margin: 0px 3px;
+            border: 1px solid @gray60;
+        }
+        span.ui-icon-triangle-1-e {
+            float: left;
+            background-position: -32px -16px;
+        }
+        span.ui-icon-triangle-1-w {
+            float: right;
+            background-position: -96px -16px;
+        }
+    }
+    a:hover {
+        
+        span {
+            .jQueryImageBackground("images/ui-icons_222222_256x240.png");
+            background-color: #dadada;
+            color: #212121;
+            outline: medium none;
+        }
+        span.ui-icon-triangle-1-e {
+            background-position: -32px -16px;
+        }
+        span.ui-icon-triangle-1-w {
+            background-position: -96px -16px;
+        }
+    }
+}
+
+#roletypes {
+    table {
+        border-collapse: separate;
+        border-spacing: 10px;
+        margin-top: -10px;
+    }
+}
+
+#events {
+    padding: 5px;
+    select {
+        width: 200px;
+    }
+    input[type=text] {
+        width: 200px;
+    }
+}
+
+#logs {
+    padding: 5px;
+    select {
+        width: 75px;
+    }
+    input[type=text] {
+        width: 125px;
+    }
+}

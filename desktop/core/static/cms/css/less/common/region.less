@@ -1,0 +1,89 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+
+.Region {
+	padding: 5px;
+	margin: 0;
+}
+
+.RegionTitle {
+	.backgroundGradientY(#eee, #ddd);
+	height: 30px;
+	.borderRadius(3px, 3px, 0, 0);
+	border: #ccc 1px solid;
+	border-width: 1px 1px 0 1px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.RegionTitle .toolbar {
+	.floatRight;
+	height: 26px;
+	background: transparent;
+	border-bottom-width: 0;
+	padding: 2px 0;
+}
+
+.RegionContent {
+	padding: 0;
+	.borderRadius(0, 0, 3px, 3px);
+	border: #ccc 1px solid;
+	border-width: 1px 1px 1px 1px;
+}
+
+.PageTitle h1,
+.RegionTitle h1,
+.PageTitle h2,
+.RegionTitle h2 {
+	white-space: nowrap;
+}
+
+h1 {
+	margin: 8px 10px;
+}
+
+h2 {
+	margin-top: 4px;
+}
+
+.RegionTitle .buttonbar {
+	vertical-align: middle;
+	white-space: nowrap;
+}
+
+.PageTitle .buttonbar a,
+.RegionTitle .buttonbar a {
+	display: inline-block;
+	text-decoration: none;
+	color: #111;
+	font-size: @fontSizeD;
+	font-weight: bold;
+	padding: 3px 7px 3px 7px;
+	line-height: 14px;
+	.borderRadius(10px);
+}
+
+.PageTitle .buttonbar a:hover,
+.RegionTitle .buttonbar a:hover {
+	background: #89a;
+	color: #fff;
+	text-shadow: 0 1px 0 #456;
+}
+
+.PageTitle .buttonbar a.selected,
+.PageTitle .buttonbar a.selected:hover,
+.RegionTitle .buttonbar a.selected,
+.RegionTitle .buttonbar a.selected:hover {
+	background: #568;
+	color: #fff;
+	cursor: default;
+	-webkit-box-shadow: inset 0 1px 2px #333;
+	text-shadow: 0 1px 0 #333;
+}
+
+.RegionContent p {
+	padding: 10px;
+}
+
+.RegionContent h3 {
+	padding: 10px;
+}

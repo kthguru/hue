@@ -1,0 +1,146 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+table.RadioGroup td {
+	vertical-align: top;
+	padding: 4px 6px 8px 0;
+}
+
+table.RadioGroup.large td {
+	font-size: @fontSizeB;
+	padding-bottom: 10px;
+}
+
+.small {
+	font-size: @fontSizeD;
+}
+
+.DialogPadding {
+	padding: 14px 20px;
+}
+
+.InstallIncompleteDialogContents {
+	width: 500px;
+	height: 180px;
+	position: relative;
+}
+
+.InstallDetailsDialogContents {
+	width: 720px;
+	height: 400px;
+	position: relative;
+}
+h2.InstallDetailsState {
+	margin: 0 0 12px 0;
+	font-size: @fontSizeB;
+	font-weight: bold;
+}
+h3.InstallDetailsLogSectionHead {
+	.standardFont();
+	font-size: @fontSizeC;
+	font-weight: bold;
+	margin: 6px -4px 4px -4px;
+	padding: 1px 4px;
+	border-top: 1px solid #bdf;
+	border-bottom: 1px solid #ace;
+	.backgroundGradientY(#def, #bdf);
+}
+.InstallDetailsLog {
+	position: absolute;
+	top: 40px;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border: 1px solid #888;
+	overflow: auto;
+	padding: 4px;
+	font-size: @fontSizeC;
+	font-family: Courier, Verdana, Arial, monospace;
+	color: #000;
+}
+
+table.progressBarRow {
+	td {
+    margin: 0;
+		width: 1%;
+		vertical-align: middle;
+    padding: 0px 5px;
+	}
+
+  .left {
+    padding-left: 0px;
+  }
+
+  .right {
+    padding-right: 0px;
+  }
+
+	#scanResultSummary,
+	.progressContainer {
+		width: auto;
+	}
+}
+
+.ScanStatus {
+	position: relative;
+	width: 100%;
+	overflow: hidden;
+}
+.ScanStatus .message {
+	float: left;
+	width: 100px;
+	padding-top: 2px;
+}
+
+@buttonContainerWidth: 120px;
+
+.ScanStatus .buttonContainer {
+	width: @buttonContainerWidth;
+	float: right;
+	text-align: right;
+}
+.ScanStatus .progressContainer {
+	position: absolute;
+	left: 100px;
+	right: @buttonContainerWidth;
+}
+
+.InstallProgress td.progressCell {
+	vertical-align: top;
+	padding-right: 0 !important;
+}
+
+.FirstRunProgressRow .stepLabel {
+	font-size: @fontSizeC;
+}
+.FirstRunProgressRow.RUNNING .stepLabel {
+	font-weight: bold;
+}
+
+[disabled] {
+	.opacity(0.5);
+}
+
+/* TODO: probably want this for all forms, but need to test */
+.buttons form,
+form.buttons {
+	display: inline;
+}
+
+.RadioIndent {
+	display: block;
+	padding: 0 20px;
+	margin: 6px 0;
+}
+
+.HelpDialogContents {
+	overflow: auto;
+	width: 720px;
+	height: 400px;
+	background-color: #fff;
+	margin: -10px -8px;
+}
+
+table.table-sortable th {
+	cursor: pointer;
+}
+

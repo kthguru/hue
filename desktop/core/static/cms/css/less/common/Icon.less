@@ -1,0 +1,27 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+// description: OOCSS Icon class. Replaces the text content of an element with an image that flows with the text.
+
+.Icon {
+	display:inline-block;
+	overflow:hidden;
+	text-align:left;
+	text-indent:-9999em;
+	color:transparent;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	vertical-align: text-bottom;
+}
+.notFocused .Icon,
+.disabled .Icon{
+	/*FIXME: Add support for translucent PNGs for IE8*/
+	-moz-opacity: 0.6;
+	opacity: 0.6;
+}
+
+// Specific Icons
+// Not Used because the images are not right.
+//.Icon.iRefresh { background-image: url(Icon/glyph-refresh.png); min-width:10px; min-height:12px; }
+//.Icon.iFirst { background-image: url(Icon/glyph-first.png); min-width:9px; min-height:9px; }
+//.Icon.iBack { background-image: url(Icon/glyph-back.png); min-width:9px; min-height:9px; }
+//.Icon.iNext { background-image: url(Icon/glyph-next.png); min-width:9px; min-height:9px; }
+//.Icon.iLast { background-image: url(Icon/glyph-last.png); min-width:9px; min-height:9px; }

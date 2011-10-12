@@ -1,0 +1,40 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+
+table.StatusTable {
+	border-collapse: collapse;
+	th {
+		border-top: 1px solid #fff;
+		padding: 2px 8px 4px 8px;
+	}
+  td {
+		border-top: 1px solid #fff;
+		color: #fff;
+		padding: 0;
+		vertical-align: middle;
+		white-space: nowrap;
+		font-size: @fontSizeC;
+
+		&.RoleType {
+			padding: 4px 8px;
+			font-size: @fontSizeB;
+			color: #000;
+			line-height: 15px;
+			font-weight: bold;
+			color: #222;
+			border-top: 1px solid #fff;
+			text-align: right;
+			vertical-align: middle;
+			.backgroundGradientY(#eee, #ddd);
+		}
+
+		a,
+		a:hover,
+		a:active,
+		a:visited {
+			color: #fff;
+			text-decoration: none;
+		}
+	}
+}
+
+

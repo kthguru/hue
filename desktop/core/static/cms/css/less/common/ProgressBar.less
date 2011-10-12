@@ -1,0 +1,41 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+
+.ProgressBar {
+	-webkit-box-sizing: border-box;
+	border: 1px solid #79b;
+	background-color: #f4f4f4;
+	width: 100%;
+	text-align: left;
+	line-height: 10px;
+	padding: 1px;
+	margin: 2px 0;
+}
+.ProgressBar.small {
+	line-height: 6px;
+	margin: 0;
+}
+.ProgressBar.done {
+	border: 1px solid #5a5;
+}
+.ProgressBar.error {
+	border: 1px solid #c00;
+}
+.ProgressBar .progress {
+	display: inline-block;
+	height: 12px;
+	background-color: #58b;
+}
+.ProgressBar.done .progress {
+	background-color: #191;
+}
+.ProgressBar.error .progress {
+	background-color: #d00;
+}
+.ProgressBar.small .progress {
+	height: 8px;
+}
+
+// jQuery progresbar
+.ui-progressbar {
+	height: 16px !important;
+}

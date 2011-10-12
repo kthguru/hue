@@ -1,0 +1,48 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+p {
+  padding: 1em 0;
+  line-height: 16px;
+}
+
+small { font-size: @fontSizeE; }
+strong { font-weight: bold; }
+
+td { vertical-align: top; }
+
+/* Set sub, sup without affecting line-height: gist.github.com/413930 */
+sub, sup { font-size: 75%; line-height: 0; position: relative; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	padding: 0;
+}
+
+/* Header Text Styles */
+h1, .h1{font-size:@fontSizeA; font-weight:normal; font-style: normal; color:#4c4c4c;}
+h2, .h2{font-size:@fontSizeB; font-weight:normal; font-style: normal; color:#4c4c4c;}
+h3, .h3{font-size:@fontSizeC; font-weight:normal; font-style: normal; color:#4c4c4c;}
+h4, .h4{font-size:@fontSizeC; font-weight:normal; font-style: normal; color: #333;}
+h5, .h5{font-size:@fontSizeC; font-weight:bold; font-style: normal; color:#AE0345;}
+h6, .h6{font-size:@fontSizeC; font-weight:normal; font-style: italic; color:#333;}
+
+/* These selection declarations have to be separate
+   No text-shadow: twitter.com/miketaylr/status/12228805301
+*/
+.selectedText {
+	/*color: #000;*/
+	background-color: #bbd3ff;
+	background-color: darken(rgba(169, 200, 255, 0.5), 10%);
+	text-shadow: none;
+}
+::-moz-selection {
+	.selectedText;
+}
+::selection {
+	.selectedText;
+}

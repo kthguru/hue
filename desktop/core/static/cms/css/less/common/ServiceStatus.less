@@ -1,0 +1,135 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+.LicenseStatus,
+.PageTitle {
+	border-bottom: #404040 2px solid;
+
+	.summary {
+		font-weight: bold;
+		font-size: @fontSizeB;
+		letter-spacing: -1px;
+		text-align: left;
+		vertical-align: top;
+		line-height: 24px;
+		display: inline-block;
+		padding-right: 4px;
+	}
+	
+	.greenHealthIcon24x24 {
+		background-position: 0 @checkmark24y;
+	}
+	
+	.yellowHealthIcon24x24 {
+		background-position: 0 @warning24y;
+	}
+
+	.redHealthIcon24x24 {
+		background-position: 0 @error24y;
+	}
+	
+	&.goodHealth {
+		.backgroundGradientY(@greenStatusTopBg, @greenStatusBottomBg);
+		.icon {
+			background-position: 0 @checkmark24y;
+		}
+		.summary {
+			color: @greenStatusColor;
+		}
+	}
+
+	&.concerningHealth {
+		.backgroundGradientY(@yellowStatusTopBg, @yellowStatusBottomBg);
+		.icon {
+			background-position: 0 @warning24y;
+		}
+		.summary {
+			color: @yellowStatusColor;
+		}
+	}
+
+	&.badHealth {
+		.backgroundGradientY(@redStatusTopBg, @redStatusBottomBg);
+		.icon {
+			background-position: 0 @error24y;
+		}
+		.summary {
+			color: @redStatusColor;
+		}
+	}
+}
+
+.LicenseStatus {
+	padding: 8px;
+}
+
+.PageTitle {
+	.ServiceStatus {
+	}
+
+	h1 {
+		margin-top: 0;
+	}
+
+	.buttonbar {
+		vertical-align: top;
+		white-space: nowrap;
+	}
+
+	.statusbar {
+		vertical-align: top;
+		padding: 0 8px;
+	}
+
+	.buttons {
+		float: right;
+		padding-left: 8px;
+	}
+
+	.not_availHealthIcon24x24 {
+		background-position: 0 @unknown24y;
+	}
+
+	&.pendingHealth,
+	&.nohistoryHealth,
+	&.busyState,
+	&.stoppingState,
+	&.startingState {
+		.backgroundGradientY(@khakiStatusTopBg, @khakiStatusBottomBg);
+		.icon {
+			background-position: 0 @hourglass24y;
+		}
+		.summary {
+			color: @khakiStatusColor;
+		}
+	}
+
+	&.unknownHealth,
+	&.disabledHealth,
+	&.stoppedState {
+		.backgroundGradientY(@greyStatusTopBg, @greyStatusBottomBg);
+		.icon {
+			background-position: 0 @moon24y;
+		}
+		.summary {
+			color: @greyStatusColor;
+		}
+	}
+}
+
+/* This cannot be moved to the ServiceStatus or LicenseStatus block */
+div.LicenseStatus .icon,
+div.ServiceStatus .icon {
+  .iconMixin(24px, 24px);
+	.sprite(24,24);
+}
+
+.redStatus {
+	color: @redStatusColor;
+}
+
+.switchToCurrent {
+	padding: 5px;
+}
+
+.switchToCurrent span {
+	font-size: @fontSizeC;
+}

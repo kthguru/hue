@@ -1,0 +1,125 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+.fixedLayout {
+	table-layout: fixed;
+}
+
+.iconCol,
+.overrideCountCol {
+	.alignCenter;
+}
+
+.cmfInput.disabled {
+	background-color: transparent;
+	color: #000 !important;
+}
+
+a.erase,
+a.edit {
+	width: 16px;
+	height: 16px;
+	text-decoration: none;
+}
+
+a.expand,
+a.collapse {
+	width: 11px;
+	height: 16px;
+	text-decoration: none;
+}
+
+.cmfTableStdout {
+	.fixedLayout;
+
+	th {
+		width: 50%;
+	}
+}
+
+table.KeyValueForm td {
+	vertical-align: baseline;
+}
+
+.cmfConfig {
+		td {
+			textarea,
+			input[type=text] {
+				.borderBox();
+				padding: .5ex;
+			}
+			padding: 2px;
+		}
+
+		col.description,
+		col.value,
+		col.name {
+			border-right: 1px solid #fff;
+		}
+		col.name {
+			width: 250px;
+		}
+		col.edit {
+			width: 20px;
+			min-width: 20px;
+			max-width: 20px;
+		}
+		col.value {
+			width: 250px;
+		}
+
+		.value input[type=text] {
+			display: block;
+		}
+
+		col.iconCol {
+			width: 16px;
+		}
+
+		td.value {
+			border-left-width: 0;
+			padding-left: 2px;
+		}
+
+		td.iconCol {
+			border-right-width: 0;
+			padding-right: 2px;
+		}
+}
+
+.cmfMetricCol {
+	width: 14ex;
+}
+
+th {
+	.alignLeft;
+}
+td {
+	.alignLeft;
+}
+
+.selectRole {
+	font-weight: normal;
+}
+
+#HostsTable table tbody td {
+	border-left: 1px solid #fff;
+}
+
+#HostsTable table {
+	width: 100%;
+}
+
+#HostsTable td.containsTable,
+#HostsTable th.containsTable {
+	padding: 0;
+	border-left: 0;
+}
+
+#settingsTable td.name {
+	white-space: nowrap;
+}
+
+#settingsTable td.value span {
+	vertical-align: baseline;
+}
+ 

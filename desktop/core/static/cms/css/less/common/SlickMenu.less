@@ -1,0 +1,175 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+//-----------------------------------------------------------------------------
+// Begin SmoothnessMenu styles
+//-----------------------------------------------------------------------------
+
+.smoothnessMenuActiveItem() {
+        .jQueryImageBackground("images/ui-bg_glass_75_dadada_1x400.png");
+        background-color: #dadada;
+        border: 1px solid #999999;
+        color: #212121;
+        outline: medium none;
+}
+
+.smoothnessMenuActiveSpan() {
+       .jQueryImageBackground("images/ui-icons_454545_256x240.png");
+        background-position: -64px -16px; // The location of the downward-pointing triangle in the CSS sprite.
+ }
+
+.SmoothnessMenu {
+  .header {
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      font-size: @fontSizeC;
+      padding: 5px 5px 5px 10px;
+      white-space: nowrap;
+      display: inline-block;
+  }
+ 
+    a.header:hover {
+        .smoothnessMenuActiveItem;
+    }
+    
+    .arrowIcon {
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      vertical-align: text-bottom;
+      .jQueryImageBackground("images/ui-icons_888888_256x240.png");
+      background-position: -64px -16px; // The location of the downward-pointing triangle in the CSS sprite.
+    }
+    
+    a.header:hover span.arrowIcon {
+        .smoothnessMenuActiveSpan;
+    }
+ 
+    ul.menuOptions {
+        z-index: 3;
+        list-style-type: none;
+        padding: 5px;
+        margin-left: 0px;
+        position: absolute;
+        li {
+            border: 1px solid #ffffff;
+            cursor: pointer;
+            padding: 4px;
+            font-weight: normal;
+            font-size: @fontSizeC;
+            white-space: nowrap;
+            text-align: left;
+        }
+
+        a, a:active, a:visisted {
+          text-decoration: none;
+        }
+    
+        li.available:hover{
+            .smoothnessMenuActiveItem;
+        }
+        li.unavailable {
+            cursor: default;
+            color: @gray80;
+        }
+    }
+    
+    ul.ui-corner-all {
+        li {
+            .borderRadius(4px);
+        }
+    }
+}
+
+.SmoothnessMenuExpanded {
+    a.header,
+    a.header:hover {
+        background: #ffffff;
+        cursor: default;
+        border: 1px solid #aaaaaa;
+        color: #212121;
+    }
+    a.header span.arrowIcon {
+        .smoothnessMenuActiveSpan;
+    }
+}
+
+//-----------------------------------------------------------------------------
+// End SmoothnessMenu styles
+//-----------------------------------------------------------------------------
+
+//-----------------------------------------------------------------------------
+// Begin NavBarMenu styles
+//-----------------------------------------------------------------------------
+
+.navBarMenuActiveSpan() {
+    .jQueryImageBackground("images/ui-icons_2e83ff_256x240.png");
+    background-position: -64px -16px; // The location of the downward-pointing triangle in the CSS sprite.
+}
+
+.ContextMenu,
+.NavBarMenu {
+    margin: 0px;
+    display: inline-block;
+    cursor: pointer;
+    .header {
+        text-decoration: none;
+    }
+ 
+    a.header:hover {
+        color: #76cefe;
+    }
+    
+    a.header {
+        span:hover {
+            .navBarMenuActiveSpan;
+        }
+    }
+    
+    a.selected:visited,
+    a.selected:hover {
+        color: #ffffff;
+    }
+    
+    .arrowIcon {
+      display: inline-block;
+      width: 16px;
+      height: 14px;
+      vertical-align: text-bottom;
+      .jQueryImageBackground("images/ui-icons_888888_256x240.png");
+      background-position: -64px -16px; // The location of the downward-pointing triangle in the CSS sprite.
+    }
+     
+    ul.menuOptions {
+        z-index: 3;
+        list-style-type: none;
+        margin-left: 0px;
+        position: absolute;
+        li {
+            font-weight: normal;
+            font-size: @fontSizeC;
+            border: 1px solid #ffffff;
+            a {
+                padding: 8px;
+                text-shadow: none;
+                color: #222222;
+                .width1of1;
+            }
+        }
+    
+        li:hover{
+            .smoothnessMenuActiveItem;
+        }
+    }
+}
+
+.ContextMenuExpanded,
+.NavBarMenuExpanded {
+    a.header span {
+        .navBarMenuActiveSpan;
+    }
+}
+
+//-----------------------------------------------------------------------------
+// End NavBarMenu styles
+//-----------------------------------------------------------------------------

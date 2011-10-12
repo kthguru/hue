@@ -1,0 +1,225 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+@import "mixins.less";
+
+@import "normal.less";
+@import "Traditional.less";
+@import "Icon.less";
+@import "CapacityUsage.less";
+@import "layout.less";
+@import "header.less";
+@import "jquery-ui-timepicker.less";
+@import "LoginForm.less";
+@import "ServiceAdvice.less";
+
+.CMFConfirmation {
+	padding: 2px 8px 3px 8px;
+	font-weight: bold;
+	color: #fff;
+	.backgroundGradientY(#91b, #709);
+	border-bottom: 1px solid #91b;
+}
+
+.toolbar {
+	padding: 6px 8px;
+	.backgroundGradientY(#eee, #ccc);
+	border-bottom: 1px solid #aaa;
+
+	form {
+		display: inline;
+	}
+}
+
+.ExceptionReport .exceptionType {
+	font-style: italic;
+	font-weight: normal;
+	color: @alertRed;
+}
+
+.ExceptionReport .exceptionMessage {
+	font-size: @fontSizeB;
+	font-weight: bold;
+	color: @alertRed;
+}
+
+.cmfStdout {
+	width: auto;
+	overflow: auto;
+}
+
+.cmfStdout > pre {
+	min-width: 80ex;
+	max-width: 160ex;
+	overflow: auto;
+}
+
+.cmfTime {
+	min-width: 14ex;
+}
+
+
+.StackTrace .frame {
+	margin-bottom: 4px;
+}
+
+.errorMessage {
+	color: #b00;
+}
+
+#Main {
+	overflow: auto;
+}
+
+.cmfParamName {
+	color: #595959;
+	font-weight: bold;
+}
+
+.cmfParamState {
+	.alignLeft;
+	margin-right: auto;
+	padding: 0.5ex 0;
+}
+.cmfParamState + p {
+	margin-top: 1ex;
+}
+
+.description {
+	min-width: 16em;
+	max-width: 33em;
+	margin-right: auto;
+}
+
+.FormToolbar() {
+	height: 28px;
+	line-height: 28px;
+	text-align: left;
+	.backgroundGradientY(#eee, #ccc);
+	width: 100%;
+	padding: 4px 0;
+}
+
+.FormToolbarTop {
+	.FormToolbar();
+	border-bottom: 1px solid #999;
+}
+
+.FormToolbarBottom {
+	.FormToolbar();
+	border-top: 1px solid #999;
+	position: fixed;
+	bottom: 0;
+}
+
+.FormToolbarTop > *,
+.FormToolbarBottom > * {
+	margin: 0 8px;
+	vertical-align: baseline;
+}
+
+@import "wizard.less";
+@import "form-validation.less";
+@import "CMFValue.less";
+@import "icons.less";
+@import "tables.less";
+@import "StatusTable.less";
+@import "DependenciesTable.less";
+@import "ServiceStatus.less";
+@import "ProgressBar.less";
+@import "SendDiagnosticsTable.less";
+@import "new.less";
+@import "button.less";
+@import "region.less";
+@import "time-browser.less";
+@import "normal-forms.less";
+@import "normal-links.less";
+@import "normal-lists.less";
+@import "normal-text.less";
+@import "widths.less";
+@import "iphone-style-checkboxes.less";
+
+html,
+html body {
+	margin: 0;
+	// allow split layout to work
+	width: 100%;
+	height: 100%;
+	// Disable Native Scrolling
+	overflow: hidden;
+}
+
+.SimpleContent {
+	background-color: #fff;
+}
+
+@import "DataTable.less";
+@import "SearchFilter.less";
+
+// @end   Global CMS Rules
+
+.XScroll {
+	overflow-x: auto;
+}
+
+.YScroll {
+	overflow-y: auto;
+}
+
+.breadcrumbs {
+	margin-left: 6px;
+}
+
+.breadcrumb {
+	padding: 0 4px;
+}
+
+.selectedTimeEndTimeLabel,
+.selectedTimeRangeLabel {
+	padding: 0 4px;
+}
+
+.currentMode .selectedTimeEndTimeLabel,
+.selectedTimeEndTimeLabel {
+	color: #3881ab;
+}
+
+.historicalMode .selectedTimeEndTimeLabel {
+	color: #ab4238;
+}
+
+.selectedTimeEndTimeLabel .instantMarkerSmallIcon {
+	margin-left: 4px;
+}
+
+.selectedTimeRangeLabel .rangeMarkerSmallIcon {
+	margin-left: 4px;
+}
+
+body.historicalMode .currentModeOnly {
+	.opacity(0.5);
+}
+
+body.currentMode .historicalModeOnly {
+	.opacity(0.5);
+}
+
+@import "SlickMenu.less";
+
+.selectedContext {
+	padding: 2px 6px;
+}
+
+.selectedContext,
+.selectedContext span {
+	vertical-align: top;
+}
+
+.selectedContext label {
+	vertical-align: baseline;
+}
+
+.LogWithContext {
+	.highlight td {
+		background-color: @mustardYellow;
+	}
+}

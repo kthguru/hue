@@ -1,0 +1,178 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+
+.AppHeader {
+}
+
+.AppHeader td {
+	vertical-align: top;
+}
+
+.AppHeader .logo {
+  margin-top: 6px;
+	border: 0;
+}
+
+.AppHeader {
+	color: #fff;
+	.backgroundGradientY(#646464, #161616);
+}
+
+.AppHeader a.appName,
+.AppHeader a.appName:visited {
+	color: #eef6ff;
+	font-size: @fontSizeC;
+	font-weight: bold;
+	letter-spacing: -1px;
+	text-shadow: 0 1px 0fcal #123;
+	padding: 0 8px;
+	white-space: nowrap;
+	text-decoration: none;
+	vertical-align: middle;
+	display: inline-block;
+	height: 40px;
+}
+
+.AppHeader label,
+.AppHeader a,
+.AppHeader a:visited {
+	color:#999;
+	text-decoration: none;
+}
+
+.AppHeader a:hover {
+	color: #76cefe;
+}
+
+.AppHeader a:active,
+.AppHeader a.selected,
+.AppHeader a.selected:hover,
+.AppHeader a.selected:active,
+.AppHeader a.selected:visited {
+	color:#fff;
+}
+
+.AppHeader {
+	width: 100%;
+}
+
+.AppLinks {
+	text-align: right;
+	padding: 0 8px 0 18px;
+	font-size: @fontSizeD;
+	font-weight: bold;
+	border-left: 1px solid #212121;
+	line-height: 40px;
+}
+
+.AppLinks a {
+	height: 20px;
+	padding: 0 4px;
+	border-left: 1px #4d4d4d solid;
+}
+
+.AppLinks a:first-child {
+	border-left: 0 #000 solid;
+}
+
+.AppNav {
+	.backgroundGradientY(#666, #343434);
+}
+
+.AppTabSet {
+	display: inline-block;
+	text-align: left;
+}
+
+.AppTabSet a {
+	display: inline-block;
+	text-decoration: none;
+	color: #ccc;
+	font-size: @fontSizeC;
+	padding: 13px 8px 13px 8px;
+	line-height: 14px;
+	vertical-align: middle;
+	text-shadow: 1px 1px #000;
+}
+
+.AppTabSet a:visited {
+	color: #ccc;
+}
+
+.AppTabSet a:hover {
+	color: #76cefe;
+}
+
+.AppTabSet a.selected {
+	.backgroundGradientY(#373737, #272727);
+	border-right: 1px solid #212121;
+	font-weight: bold;
+	color: #fff;
+}
+
+.AppTabSet a.selected:visited,
+.AppTabSet a.selected:hover {
+	color: #fff;
+}
+
+.SubNav {
+	.backgroundGradientY(#FFF, #E5E5E5);
+	border-bottom: #404040 2px solid;
+	overflow: hidden;
+	width: 100%;
+	height: 40px;
+}
+
+.SubTabSet {
+	padding: 8px 8px;
+	text-align: left;
+}
+
+.SubTabSet a {
+	display: inline-block;
+	text-decoration: none;
+	color: #4c4c4c;
+	padding: 3px 8px 5px 8px;
+	font-size: @fontSizeC;
+	line-height: 14px;
+	vertical-align: middle;
+	font-weight: 600;
+}
+
+.SubTabSet a.selected {
+	.borderRadius(3px, 3px, 3px, 3px);
+	.backgroundGradientY(#2c7fb3, #01639c);
+	border: #999 1px solid;
+	color: #eee;
+}
+
+.BasicSearch {
+	display: inline-block;
+	height: 22px;
+	line-height: 22px;
+	padding: 9px 8px;
+	vertical-align: middle;
+	text-align: center;
+	position: relative;
+	clear: left;
+	white-space: nowrap;
+}
+
+.BasicSearch .inputAndGo {
+	width: 180px;
+	float: left;
+}
+
+.BasicSearch .inputAndGo input {
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-ms-box-sizing:border-box;
+	box-sizing:border-box;
+}
+
+.BasicSearch label.over {
+	color: #aaa;
+	position: absolute;
+	top: 9px;
+	left: 18px;
+}
+

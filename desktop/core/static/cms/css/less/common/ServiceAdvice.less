@@ -1,0 +1,41 @@
+// (c) Copyright 2011 Cloudera, Inc. All rights reserved.
+
+@import "mixins.less";
+
+.ServiceAdviceCategory {
+    padding: 6px;
+    ul {
+        list-style-type: none;
+    }
+    li {
+        margin: 5px 0px;
+    }
+    .checkDescription {
+        margin-bottom: 5px;
+        font-weight: bold;
+    }
+    h2 {
+        margin-left: 5px;
+        margin-bottom: 10px;
+    }
+    .adviceSnippet {
+        padding-left: 10px;
+    }
+    .backToTop {
+        color: white;
+        text-decoration: none;
+        font-size: @fontSizeD;
+    }
+    a.backToTop:hover {
+        color: @lightBlue;
+    }
+}
+
+#serviceAdviceToC {
+    background-color: @dataTableOdd;
+    div { 
+        font-size: @fontSizeB;
+        padding: 5px 0px;
+    }
+    padding: 0px 0px 10px 10px;
+}

@@ -1,0 +1,817 @@
+// Copyright (c) 2011 Cloudera, Inc. All rights reserved.
+// positions for sprite16x16
+@edit16y: 0;
+@erase16y: -32px;
+@health_disabled16y: -64px;
+@health_green16y: -96px;
+@health_history_not_avail16y: -128px;
+@health_not_avail16y: -160px;
+@health_red16y: -192px;
+@health_yellow16y: -224px;
+@service_hbase16y: -256px;
+@service_hdfs16y: -288px;
+@service_hue16y: -320px;
+@service_mapreduce16y: -352px;
+@service_mgmt16y: -384px;
+@service_zookeeper16y: -416px;
+@state_checkmark16y: -448px;
+@state_error16y: -480px;
+@state_hourglass16y: -512px;
+@state_moon16y: -544px;
+@state_unknown16y: -576px;
+@state_warning16y: -608px;
+@status_failed16y: -640px;
+@status_killed16y: -672px;
+@status_started16y: -704px;
+@status_submitted16y: -736px;
+@status_succeeded16y: -768px;
+@status_suspended16y: -800px;
+@status_warning16y: -832px;
+@service_oozie16y: -864px;
+
+@activity_oozie16y: @service_oozie16y;
+@activity_pig16y: -896px;
+@activity_hive16y: -928px;
+@activity_mr16y: @service_mapreduce16y;
+@activity_streaming16y: -960px;
+
+@edit16x: 0;
+@erase16x: 0;
+@health_disabled16x: 0;
+@health_green16x: 0;
+@health_history_not_avail16x: 0;
+@health_not_avail16x: 0;
+@health_red16x: 0;
+@health_yellow16x: 0;
+@service_hbase16x: 0;
+@service_hdfs16x: 0;
+@service_hue16x: 0;
+@service_mapreduce16x: 0;
+@service_mgmt16x: 0;
+@service_zookeeper16x: 0;
+@state_checkmark16x: 0;
+@state_error16x: 0;
+@state_hourglass16x: 0;
+@state_moon16x: 0;
+@state_unknown16x: 0;
+@state_warning16x: 0;
+@status_failed16x: 0;
+@status_killed16x: 0;
+@status_started16x: 0;
+@status_submitted16x: 0;
+@status_succeeded16x: 0;
+@status_suspended16x: 0;
+@status_warning16x: 0;
+@service_oozie16x: 0;
+
+@activity_oozie16x: 0;
+@activity_pig16x: 0;
+@activity_hive16x: 0;
+@activity_mr16x: 0;
+@activity_streaming16x: 0;
+
+@datePicker32y: -416px;
+@calendar32y: -448px;
+@zoomIn32y: -480px;
+@zoomOut32y: -512px;
+@clock32y: -544px;
+@gear32y: -576px;
+@help32y: -608px;
+@search_32y: -642px;
+
+@datePicker32x: 0;
+@calendar32x: 0;
+@zoomIn32x: 0;
+@zoomOut32x: 0;
+@clock32x: 0;
+@gear32x: 0;
+@help32x: 0;
+@search_32x: -2px;
+
+// positions for sprite24x24
+@column24y:-0;
+@minus24y:-24px;
+@plus24y:-48px;
+@dot24y:-72px;
+@checkmark24y:-96px;
+@error24y:-120px;
+@hourglass24y:-144px;
+@moon24y:-168px;
+@unknown24y:-192px;
+@warning24y:-216px;
+
+@product_enterprise_x: 0;
+@product_enterprise_y: 0;
+@product_express_x: 0;
+@product_express_y: -32px;
+@instantMarkerRedL_x: 0;
+@instantMarkerRedM_x: -64px;
+@instantMarkerRedS_x: -96px;
+@instantMarkerRedL_y: -64px;
+@instantMarkerRedM_y: -64px;
+@instantMarkerRedS_y: -64px;
+@instantMarkerBlueL_x: 0;
+@instantMarkerBlueM_x: -64px;
+@instantMarkerBlueS_x: -96px;
+@instantMarkerBlueL_y: -128px;
+@instantMarkerBlueM_y: -128px;
+@instantMarkerBlueS_y: -128px;
+@instantMarkerL_w: 37px;
+@instantMarkerL_h: 34px;
+@instantMarkerM_w: 22px;
+@instantMarkerM_h: 20px;
+@instantMarkerS_w: 17px;
+@instantMarkerS_h: 16px;
+
+.icon(@width, @height) {
+	.iconMixin(@width, @height);
+}
+
+.iconMixin(@width, @height) {
+	background-repeat: no-repeat;
+	text-align: center;
+	width: @width;
+	height: @height;
+	display: inline-block;
+}
+
+.sprite(@width, @height) {
+	background-image: url('/static/cms/icons/sprite@{width}x@{height}.png');
+}
+
+.Sprite11x16 {
+	.icon(11px, 16px);
+	.sprite(11, 16);
+}
+
+.Sprite16x16 {
+	.icon(16px, 16px);
+	.sprite(16, 16);
+}
+
+.Sprite24x24 {
+	.icon(24px, 24px);
+	.sprite(24, 24);
+}
+
+.Sprite30x22 {
+	.icon(30px, 22px);
+	.sprite(30, 22);
+}
+
+.Sprite32x32 {
+	.icon(32px, 32px);
+	.sprite(32, 32);
+}
+
+.Icon24x24 {
+	.icon(24px, 24px);
+}
+
+.Icon16x16 {
+	.icon(16px, 16px);
+}
+
+.Icon30x22 {
+	.icon(30px, 22px);
+}
+
+.Icon32x32 {
+	.icon(32px, 32px);
+}
+
+.IconCheckmark16x16 {
+	.icon(16px, 16px);
+	.sprite(16, 16);
+	vertical-align: bottom;
+	background-position: @state_checkmark16x @state_checkmark16y;
+}
+.IconWarning16x16 {
+	.icon(16px, 16px);
+	.sprite(16, 16);
+	vertical-align: bottom;
+	background-position: @state_warning16x @state_warning16y;
+}
+.IconError16x16 {
+	.icon(16px, 16px);
+	.sprite(16, 16);
+	vertical-align: bottom;
+	background-position: @state_error16x @state_error16y;
+}
+.IconSpinner16x16 {
+	.icon(16px, 16px);
+	vertical-align: bottom;
+	background-image: url(/static/cms/icons/color_sm/spinner_bgf2.gif);
+}
+.IconSpinnerLightBlueBg16x16 {
+	.icon(16px, 16px);
+	vertical-align: bottom;
+	background-image: url(/static/cms/icons/color_sm/spinner_bgE0E6EA.gif);
+}
+
+.IconSpinner24x24 {
+	.icon(24px, 24px);
+	vertical-align: bottom;
+	background-image: url(/static/cms/icons/color/spinner_bgf2.gif);
+}
+
+.IconColumnSelector24x24 {
+	background-position: 0 0;
+}
+
+.IconCircledMinus24x24 {
+	background-position: 0 -24px;
+}
+
+.IconCircledPlus24x24 {
+	background-position: 0 -48px;
+}
+
+.IconCircledMore24x24 {
+	background-position: 0 -72px;
+}
+
+.IconRowFilter30x22 {
+	background-position: 0 0;
+}
+
+.selected .IconRowFilter30x22 {
+	background-position: 0 -22px;
+}
+
+.IconGraph30x22 {
+	background-position: 0 -44px;
+}
+
+.selected .IconGraph30x22 {
+	background-position: 0 -66px;
+}
+
+.IconMinus30x22 {
+	background-position: 0 -88px;
+}
+
+.IconPlus30x22 {
+	background-position: 0 -132px;
+}
+
+.IconDatePicker32x32,
+.IconCalendar32x32,
+.IconZoomIn32x32,
+.IconZoomOut32x32
+ {
+	.sprite(32, 32);
+	.iconMixin(16px, 16px);
+}
+
+.IconGear32x32,
+.IconHelp32x32 {
+  .sprite(32, 32);
+  .iconMixin(16px, 18px);
+}
+
+
+.IconDatePicker32x32 {
+	background-position: @datePicker32x @datePicker32y;
+}
+
+.IconCalendar32x32 {
+	background-position: @calendar32x @calendar32y;
+	margin: 0 8px;
+}
+
+.IconZoomIn32x32 {
+	background-position: @zoomIn32x @zoomIn32y;
+	margin: 0 8px;
+}
+
+.IconZoomOut32x32 {
+	background-position: @zoomOut32x @zoomOut32y;
+	margin: 0 8px;
+}
+
+.IconClock32x32 {
+  background-position: @clock32x @clock32y;
+}
+
+.IconGear32x32 {
+  background-position: @gear32x @gear32y;
+  padding: 0 2px;
+}
+
+.IconHelp32x32 {
+  background-position: @help32x @help32y;
+}
+
+// @group Commands
+
+.ValidationBlock .heading .icon,
+.health .icon,
+.service .icon,
+.Icon.iCommandState {
+	.icon(16px, 16px);
+	padding: 0 2px;
+}
+
+.Icon.iCommandState.isActive,
+.isActive .Icon.iCommandState {
+	.sprite(16, 16);
+	background-position: @state_hourglass16x @state_hourglass16y;
+}
+
+.Icon.iCommandState.notActive.isSuccess,
+.notActive.isSuccess .Icon.iCommandState {
+	.sprite(16, 16);
+	background-position: @state_moon16x @state_moon16y;
+}
+
+.Icon.iCommandState.notActive.notSuccess,
+.notActive.notSuccess .Icon.iCommandState {
+	.sprite(16, 16);
+	background-position: @state_error16x @state_error16y;
+}
+
+// @end
+
+// @group Table Sorting
+
+.table-th-sort-span {
+	display: inline-block;
+	min-height: 5px;
+	width: 9px;
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
+	cursor: inherit;
+}
+
+.table-th-sort .table-th-sort-span {
+	background-image: url(/static/cms/icons/bullet_arrow_up.png);
+}
+
+.table-th-sort-rev .table-th-sort-span {
+	background-image: url(/static/cms/icons/bullet_arrow_down.png);
+}
+
+.Icon.erase {
+	.sprite(16,16);
+	.icon(16px, 16px);
+	background-position: @erase16x @erase16y;
+	cursor: pointer;
+	padding: 0 2px;
+}
+
+.Icon.edit {
+	.sprite(16,16);
+	.icon(16px, 16px);
+	background-position: @edit16x @edit16y;
+	cursor: pointer;
+	padding: 0 2px;
+}
+
+.Icon.collapse,
+.Icon.arrowDown {
+	.Sprite11x16;
+	background-position: 0 -32px;
+	min-width: 11px !important;
+}
+
+.Icon.arrowUp {
+	background-image: url(/static/cms/icons/arrow_up.png);
+	.Sprite11x16;
+	background-position: 0 0;
+	min-width: 11px !important;
+}
+
+.Icon.arrowLeft {
+	.Sprite11x16;
+	background-position: 0 -48px;
+	min-width: 11px !important;
+}
+
+.Icon.expand,
+.Icon.arrowRight {
+	.Sprite11x16;
+	background-position: 0 -16px;
+	min-width: 11px !important;
+}
+
+// @end
+
+.addServiceIcon {
+	background: url(/static/cms/icons/add_sm.png) no-repeat center center;
+}
+
+.hdfsService .icon,
+.hdfsServiceIcon,
+.mapreduceService .icon,
+.mapreduceServiceIcon,
+.hbaseService .icon,
+.hbaseServiceIcon,
+.hueService .icon,
+.hueServiceIcon,
+.zookeeperService .icon,
+.zookeeperServiceIcon,
+.mgmtService .icon,
+.mgmtServiceIcon,
+.oozieService .icon,
+.oozieServiceIcon {
+  vertical-align: top;
+  .sprite(16, 16);
+  .iconMixin(16px, 16px);
+  padding: 0 2px;
+}
+
+.hdfsService .icon,
+.hdfsServiceIcon {
+	background-position: @service_hdfs16x @service_hdfs16y;
+}
+
+.mapreduceService .icon,
+.mapreduceServiceIcon {
+	background-position: @service_mapreduce16x @service_mapreduce16y;
+}
+
+.hbaseService .icon,
+.hbaseServiceIcon {
+	background-position: @service_hbase16x @service_hbase16y;
+}
+.hueService .icon,
+.hueServiceIcon {
+	background-position: @service_hue16x @service_hue16y;
+}
+
+.zookeeperService .icon,
+.zookeeperServiceIcon {
+	background-position: @service_zookeeper16x @service_zookeeper16y;
+}
+
+.mgmtService .icon,
+.mgmtServiceIcon {
+	background-position: @service_mgmt16x @service_mgmt16y;
+}
+
+.oozieService .icon,
+.oozieServiceIcon {
+	background-position: @service_oozie16x @service_oozie16y;
+}
+
+// CMONSchema.ActivityType:
+// Do not re-arrange or delete these, as the ordinals
+// are persisted to the DB.
+//
+// OOZIE,
+// PIG,
+// HIVE,
+// MR,
+// STREAMING
+.activityType0 .icon,
+.activityType1 .icon,
+.activityType2 .icon,
+.activityType3 .icon,
+.activityType4 .icon,
+.activityTypeOOZIE .icon,
+.activityTypePIG .icon,
+.activityTypeHIVE .icon,
+.activityTypeMR .icon,
+.activityTypeSTREAMING .icon {
+  vertical-align: top;
+  .sprite(16, 16);
+  .iconMixin(16px, 16px);
+  padding: 0 2px;
+}
+
+.activityType0 .icon,
+.activityTypeOOZIE .icon {
+  background-position: @activity_oozie16x @activity_oozie16y; 
+}
+
+.activityType1 .icon,
+.activityTypePIG .icon {
+  background-position: @activity_pig16x @activity_pig16y; 
+}
+
+.activityType2 .icon,
+.activityTypeHIVE .icon {
+  background-position: @activity_hive16x @activity_hive16y; 
+}
+
+.activityType3 .icon,
+.activityTypeMR .icon {
+  background-position: @activity_mr16x @activity_mr16y; 
+}
+
+.activityType4 .icon,
+.activityTypeSTREAMING .icon {
+  background-position: @activity_streaming16x @activity_streaming16y; 
+}
+
+/**
+ * All entries of HealthTestResult.Summary.tag()
+ * goodHealth
+ * concerningHealth
+ * badHealth
+ * disabledHealth
+ * nohistoryHealth
+ * unknownHealth
+ */
+.goodHealth,
+.concerningHealth,
+.badHealth,
+.disabledHealth,
+.nohistoryHealth,
+.unknownHealth {
+	.icon {
+		vertical-align: top;
+		.sprite(16, 16);
+		.iconMixin(16px, 16px);
+		padding: 0 2px;
+	}
+}
+
+.goodHealth {
+	color: #060;
+	.icon {
+		background-position: @state_checkmark16x @state_checkmark16y;
+	}
+}
+.concerningHealth {
+	color: #960;
+	.icon {
+		background-position: @state_warning16x @state_warning16y;
+	}
+}
+.badHealth {
+	color: #c21;
+	.icon {
+		background-position: @state_error16x @state_error16y;
+	}
+}
+.unknownHealth {
+	color: #960;
+	.icon {
+		background-position: @state_unknown16x @state_unknown16y;
+	}
+}
+.nohistoryHealth,
+.disabledHealth {
+	color: #333355;
+	.icon {
+		background-position: @state_moon16x @state_moon16y;
+	}
+}
+
+// RoleState:
+// HISTORY_NOT_AVAILABLE(0),
+// UNKNOWN(1),
+// STARTING(2),
+// RUNNING(3),
+// BUSY(4),
+// STOPPING(5),
+// STOPPED(6);
+
+// ProcessState:
+// UNKNOWN,
+// STOPPED,
+// STARTING,
+// RUNNING,
+// BACKOFF,
+// STOPPING,
+// EXITED,
+// FATAL,
+
+// ServiceState:
+// UNKNOWN,
+// STARTING,
+// RUNNING,
+// STOPPING,
+// STOPPED,
+
+// CommandState:
+// UNKNOWN,
+// STARTED,
+// FINISHED,
+// CANCELLED,
+
+
+.HISTORY_NOT_AVAILABLEState,
+.history_not_availableState,
+.UNKNOWNState,
+.unknownState,
+.STARTINGState,
+.startingState,
+.RUNNINGState,
+.runningState,
+.BUSYState,
+.busyState,
+.STOPPINGState,
+.stoppingState,
+.STOPPEDState,
+.stoppedState,
+.BACKOFFState,
+.backoffState,
+.EXITEDState,
+.exitedState,
+.FATALState,
+.fatalState {
+	.icon {
+		vertical-align: top;
+		.sprite(16, 16);
+		.iconMixin(16px, 16px);
+		padding: 0 2px;
+	}
+}
+
+.HISTORY_NOT_AVAILABLEState,
+.history_not_availableState,
+.UNKNOWNState,
+.unknownState {
+	.icon {
+		background-position: @state_unknown16x @state_unknown16y;
+	}
+	.summary {
+		color: @greyStatusColor;
+	}
+}
+
+.RUNNINGState,
+.runningState {
+	.icon {
+		background-position: @state_checkmark16x @state_checkmark16y;
+	}
+	.summary {
+		color: @greenStatusColor;
+	}
+}
+
+.STARTINGState,
+.startingState,
+.BUSYState,
+.busyState,
+.STOPPINGState,
+.stoppingState {
+	.icon {
+		background-position: @state_hourglass16x @state_hourglass16y;
+	}
+	.summary {
+		color: @khakiStatusColor;
+	}
+}
+
+.EXITEDState,
+.exitedState {
+	.icon {
+		background-position: @state_moon16x @state_moon16y;
+	}
+	.summary {
+		color: @greyStatusColor;
+	}
+}
+
+.STOPPEDState,
+.stoppedState {
+	.icon {
+		background-position: @state_moon16x @state_moon16y;
+	}
+	.summary {
+		color: @greyStatusColor;
+									}
+}
+
+.BACKOFFState,
+.backoffState {
+	.icon {
+		background-position: @state_warning16x @state_warning16y;
+	}
+	.summary {
+		color: #yellowStatusColor;
+	}
+}
+
+.FATALState,
+.fatalState {
+	.icon {
+		background-position: @state_error16x @state_error16y;
+	}
+	.summary {
+		color: #redStatusColor;
+	}
+}
+
+.ValidationBlock {
+	background-color: #f6f6f6;
+	border-bottom: 1px solid #ccc;
+}
+.ValidationBlock .heading {
+	color: #111;
+	display: inline-block;
+	text-decoration: none;
+	padding: 3px 8px 4px 8px;
+	font-weight: bold;
+}
+.ValidationBlock ul {
+	padding: 2px 8px 4px 12px;
+}
+.ValidationBlock .heading .icon {
+	margin: -1px 3px -3px -2px;
+}
+
+.ValidationBlock.check {
+	background-color: #e6ffdd;
+}
+.ValidationBlock.check .icon {
+	.sprite(16, 16);
+	background-position: @state_checkmark16x @state_checkmark16y;
+}
+.ValidationBlock.warning {
+	background-color: #fec;
+}
+.ValidationBlock.warning .icon {
+	.sprite(16, 16);
+	background-position: @state_warning16x @state_warning16y;
+}
+.ValidationBlock.error {
+	background-color: #fcc;
+}
+.ValidationBlock.error .icon {
+	.sprite(16, 16);
+	background-position: @state_error16x @state_error16y;
+}
+
+.FirstRunProgressRow.SUCCEEDED .Icon24x24.progress {
+	background-image: url(/static/cms/icons/color/checkmark.png);
+}
+.FirstRunProgressRow.RUNNING .Icon24x24.progress {
+	background-image: url(/static/cms/icons/color/spinner_bgf2.gif);
+}
+.FirstRunProgressRow.FAILED .Icon24x24.progress {
+	background-image: url(/static/cms/icons/color/error.png);
+}
+
+.label_productName_express,
+.label_productName_enterprise,
+.instantMarkerLargeIcon,
+.instantMarkerMediumIcon,
+.instantMarkerSmallIcon {
+	background-image: url('/static/cms/icons/sprite.png');
+	display: inline-block;
+	background-repeat: no-repeat;
+}
+
+.label_productName_express {
+	background-position: @product_express_x @product_express_y;
+	width: 330px;
+	height: 28px;
+}
+
+.label_productName_enterprise {
+	background-position: @product_enterprise_x @product_enterprise_y;
+	width: 172px;
+	height: 28px;
+}
+
+.currentMode .instantMarkerLargeIcon {
+	background-position: @instantMarkerBlueL_x @instantMarkerBlueL_y;
+	width: @instantMarkerL_w;
+	height: @instantMarkerL_h;
+}
+
+.currentMode .ui-draggable-dragging .instantMarkerLargeIcon,
+.historicalMode .instantMarkerLargeIcon {
+	background-position: @instantMarkerRedL_x @instantMarkerRedL_y;
+	width: @instantMarkerL_w;
+	height: @instantMarkerL_h;
+}
+
+.currentMode .instantMarkerMediumIcon {
+  background-position: @instantMarkerBlueM_x @instantMarkerBlueM_y;
+  width: @instantMarkerM_w;
+  height: @instantMarkerM_h;
+}
+
+.currentMode .ui-draggable-dragging .instantMarkerMediumIcon,
+.historicalMode .instantMarkerMediumIcon {
+  background-position: @instantMarkerRedM_x @instantMarkerRedM_y;
+  width: @instantMarkerM_w;
+  height: @instantMarkerM_h;
+}
+
+.currentMode .instantMarkerSmallIcon {
+  background-position: @instantMarkerBlueS_x @instantMarkerBlueS_y;
+	width: @instantMarkerS_w;
+	height: @instantMarkerS_h;
+}
+
+.currentMode .ui-draggable-dragging .instantMarkerSmallIcon,
+.historicalMode .instantMarkerSmallIcon {
+  background-position: @instantMarkerRedS_x @instantMarkerRedS_y;
+	width: @instantMarkerS_w;
+	height: @instantMarkerS_h;
+}
+
+.BasicSearch .go {
+	.icon(25px, 22px);
+	.sprite(32, 32);
+	vertical-align: top;
+	cursor: pointer;
+	background-position: @search_32x @search_32y;
+}
