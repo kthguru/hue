@@ -16,7 +16,7 @@ TOP := $(realpath .)
 
 CP := cp
 INSTALL := install
-MKDIR := mkdir
+MKDIR := mkdir -p
 TAR := tar
 RMF := rm -rf
 GZIP := gzip -f -c
@@ -26,6 +26,7 @@ EXT_DIR          := $(TOP)/ext
 
 JQUERY_DIR  := $(EXT_DIR)/jquery
 JQUERY_PLUGINS_DIR := $(JQUERY_DIR)/plugins
+CLOUDERA_PLUGINS_DIR := release/cloudera/plugins
 
 # External nodejs files; this is needed by the Less CSS compiler.
 NODE_VERSION   := node-v0.4.11
@@ -67,7 +68,10 @@ env/bin/jscoverage:
 	cd jscoverage-0.5.1 && ./configure --prefix=${TOP}/env && make && make install
 	rm -rf jscoverage-0.5.1
 
-jscompress: $(JQUERY_PLUGINS_DIR)/jquery-plugins-all-3.7.min.js
+$(CLOUDERA_PLUGINS_DIR):
+	$(MKDIR) release/cloudera/plugins
+
+jscompress: $(CLOUDERA_PLUGINS_DIR) $(JQUERY_PLUGINS_DIR)/jquery-plugins-all-3.7.min.js $(CLOUDERA_PLUGINS_DIR)/cloudera-plugins-all-3.7.min.js
 
 $(JQUERY_PLUGINS_DIR)/jquery-plugins-all-3.7.min.js: FORCE
 	@cat		 $(JQUERY_DIR)/js/jquery-ui-1.8.16.custom.min.js > $@
@@ -80,6 +84,8 @@ $(JQUERY_PLUGINS_DIR)/jquery-plugins-all-3.7.min.js: FORCE
 	@cat		 $(JQUERY_PLUGINS_DIR)/jquery.address-1.4.min.js >> $@
 	@cat		 $(JQUERY_PLUGINS_DIR)/jquery-tools-1.2.5.min.js >> $@
 
+$(CLOUDERA_PLUGINS_DIR)/cloudera-plugins-all-3.7.min.js: FORCE
+	${YUICOMPRESSOR} cloudera/layout/AutoOverFlow2.js > $@
 
 # This gets the latest cloudhead/less.js packages from github.com
 # See http://www.pimcore.org/wiki/display/PIMCORE/Install+lessc+on+your+server+(Debian)
