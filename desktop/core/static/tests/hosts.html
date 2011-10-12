@@ -1,19 +1,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <!-- A common head. Must extract, perhaps with a placeholder to insert some application specific stuff -->
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Cloudera Desktop</title>
+    <!-- Note: We concatenate the h1 content with this title, so this page would appear as "Page Name - Clouder Desktop" -->
+    <title> - Cloudera Desktop</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="stylesheet" href="/static/cms/css/boilerplate.css?v=3.0u3"/>
     <link rel="stylesheet" href="/static/cms/css/cms.css?v=3.0u3"/>
     <link rel="stylesheet" href="/static/ext/jquery/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />
-
     <script type="text/javascript" src="/static/ext/jquery/js/jquery-1.6.2.min.js"></script>
-    <script type-"text/javascript">jQuery.noConflict();</script>
+    <script type="text/javascript">jQuery.noConflict();</script>
   </head>
   <body class="Fill">
+    <!-- BEGIN: Common header. Must extract -->
     <table class="AppHeader">
       <tbody>
         <tr>
@@ -31,29 +32,26 @@
               <a href="/cmf/reports" >Reports</a>
             </span>
           </td>
-
-          <td class="alignRight"><form action="/cmf/search" class="BasicSearch">
+          <td class="alignRight">
+            <form action="/cmf/search" class="BasicSearch">
               <label class="hidden" title="Search by Service, Role or Host Name" for="BasicSearch">Search</label>
               <span class="inputAndGo"><input id="BasicSearch" title="Search by Service, Role or Host Name" type="text" name="q"/><span class="go" title="Search"></span></span>
             </form>
           </td>
           <td class="AppLinks"><a id="settingsTab" href="/cmf/settings"><span class="IconGear32x32" style="vertical-align: text-bottom" title="Administration"></span></a>
-            <span>
-              <a class='header'>Help<span class='arrowIcon'></span></a>
-              <ul class='menuOptions hidden'>
-                <li><a id="helpAppLink" href="/cmf/help/scm-help-guide" target="_blank">Help</a></li>
-                <li><a href="http://support.cloudera.com/" target="_blank">Support</a></li>
-              </ul>
-            </span>
+            <a id="helpAppLink" href="/cmf/help/scm-help-guide" target="_blank">Help</a>
+            <a href="http://support.cloudera.com/" target="_blank">Support</a>
             <a href="/j_spring_security_logout">Logout</a>
           </td>
         </tr>
       </tbody>
     </table><!-- AppHeader -->
+    <!-- END: Common Header -->
 
+    <h1>Page Name</h1>
     <div id="Main">
-      <h1>Page Name</h1>
-      <form action="do" method="POST">
+      <form action="do" method="post">
+        <!-- All components should be region based. A region may or may not have a RegionTitle. -->
         <div class="Region">
           <div class="RegionTitle">
             <h2>Hosts</h2>
@@ -61,8 +59,8 @@
           <div class="RegionContent">
             <div class="toolbar">
               Selected:
-              <input type="submit" name="action" label="Assign a rack to these hosts" value="Set Rack" />
-              <input type="submit" name="action" label="Delete these hosts from SCM" value="Delete" />
+              <input type="submit" name="action" title="Assign a rack to these hosts" value="Set Rack" />
+              <input type="submit" name="action" title="Delete these hosts from SCM" value="Delete" />
             </div>
             <div id="hosts" class="YScroll">
               <div class="XScroll">
@@ -85,9 +83,9 @@
                     </tr>
                     <tr class="cmfTableFilterRow ">
                       <th class="noSort">&nbsp;</th>
-                      <th><input class="filter" id="filterName" type="search" placeholder="Any Name"/></th>
-                      <th><input class="filter" id="filterIp" type="search" placeholder="Any IP"/></th>
-                      <th><input class="filter" id="filterRack" type="search" placeholder="Any Rack"/></th>
+                      <th><input class="filter" id="filterName" type="text"/></th>
+                      <th><input class="filter" id="filterIp" type="text"/></th>
+                      <th><input class="filter" id="filterRack" type="text"/></th>
                       <th>
                         <select class="filter" id="filterHealth">
                           <option value="">All</option>
@@ -111,7 +109,7 @@
                         </select>
                       </th>
                       <th>
-                        <input class="filter" id="filterNumCores" type="search" placeholder="Any Number of Cores"/>
+                        <input class="filter" id="filterNumCores" type="text"/>
                       </th>
                       <th>
                         <select class="filter" name="filterDiskUsage" id="filterDiskUsage">
@@ -121,7 +119,7 @@
                           <option value="Low">Low Usage</option>
                         </select>
                       </th>
-                      <th><input class="filter" id="filterLoad" type="search" placeholder="Any Load Average"/></th>
+                      <th><input class="filter" id="filterLoad" type="text"/></th>
                       <th>
                         <select class="filter" id="filterPMem">
                           <option value="">All</option>
@@ -235,14 +233,11 @@
                     <tr>
                       <td><input type="checkbox" name="id" value="11"/></td>
                       <td>
-
                         <a href="/cmf/hardware/hosts/11/status">c0421.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.138</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:44.914Z">
                         1.0s ago
                         <span class="hidden filterValue">
@@ -260,13 +255,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -283,23 +274,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="44"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/44/status">c0423.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.140</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:41.958Z">
                         4.0s ago
                         <span class="hidden filterValue">
@@ -317,13 +301,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.02</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -340,23 +320,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="64"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/64/status">c0537.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.189</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:45.009Z">
                         1.0s ago
                         <span class="hidden filterValue">
@@ -374,13 +347,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -397,23 +366,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="87"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/87/status">c0522.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.174</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:43.945Z">
                         2.0s ago
                         <span class="hidden filterValue">
@@ -431,13 +393,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -454,23 +412,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="56"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/56/status">c0420.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.137</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:41.948Z">
                         4.0s ago
                         <span class="hidden filterValue">
@@ -488,13 +439,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.01</td>
-
                               <td>0.04</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -511,23 +458,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="83"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/83/status">c0513.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.165</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:43.741Z">
                         2.0s ago
                         <span class="hidden filterValue">
@@ -545,13 +485,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -568,23 +504,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="66"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/66/status">c0535.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.187</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:44.915Z">
                         1.0s ago
                         <span class="hidden filterValue">
@@ -602,13 +531,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.17</td>
-
                               <td>0.06</td>
-
                               <td>0.02</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -625,23 +550,16 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="12"/></td>
 
-
                       <td>
-
                         <a href="/cmf/hardware/hosts/12/status">c0422.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.139</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:45.310Z">
                         1.0s ago
                         <span class="hidden filterValue">
@@ -659,13 +577,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                               <td>0.00</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -682,21 +596,15 @@
                           <span class="hidden filterValue"> priorityLow</span>
                         </div>
                       </td>
-
                     </tr>
-
                     <tr>
-
                       <td><input type="checkbox" name="id" value="1"/></td>
                       <td>
-
                         <a href="/cmf/hardware/hosts/1/status">c0215.hal.cloudera.com</a>
-
                       </td>
                       <td>172.29.81.62</td>
                       <td>/default</td>
                       <td><span class="goodHealth"><span title="Good" class="icon"></span>Good</span></td>
-
                       <td title="2011-10-12T05:07:45.386Z">
                         1.0s ago
                         <span class="hidden filterValue">
@@ -714,13 +622,9 @@
                         <table>
                           <tbody>
                             <tr>
-
                               <td>1.09</td>
-
                               <td>1.02</td>
-
                               <td>1.04</td>
-
                             </tr>
                           </tbody>
                         </table>
@@ -746,11 +650,27 @@
         </div>
       </form>
     </div>
+    <!-- There may be a common footer here -->
+
     <script type="text/javascript">
+    <!--
       jQuery(function($){
+        // Resizes the page's scrollable area.
         $("#hosts").AutoOverFlow2();
+
+        // Note:
+        // This is a bit of hack because we often
+        // saw title and <h1> are not in sync.
+        $h1 = $("h1:first");
+        if ($h1.length > 0) {
+          document.title = $h1.text() + " - Cloudera " + $(".AppHeader .productName").text();
+        } else {
+          document.title = "Cloudera " + $(".AppHeader .productName").text();
+        }
       });
+    -->
     </script>
+    <script type="text/javascript" src="/static/release/cloudera/plugins/cloudera-plugins-all-3.7.min.js"></script>
     <script type="text/javascript" src="/static/ext/jquery/plugins/jquery-plugins-all-3.7.min.js"></script>
   </body>
 </html>
