@@ -183,7 +183,7 @@ ${wrappers.head("Beeswax Table Metadata: " + table.tableName, section='tables')}
 <style>
 	#filechooser {
 		display:none;
-		height:100px;
+		min-height:100px;
 		overflow-y:scroll;
 	}
 </style>
