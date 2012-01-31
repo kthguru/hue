@@ -15,6 +15,7 @@
 # limitations under the License.
 from setuptools import setup, find_packages
 from hueversion import VERSION
+from babel.messages import frontend as babel
 
 setup(
       name = "useradmin",
@@ -26,4 +27,8 @@ setup(
       package_dir = {'': 'src'},
       install_requires = ['setuptools', 'desktop'],
       entry_points = { 'desktop.sdk.application': 'useradmin=useradmin' },
+      cmdclass = {'compile_catalog': babel.compile_catalog,
+                  'extract_messages': babel.extract_messages,
+                  'init_catalog': babel.init_catalog,
+                  'update_catalog': babel.update_catalog}
 )

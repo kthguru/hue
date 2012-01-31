@@ -28,11 +28,11 @@ ${wrappers.head()}
       <table class="datatables">
         <thead>
           <tr>
-            <th>Username</th>
+            <th>${_('Username')}</th>
             <th>${_('First Name')}</th>
-            <th>Last Name</th>
-            <th>E-mail</th>
-            <th>Last Login</th>
+            <th>${_('Last Name')}</th>
+            <th>${_('E-mail')}</th>
+            <th>${_('Last Login')}</th>
 			<th>&nbsp;</th>
           </tr>
         </head>
@@ -69,7 +69,7 @@ ${wrappers.head()}
 	</div>
 	</form>
 </div>
-      
+
 
 	<script type="text/javascript" charset="utf-8">
 		$(document).ready(function(){
@@ -97,7 +97,7 @@ ${wrappers.head()}
 			$(".hideModal").click(function(){
 				$("#deleteUser").modal("hide");
 			});
-			
+
 			$("#filterInput").keyup(function(){
 		        $.each($(".userRow"), function(index, value) {
 
@@ -116,7 +116,7 @@ ${wrappers.head()}
 		            $(value).show(250);
 		        });
 		    });
-		   
+
 
 		});
 	</script>

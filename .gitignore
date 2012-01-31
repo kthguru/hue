@@ -70,3 +70,6 @@ desktop/logs
 
 # Maven's target directory
 target
+
+# translated binary files
+*.mo
