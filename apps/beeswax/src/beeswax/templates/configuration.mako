@@ -25,7 +25,7 @@ ${layout.menubar(section='hive configuration')}
 	<h1>${_('Hive Configuration Variables')}</h1>
 	<div class="well">
 		<form class="form-search">
-            ${_('Filter:')} <input id="filterInput" class="input-xlarge search-query" placeholder="${_('Search for key, value, etc...')}">
+            ${_('Filter:')} <input type="text" id="filterInput" class="input-xlarge search-query" placeholder="${_('Search for key, value, etc...')}">
 		    <a href="#" id="clearFilterBtn" class="btn">${_('Clear')}</a>
 		</form>
 	</div>

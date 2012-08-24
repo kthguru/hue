@@ -210,14 +210,6 @@ ${ layout.menubar(section='workflows') }
 <script src="/static/ext/js/jquery/plugins/jquery-ui-autocomplete-1.8.18.min.js" type="text/javascript" charset="utf-8"></script>
 
 <style>
-  .pathChooser, .pathChooserKo {
-    border-radius: 3px 0 0 3px;
-    border-right:0;
-  }
-  .fileChooserBtn {
-    border-radius: 0 3px 3px 0;
-  }
-
   #fileChooserModal {
     padding:14px;
     height:270px;

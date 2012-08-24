@@ -42,7 +42,7 @@ ${ layout.menubar(section='workflows') }
     <div class="row-fluid">
       <div class="span4">
         <form class="form-search">
-          ${ _('Filter:') } <input id="filterInput" class="input-xlarge search-query" placeholder="${ _('Search for username, name, etc...') }">
+          ${ _('Filter:') } <input type="text" id="filterInput" class="input-xlarge search-query" placeholder="${ _('Search for username, name, etc...') }">
         </form>
       </div>
       <div class="span4">
