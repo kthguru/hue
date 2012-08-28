@@ -77,10 +77,10 @@ from django.utils.translation import ugettext as _
 </%def>
 
 <%def name="list_table_browser(files, path, current_request_path, cwd_set=True)">
-  ${_table(files, path, current_request_path, 'view', cwd_set)}
+  ${_table(files, path, current_request_path, 'view')}
 </%def>
 
-<%def name="_table(files, path, current_request_path, view, cwd_set=False)">
+<%def name="_table(files, path, current_request_path, view)">
     <script src="/static/ext/js/knockout-2.0.0.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/ext/js/datatables-paging-0.1.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
@@ -103,13 +103,9 @@ from django.utils.translation import ugettext as _
     <table class="table table-condensed table-striped datatables">
         <thead>
             <tr>
-                <th width="1%"><input id="selectAll" type="checkbox" /></th>
+                <th width="1%"><input id="selectAll" type="checkbox" data-bind="click: selectAll, checked: allSelected"/></th>
                 <th class="sortable sorting" data-sort="type" width="4%">Type</th>
-            % if cwd_set:
                 <th class="sortable sorting" data-sort="name">${_('Name')}</th>
-            % else:
-                <th class="sortable sorting" data-sort="name">${_('Path')}</th>
-            % endif
                 <th class="sortable sorting" data-sort="size" width="10%">${_('Size')}</th>
                 <th class="sortable sorting" data-sort="user" width="10%">${_('User')}</th>
                 <th class="sortable sorting" data-sort="group" width="10%">${_('Group')}</th>
@@ -117,82 +113,8 @@ from django.utils.translation import ugettext as _
                 <th class="sortable sorting" data-sort="mtime" width="15%">${_('Date')}</th>
             </tr>
         </thead>
-        <tbody id="files" class="hide">
-            % for file in files:
-            <%
-              icon = 'icon-file'
-              checkbox_class = 'checkbox_file'
-              if file['type'] == 'dir':
-                icon = 'icon-folder-close'
-                checkbox_class = 'checkbox_folder'
-              endif
+        <tbody id="files" data-bind="template: {name: 'fileTemplate', foreach: files}">
 
-              if cwd_set:
-                display_name = file['name']
-              else:
-                display_name = file['path']
-              endif
-
-              row_class = 'file-row'
-              if '..' == display_name:
-                row_class += ' parent'
-              endif
-            %>
-
-            <% path = file['path'] %>
-            <tr class="${row_class}" data-search="${display_name}">
-                <td class="center" data-row-selector-exclude="true">
-                    % if display_name != "..":
-                    <input value="${path}" type="checkbox" class="fileSelect ${checkbox_class}" data-row-selector-exclude="true" data-bind="checked: selectedFiles"  />
-                    %endif
-                </td>
-                <td class="left"><i class="${icon}"></i></td>
-                <td>
-                    <h5><a href="${url('filebrowser.views.'+view, path=urlencode(path))}?file_filter=${file_filter}" data-row-selector="true">${display_name}</a></h5>
-                </td>
-                <td>
-                    % if "dir" == file['type']:
-                    <span></span>
-                    % else:
-                    <span>${file['stats']['size']|filesizeformat}</span>
-                    % endif
-                </td>
-                <td>${file['stats']['user']}</td>
-                <td>${file['stats']['group']}</td>
-                <td>${file['rwx']}</td>
-                <td>${date(datetime.datetime.fromtimestamp(file['stats']['mtime']))} ${time(datetime.datetime.fromtimestamp(file['stats']['mtime'])).replace("p.m.","PM").replace("a.m.","AM")}</td>
-##                <td data-row-selector-exclude="true">
-##                    % if ".." != file['name']:
-##                    <%
-##                    path_digest = urlencode(md5.md5(smart_str(path)).hexdigest())
-##                    %>
-##                    <div class="btn-group" data-row-selector-exclude="true">
-##                        <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-##                            ${_('Operations')}
-##                            <span class="caret"></span>
-##                        </a>
-##                        <ul class="dropdown-menu pull-right">
-##                            % if "file" == file['type']:
-##                            <li><a href="${url('filebrowser.views.view', path=urlencode(path))}">${_('View File')}</a></li>
-##                            <li><a href="${url('filebrowser.views.edit', path=urlencode(path))}">${_('Edit File')}</a></li>
-##                            <li><a href="${url('filebrowser.views.download', path=urlencode(path))}" target="_blank">${_('Download File')}</a></li>
-##                            % endif
-##                            <li><a class="rename" file-to-rename="${path}">${_('Rename')}</a></li>
-##                            <li><a onclick="openChownWindow('${path}','${file['stats']['user']}','${file['stats']['group']}','${current_request_path}')">${_('Change Owner / Group')}</a></li>
-##                            <li><a onclick="openChmodWindow('${path}','${stringformat(file['stats']['mode'], "o")}','${current_request_path}')">${_('Change Permissions')}</a></li>
-##                            <li><a onclick="openMoveModal('${path}','${stringformat(file['stats']['mode'], "o")}', '${current_request_path}')">${_('Move')}</a></li>
-##                            % if "dir" == file['type']:
-##                            <li><a class="delete" delete-type="rmdir" file-to-delete="${path}" data-keyboard="true">${_('Delete')}</a></li>
-##                            <li><a class="delete" delete-type="rmtree" file-to-delete="${path}" data-keyboard="true">${_('Delete Recursively')}</a></li>
-##                            % else:
-##                            <li><a class="delete" delete-type="remove" file-to-delete="${path}" data-keyboard="true">${_('Delete')}</a></li>
-##                            % endif
-##                        </ul>
-##                    </div>
-##                    % endif
-##                </td>
-            </tr>
-            % endfor
         </tbody>
     </table>
 
@@ -446,7 +368,7 @@ from django.utils.translation import ugettext as _
         //delete handlers
         $(".delete").live("click", function(e){
             $("#fileToDeleteInput").attr("value", $(e.target).attr("file-to-delete"));
-            $("#deleteForm").attr("action", "/filebrowser/" + $(e.target).attr("delete-type") + "?next=" + encodeURI("${current_request_path}") + "&path=" + encodeURI("${path}"));
+            $("#deleteForm").attr("action", "/filebrowser/" + $(e.target).attr("delete-type") + "?next=" + encodeURI("${current_request_path}") + "&path=" + encodeURI(""));
             $("#deleteModal").modal({
                 keyboard: true,
                 show: true
@@ -622,18 +544,64 @@ from django.utils.translation import ugettext as _
 
     });
 
-    function FileBrowserModel() {
-        var self = this;
-        self.selectedFiles = ko.observableArray([]);
 
-        self.addFileToSelection = function(path){
-            self.selectedFiles.push(path);
-        };
+    $.getJSON("/filebrowser/${current_request_path}?format=json", function(data){
+        ko.applyBindings(new FileBrowserModel(data.files));
+    });
+
+    var File = function(file){
+        return {
+            name: file.name,
+            path: file.path,
+            url: file.url,
+            type: file.type,
+            permissions: file.rwx,
+            selected: ko.observable(false)
+        }
     }
 
-    var viewModel = new FileBrowserModel();
+    var FileBrowserModel = function(files) {
+        var self = this;
 
-    ko.applyBindings(viewModel);
+        self.files = ko.observableArray(ko.utils.arrayMap(files, function(file) {
+            return new File(file);
+        }));
+
+        self.saelectedFiles = ko.observableArray();
+
+        self.allSelected = ko.observable(false);
+
+        self.selectAll = function() {
+            ko.utils.arrayForEach(self.files(), function(file) {
+                file.selected(!self.allSelected());
+            });
+            return true;
+        }
+
+        self.selectedFiles = ko.computed(function() {
+            return ko.utils.arrayFilter(self.files(), function(file) {
+                return file.selected();
+            });
+        }, self);
+
+
+        self.viewFile = function(file) {
+            location.href = "/filebrowser/view/" + encodeURIComponent(file.path);
+        };
+
+    };
+
 </script>
+    <div data-bind="text: ko.toJSON($root.selectedFiles)"></div>​
 
+    <script id="fileTemplate" type="text/html">
+        <tr>
+            <td class="center" data-row-selector-exclude="true">
+                <input data-bind="value: path, checked: selected, visible: name!='..'" type="checkbox" data-row-selector-exclude="true"  />
+            </td>
+            <td colspan="7">
+                <h5><a href="#" data-row-selector="true" data-bind="click: $root.viewFile, text: name"></a></h5>
+            </td>
+        </tr>
+    </script>
 </%def>

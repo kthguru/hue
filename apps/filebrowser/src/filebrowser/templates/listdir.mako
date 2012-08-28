@@ -19,7 +19,7 @@ from desktop.views import commonheader, commonfooter
 from django.utils.translation import ugettext as _
 %>
 
-<%namespace name="dir" file="listdir_components.mako" />
+<%namespace name="dir" file="listdir_components_ko.mako" />
 <%namespace name="fb_components" file="fb_components.mako" />
 
 ${commonheader(_('File Browser'), 'filebrowser')}

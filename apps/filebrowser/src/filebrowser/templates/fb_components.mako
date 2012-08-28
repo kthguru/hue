@@ -27,8 +27,17 @@ from django.utils.translation import ugettext as _
     <div class="subnav">
         % if from_listdir:
         <p class="pull-right">
-            <a href="#" class="btn upload-link">${_('Upload files')}</a>
-            <a href="#" class="btn create-directory-link">${_('New directory')}</a>
+
+            <button id="btnFileEdit" class="btn fileToolbarBtn" title="${_('Edit File')}" rel="tooltip" data-bind="enable: selectedFiles().length == 1"><i class="icon-pencil"></i></button>
+            <button id="btnFileDownload" class="btn fileToolbarBtn" title="${_('Download File')}" rel="tooltip" data-bind="enable: selectedFiles().length == 1"><i class="icon-download"></i></button>
+            <button id="btnFileRename" class="btn fileToolbarBtn" title="${_('Rename')}" rel="tooltip" data-bind="enable: selectedFiles().length == 1"><i class="icon-font"></i></button>
+            <button id="btnFileMove" class="btn fileToolbarBtn" title="${_('Move')}" rel="tooltip" data-bind="enable: selectedFiles().length > 0"><i class="icon-random"></i></button>
+            <button id="btnFileChangeOwner" class="btn fileToolbarBtn" title="${_('Change Owner / Group')}" rel="tooltip" data-bind="enable: selectedFiles().length > 0"><i class="icon-user"></i></button>
+            <button id="btnFileChangePermissions" class="btn fileToolbarBtn" title="${_('Change Permissions')}" rel="tooltip" data-bind="enable: selectedFiles().length > 0"><i class="icon-list-alt"></i></button>
+            <button id="btnFileDelete" class="btn fileToolbarBtn" title="${_('Delete')}" rel="tooltip" data-bind="enable: selectedFiles().length > 0"><i class="icon-trash"></i></button>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#" class="btn upload-link" title="${_('Upload files')}" rel="tooltip"><i class="icon-upload"></i></a>
+            <a href="#" class="btn create-directory-link" title="${_('New directory')}" rel="tooltip"><i class="icon-folder-close"></i></a>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="text" value="${current_filter}" class="input-medium search-query" placeholder="${_('Search for file name')}">
             <a href="#" class="btn filter">${_('Search')}</a>

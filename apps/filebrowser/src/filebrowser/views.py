@@ -27,13 +27,15 @@ import operator
 import posixpath
 import stat as stat_module
 import os
+from types import MethodType
+
 try:
   import json
 except ImportError:
   import simplejson as json
 
 from django.contrib import messages
-from django.core import urlresolvers
+from django.core import urlresolvers, serializers
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.views.static import was_modified_since
 from django.utils.http import http_date, urlquote
@@ -352,6 +354,17 @@ def listdir(request, path, chooser):
     else:
         return render('listdir.mako', request, data)
 
+def _massage_page(page):
+    return {
+        'number': page.number,
+        'num_pages': page.num_pages(),
+        'previous_page_number': page.previous_page_number(),
+        'next_page_number': page.next_page_number(),
+        'start_index': page.start_index(),
+        'end_index': page.end_index(),
+        'total_count': page.total_count()
+    }
+
 def listdir_paged(request, path):
     """
     A paginated version of listdir.
@@ -416,7 +429,7 @@ def listdir_paged(request, path):
         'breadcrumbs': breadcrumbs,
         'current_request_path': request.path,
         'files': page.object_list,
-        'page': page,
+        'page': _massage_page(page),
         'pagesize': pagesize,
         'home_directory': request.fs.isdir(home_dir_path) and home_dir_path or None,
         'filter_str': filter_str,
