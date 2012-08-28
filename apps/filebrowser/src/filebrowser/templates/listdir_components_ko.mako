@@ -82,6 +82,7 @@ from django.utils.translation import ugettext as _
 
 <%def name="_table(files, path, current_request_path, view)">
     <script src="/static/ext/js/knockout-2.0.0.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/static/ext/js/moment.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/ext/js/datatables-paging-0.1.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
         .pull-right {
@@ -490,62 +491,10 @@ from django.utils.translation import ugettext as _
         });
 
         $("*[rel='tooltip']").tooltip();
-        $("#selectAll").change(function(){
-            if ($(this).is(":checked")){
-                //$(".fileSelect").attr("checked", "checked");
-                $(".fileSelect").each(function(){
-                    if ($(this).not(":checked")){
-                        $(this).click();
-                    }
-                });
-                //handleSelectedFiles();
-            }
-            else {
-                $(".fileSelect").removeAttr("checked");
-                //handleSelectedFiles();
-            }
-        });
-        /*
-
-        $(".fileSelect").change(function(){
-            handleSelectedFiles();
-        });
-
-        function handleSelectedFiles(){
-            var matches = $(".fileSelect:checked");
-            if (matches.length > 0){
-                if (matches.length != $(".fileSelect").length){
-                    $("#selectAll").removeAttr("checked");
-                }
-                if (matches.length == 1){
-                    if (matches.eq(0).hasClass("checkbox_file")){
-                        $(".fileToolbarBtn").removeAttr("disabled");
-                    }
-                    else {
-                        $(".fileToolbarBtn").removeAttr("disabled");
-                        $("#btnFileView").attr("disabled", "disabled");
-                        $("#btnFileEdit").attr("disabled", "disabled");
-                        $("#btnFileDownload").attr("disabled", "disabled");
-                    }
-                }
-                else {
-                    $(".fileToolbarBtn").attr("disabled", "disabled");
-                    $("#btnFileMove").removeAttr("disabled");
-                    $("#btnFileChangeOwner").removeAttr("disabled");
-                    $("#btnFileChangePermissions").removeAttr("disabled");
-                    $("#btnFileDelete").removeAttr("disabled");
-                }
-            }
-            else {
-                $(".fileToolbarBtn").attr("disabled", "disabled");
-            }
-        }
-        */
-
     });
 
 
-    $.getJSON("/filebrowser/${current_request_path}?format=json", function(data){
+    $.getJSON("${current_request_path}?format=json", function(data){
         ko.applyBindings(new FileBrowserModel(data.files));
     });
 
@@ -556,6 +505,12 @@ from django.utils.translation import ugettext as _
             url: file.url,
             type: file.type,
             permissions: file.rwx,
+            stats: {
+                size: file.stats.size,
+                user: file.stats.user,
+                group: file.stats.group,
+                mtime: moment.unix(file.stats.mtime).format("MMMM DD, YYYY hh:mm a")
+            },
             selected: ko.observable(false)
         }
     }
@@ -592,16 +547,24 @@ from django.utils.translation import ugettext as _
     };
 
 </script>
-    <div data-bind="text: ko.toJSON($root.selectedFiles)"></div>​
 
-    <script id="fileTemplate" type="text/html">
-        <tr>
-            <td class="center" data-row-selector-exclude="true">
-                <input data-bind="value: path, checked: selected, visible: name!='..'" type="checkbox" data-row-selector-exclude="true"  />
-            </td>
-            <td colspan="7">
-                <h5><a href="#" data-row-selector="true" data-bind="click: $root.viewFile, text: name"></a></h5>
-            </td>
-        </tr>
-    </script>
+<script id="fileTemplate" type="text/html">
+    <tr>
+        <td class="center" data-row-selector-exclude="true">
+            <input data-bind="value: path, checked: selected, visible: name!='..'" type="checkbox" data-row-selector-exclude="true"  />
+        </td>
+        <td class="right"><i data-bind="css: {'icon-file': type == 'file', 'icon-folder-close': type != 'file'}"></i></td>
+        <td>
+            <h5><a href="#" data-row-selector="true" data-bind="click: $root.viewFile, text: name"></a></h5>
+        </td>
+        <td>
+            <span data-bind="visible: type=='file', text: stats.size"></span>
+        </td>
+        <td data-bind="text: stats.user"></td>
+        <td data-bind="text: stats.group"></td>
+        <td data-bind="text: permissions"></td>
+        <td data-bind="text: stats.mtime"></td>
+    </tr>
+</script>
+
 </%def>
