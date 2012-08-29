@@ -165,13 +165,11 @@ from django.utils.translation import ugettext as _
             <h3>${_('Uploading to:')} <span id="uploadDirName" data-bind="text: currentPath"></span></h3>
         </div>
         <div class="modal-body">
-            <form data-bind="submit: upload" method="POST" enctype="multipart/form-data" class="form-stacked">
-                <div id="fileUploader">
-                <noscript>
-                    <p>${_('Please enable JavaScript to use the file uploader.')}</p>
-                </noscript>
-                </div>
-            </form>
+            <div id="fileUploader">
+            <noscript>
+                <p>${_('Please enable JavaScript to use the file uploader.')}</p>
+            </noscript>
+            </div>
         </div>
         <div class="modal-footer"></div>
     </div>
@@ -255,8 +253,9 @@ from django.utils.translation import ugettext as _
 
         //uploader
         var num_of_pending_uploads = 0;
+        var uploader = null;
         function createUploader(){
-            var uploader = new qq.FileUploader({
+            uploader = new qq.FileUploader({
                 element: document.getElementById("fileUploader"),
                 action: "/filebrowser/upload",
                 template: '<div class="qq-uploader">' +
@@ -272,13 +271,13 @@ from django.utils.translation import ugettext as _
                         '<span class="qq-upload-failed-text">${_('Failed')}</span>' +
                         '</li>',
                 params:{
-                    dest: "${current_dir_path}",
+                    dest: viewModel.currentPath(),
                     fileFieldLabel: "hdfs_file"
                 },
                 onComplete:function(id, fileName, responseJSON){
                     num_of_pending_uploads--;
                     if(num_of_pending_uploads == 0){
-                        window.location = "/filebrowser/view${current_dir_path}";
+                        window.location = "/filebrowser/view" + viewModel.currentPath();
                     }
                 },
                 onSubmit:function(id, fileName, responseJSON){
@@ -505,6 +504,10 @@ from django.utils.translation import ugettext as _
                     return new Breadcrumb(breadcrumb);
                 }));
                 self.currentPath(currentDirPath);
+                uploader.setParams({
+                    dest: self.currentPath(),
+                    fileFieldLabel: "hdfs_file"
+                });
                 self.isLoading(false);
             };
 
@@ -591,7 +594,7 @@ from django.utils.translation import ugettext as _
 
             self.deleteSelected = function () {
                 $("#fileToDeleteInput").attr("value", self.selectedFile().path);
-                $("#deleteForm").attr("action", "/filebrowser/" + (self.selectedFile().type == "dir" ? "rmtree" : "remove") + "?next=${url('filebrowser.views.view', path=urlencode('/'))}" + self.currentPath() + "&path=" + self.selectedFile().path);
+                $("#deleteForm").attr("action", "/filebrowser/" + (self.selectedFile().type == "dir" ? "rmtree" : "remove") + "?next=${url('filebrowser.views.view', path=urlencode('/'))}" + "." + self.currentPath() + "&path=" + self.selectedFile().path);
                 $("#deleteModal").modal({
                     keyboard:true,
                     show:true
@@ -599,12 +602,8 @@ from django.utils.translation import ugettext as _
             };
 
             self.createDirectory = function (formElement) {
-                $(formElement).attr("action", "/filebrowser/mkdir?next=${url('filebrowser.views.view', path=urlencode('/'))}" + self.currentPath());
+                $(formElement).attr("action", "/filebrowser/mkdir?next=${url('filebrowser.views.view', path=urlencode('/'))}"+ "." + self.currentPath());
                 return true;
-            };
-
-            self.upload = function (formElement) {
-                $(formElement).attr("action", "/filebrowser/upload?next=${url('filebrowser.views.view', path=urlencode('/'))}" + self.currentPath());
             };
         };
 
