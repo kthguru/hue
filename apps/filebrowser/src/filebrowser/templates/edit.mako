@@ -26,7 +26,7 @@
 %>
 <%namespace name="fb_components" file="fb_components.mako" />
 
-${commonheader(_('%(filename)s - File Viewer') % dict(filename=truncate(filename)), 'filebrowser')}
+${commonheader(_('%(filename)s - File Viewer') % dict(filename=truncate(filename)), 'filebrowser', '70px')}
 
 <div class="container-fluid">
 	% if breadcrumbs:

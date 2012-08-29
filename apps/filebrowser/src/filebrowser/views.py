@@ -36,6 +36,7 @@ except ImportError:
 
 from django.contrib import messages
 from django.core import urlresolvers, serializers
+from django.template.defaultfilters import stringformat, filesizeformat
 from django.http import Http404, HttpResponse, HttpResponseNotModified
 from django.views.static import was_modified_since
 from django.utils.http import http_date, urlquote
@@ -391,15 +392,6 @@ def listdir_paged(request, path):
 
     all_stats = request.fs.listdir_stats(path)
 
-    # Include parent dir, unless at filesystem root.
-    if Hdfs.normpath(path) != posixpath.sep:
-        parent_path = request.fs.join(path, "..")
-        parent_stat = request.fs.stats(parent_path)
-        # The 'path' field would be absolute, but we want its basename to be
-        # actually '..' for display purposes. Encode it since _massage_stats expects byte strings.
-        parent_stat['path'] = parent_path
-        parent_stat['name'] = ".."
-        all_stats.insert(0, parent_stat)
 
     # Filter first
     filter_str = request.GET.get('filter', None)
@@ -419,10 +411,21 @@ def listdir_paged(request, path):
                                key=operator.attrgetter(sortby),
                                reverse=coerce_bool(descending_param))
 
+
     # Do pagination
     page = paginator.Paginator(all_stats, pagesize).page(pagenum)
     shown_stats = page.object_list
+    # Include parent dir always as first option, unless at filesystem root.
+    if Hdfs.normpath(path) != posixpath.sep:
+        parent_path = request.fs.join(path, "..")
+        parent_stat = request.fs.stats(parent_path)
+        # The 'path' field would be absolute, but we want its basename to be
+        # actually '..' for display purposes. Encode it since _massage_stats expects byte strings.
+        parent_stat['path'] = parent_path
+        parent_stat['name'] = ".."
+        shown_stats.insert(0, parent_stat)
     page.object_list = [ _massage_stats(request, s) for s in shown_stats ]
+
 
     data = {
         'path': path,
@@ -473,8 +476,10 @@ def _massage_stats(request, stats):
         'path': normalized,
         'name': stats['name'],
         'stats': stats.to_json_dict(),
+        'humansize': filesizeformat(stats['size']),
         'type': filetype(stats['mode']),
         'rwx': rwx(stats['mode']),
+        'mode': stringformat(stats['mode'], "o"),
         'url': make_absolute(request, "view", dict(path=urlquote(normalized))),
         }
 

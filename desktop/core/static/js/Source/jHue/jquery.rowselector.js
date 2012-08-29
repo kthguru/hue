@@ -21,13 +21,14 @@
 	};
 
 	Plugin.prototype.init = function () {
-		var _this = this;		
+		var _this = this;
         $(_this.element).closest("tr").click(function(e){
             if ($(e.target).data("row-selector-exclude")){
                 return;
             }
             if (!$(e.target).is("a")){
-                if ($.trim($(_this.element).attr("href")) != ""){
+                console.log($.trim($(_this.element).attr("href")));
+                if ($.trim($(_this.element).attr("href")) != "" && $.trim($(_this.element).attr("href")) != "#"){
                     location.href = $(_this.element).attr("href");
                 }
                 else {
