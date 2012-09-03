@@ -35,6 +35,14 @@ from django.utils.translation import ugettext as _
     <script src="/static/ext/js/moment.min.js" type="text/javascript" charset="utf-8"></script>
     <script src="/static/ext/js/datatables-paging-0.1.js" type="text/javascript" charset="utf-8"></script>
     <style type="text/css">
+        .fixed {
+            position: fixed;
+            top: 40px;
+            filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ffffffff', endColorstr='#fff2f2f2', GradientType=0);
+            -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+            -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+        }
         .pull-right {
             margin: 4px;
         }
@@ -46,7 +54,7 @@ from django.utils.translation import ugettext as _
         }
     </style>
 
-    <table class="table table-condensed table-striped datatables" data-bind="">
+    <table class="table table-striped datatables" data-bind="">
         <thead>
             <tr>
                 <th width="1%"><input id="selectAll" type="checkbox" data-bind="click: selectAll, checked: allSelected"/></th>
@@ -83,17 +91,17 @@ from django.utils.translation import ugettext as _
             <td class="center">
                 <input data-bind="value: path, checked: selected, visible: name != '..'" type="checkbox" data-row-selector-exclude="true"  />
             </td>
-            <td data-bind="click: name != '..' ? selected:false" class="center"><i data-bind="css: {'icon-file': type == 'file', 'icon-folder-close': type != 'file'}"></i></td>
-            <td data-bind="click: name != '..' ? selected:false">
+            <td data-bind="click: $root.viewFile" class="left"><i data-bind="css: {'icon-file': type == 'file', 'icon-folder-close': type != 'file'}"></i></td>
+            <td data-bind="click: $root.viewFile">
                 <h5><a href="#" data-bind="click: $root.viewFile, text: name"></a></h5>
             </td>
-            <td data-bind="click: name != '..' ? selected:false">
+            <td data-bind="click: $root.viewFile">
                 <span data-bind="visible: type=='file', text: stats.size"></span>
             </td>
-            <td data-bind="click: name != '..' ? selected:false, text: stats.user"></td>
-            <td data-bind="click: name != '..' ? selected:false, text: stats.group"></td>
-            <td data-bind="click: name != '..' ? selected:false, text: permissions"></td>
-            <td data-bind="click: name != '..' ? selected:false, text: stats.mtime"></td>
+            <td data-bind="click: $root.viewFile, text: stats.user"></td>
+            <td data-bind="click: $root.viewFile, text: stats.group"></td>
+            <td data-bind="click: $root.viewFile, text: permissions"></td>
+            <td data-bind="click: $root.viewFile, text: stats.mtime"></td>
         </tr>
     </script>
 
@@ -287,11 +295,26 @@ from django.utils.translation import ugettext as _
             });
         }
 
-        // in your app create uploader as soon as the DOM is ready
-        // don"t wait for the window to load
-        window.onload = createUploader;
+        $(document).scroll(function(){
+            var el = $(".subnav");
+            if (!el.data("top")) {
+                if (el.hasClass("fixed")){
+                    return;
+                }
+                var offset = el.offset()
+                el.data("top", offset.top).data("width", el.width());
+            }
+            if (el.data("top") - el.outerHeight() <= $(this).scrollTop()+1){
+                el.width(el.data("width")).addClass("fixed");
+            }
+            else {
+                el.width("100%").data("width", el.width()).removeClass("fixed");
+            }
+        });
 
         $(document).ready(function(){
+
+            createUploader();
 
             $("#cancelDeleteBtn").click(function(){
                 $("#deleteModal").modal("hide");
@@ -378,8 +401,10 @@ from django.utils.translation import ugettext as _
                 $("#fileChooserRename").slideDown();
             });
 
-            $("*[rel='tooltip']").tooltip({ placement: "bottom" });
-
+            //$("*[rel='tooltip']").tooltip({ placement: "bottom" });
+            if (window.location.hash != null && window.location.hash.length > 1){
+                viewModel.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + window.location.hash.substring(2));
+            }
             viewModel.retrieveData();
         });
 
@@ -496,6 +521,8 @@ from django.utils.translation import ugettext as _
             };
 
             self.updateFileList = function (files, page, breadcrumbs, currentDirPath) {
+                window.location.hash = currentDirPath;
+
                 self.page(new Page(page));
                 self.files(ko.utils.arrayMap(files, function (file) {
                     return new File(file);
@@ -504,10 +531,12 @@ from django.utils.translation import ugettext as _
                     return new Breadcrumb(breadcrumb);
                 }));
                 self.currentPath(currentDirPath);
-                uploader.setParams({
-                    dest: self.currentPath(),
-                    fileFieldLabel: "hdfs_file"
-                });
+                if (uploader != null){
+                    uploader.setParams({
+                        dest: self.currentPath(),
+                        fileFieldLabel: "hdfs_file"
+                    });
+                }
                 self.isLoading(false);
             };
 

@@ -19,39 +19,70 @@ from django.utils.translation import ugettext as _
 %>
 
 <%def name="breadcrumbs(path, breadcrumbs, from_listdir=False)">
-    <%
-    current_filter = ""
-    if filter_str is not None:
-        current_filter = filter_str
-    %>
-    <div class="subnav subnav-fixed">
-        % if from_listdir:
-        <p class="pull-right">
-
-            <button class="btn fileToolbarBtn" title="${_('Edit File')}" rel="tooltip" data-bind="click: editFile, enable: selectedFiles().length == 1 && selectedFile().type == 'file'"><i class="icon-pencil"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Download File')}" rel="tooltip" data-bind="click: downloadFile, enable: selectedFiles().length == 1 && selectedFile().type == 'file'"><i class="icon-download"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Rename')}" rel="tooltip" data-bind="click: renameFile, enable: selectedFiles().length == 1"><i class="icon-font"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Move')}" rel="tooltip" data-bind="click: move, enable: selectedFiles().length == 1"><i class="icon-random"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Change Owner / Group')}" rel="tooltip" data-bind="click: changeOwner, enable: selectedFiles().length == 1"><i class="icon-user"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Change Permissions')}" rel="tooltip" data-bind="click: changePermissions, enable: selectedFiles().length == 1"><i class="icon-list-alt"></i></button>
-            <button class="btn fileToolbarBtn" title="${_('Delete')}" rel="tooltip" data-bind="click: deleteSelected, enable: selectedFiles().length == 1"><i class="icon-trash"></i></button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#" class="btn upload-link" title="${_('Upload files')}" rel="tooltip"><i class="icon-upload"></i></a>
-            <a href="#" class="btn create-directory-link" title="${_('New directory')}" rel="tooltip"><i class="icon-folder-close"></i></a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="text" class="input-medium search-query" placeholder="${_('Search for file name')}" data-bind="value: searchQuery">
-            <a href="#" class="btn" data-bind="click: filter">${_('Search')}</a>
-        </p>
-        % endif
-        <ul class="nav nav-pills">
-          <li><a href="${url('filebrowser.views.view', path=urlencode(path))}?default_to_home"><i class="icon-home"></i> ${_('Home')}</a></li>
-          <li>
-            <ul class="hueBreadcrumb" data-bind="foreach: breadcrumbs">
-                <li data-bind="visible: label == '/'"><a href="#" data-bind="click: show"><span class="divider" data-bind="text: label"></span></a></li>
-                <li data-bind="visible: label != '/'"><a href="#" data-bind="text: label, click: show"></a><span class="divider">/</span></li>
-            </ul>
-          </li>
+    % if from_listdir:
+        <div class="subnavContainer">
+            <div class="subnav">
+                <p class="pull-right">
+                    <input type="text" class="input-medium search-query" placeholder="${_('Search for file name')}" data-bind="value: searchQuery">
+                    <a href="#" class="btn" data-bind="click: filter">${_('Search')}</a>
+                </p>
+                <p style="padding: 4px">
+                    <button class="btn fileToolbarBtn" title="${_('Rename')}" rel="tooltip" data-bind="click: renameFile, enable: selectedFiles().length == 1"><i class="icon-font"></i> ${_('Rename')}</button>
+                    <button class="btn fileToolbarBtn" title="${_('Move')}" rel="tooltip" data-bind="click: move, enable: selectedFiles().length == 1"><i class="icon-random"></i> ${_('Move')}</button>
+                    <button class="btn fileToolbarBtn" title="${_('Change Owner / Group')}" rel="tooltip" data-bind="click: changeOwner, enable: selectedFiles().length == 1"><i class="icon-user"></i> ${_('Change Owner / Group')}</button>
+                    <button class="btn fileToolbarBtn" title="${_('Change Permissions')}" rel="tooltip" data-bind="click: changePermissions, enable: selectedFiles().length == 1"><i class="icon-list-alt"></i> ${_('Change Permissions')}</button>
+                    <button class="btn fileToolbarBtn" title="${_('Delete')}" rel="tooltip" data-bind="click: deleteSelected, enable: selectedFiles().length == 1"><i class="icon-trash"></i> ${_('Delete')}</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="btn upload-link" title="${_('Upload files')}" rel="tooltip"><i class="icon-upload"></i> ${_('Upload files')}</a>
+                    <a href="#" class="btn create-directory-link" title="${_('New directory')}" rel="tooltip"><i class="icon-folder-close"></i> ${_('New directory')}</a>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                </p>
+            </div>
+        </div>
+        <br/>
+        <ul class="nav nav-pills hueBreadcrumbBar">
+            <li><a href="${url('filebrowser.views.view', path=urlencode(path))}?default_to_home"><i class="icon-home"></i> ${_('Home')}</a></li>
+            <li>
+                <ul class="hueBreadcrumb" data-bind="foreach: breadcrumbs">
+                    <li data-bind="visible: label == '/'"><a href="#" data-bind="click: show"><span class="divider" data-bind="text: label"></span></a></li>
+                    <li data-bind="visible: label != '/'"><a href="#" data-bind="text: label, click: show"></a><span class="divider">/</span></li>
+                </ul>
+            </li>
         </ul>
-    </div>
-    <br/>
+    % else:
+        <ul class="nav nav-pills hueBreadcrumbBar">
+            <li><a href="${url('filebrowser.views.view', path=urlencode(path))}?default_to_home"><i class="icon-home"></i> ${_('Home')}</a></li>
+            <li>
+                <ul class="hueBreadcrumb">
+                        % for breadcrumb_item in breadcrumbs:
+                        <% label = breadcrumb_item['label'] %>
+                        %if label == '/':
+                                <li><a href="/filebrowser/view${breadcrumb_item['url']}"><span
+                                        class="divider">${label | h}<span></a></li>
+                        %else:
+                                <li><a href="/filebrowser/view${breadcrumb_item['url']}">${label | h}</a><span class="divider">/</span></li>
+                        %endif
+                        % endfor
+                </ul>
+            </li>
+        </ul>
+    % endif
+
+    <style type="text/css">
+        .subnavContainer {
+            height: 36px;
+        }
+        .hueBreadcrumbBar {
+            padding: 8px 15px;
+            margin: 0 0 20px;
+            list-style: none;
+            border: 1px solid #E5E5E5;
+            -webkit-border-radius: 4px;
+            -moz-border-radius: 4px;
+            border-radius: 4px;
+        }
+        .hueBreadcrumb {
+            margin: 0!important;
+        }
+    </style>
 </%def>
