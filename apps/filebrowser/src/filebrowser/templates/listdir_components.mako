@@ -406,6 +406,15 @@ from django.utils.translation import ugettext as _
                 viewModel.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + window.location.hash.substring(2));
             }
             viewModel.retrieveData();
+
+            var filterTimeout = -1;
+            $(".search-query").keyup(function(){
+                window.clearTimeout(filterTimeout);
+                filterTimeout = window.setTimeout(function(){
+                    viewModel.searchQuery($(".search-query").val());
+                    viewModel.filter();
+                }, 500);
+            });
         });
 
 
