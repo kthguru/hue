@@ -87,7 +87,7 @@ from django.utils.translation import ugettext as _
     </table>
 
     <script id="fileTemplate" type="text/html">
-        <tr>
+        <tr style="cursor: pointer">
             <td class="center">
                 <input data-bind="value: path, checked: selected, visible: name != '..'" type="checkbox" data-row-selector-exclude="true"  />
             </td>
@@ -417,8 +417,9 @@ from django.utils.translation import ugettext as _
             });
 
             $("#editBreadcrumb").click(function(){
+                $(this).hide();
                 $(".hueBreadcrumb").hide();
-                $("#hueBreadcrumbText").show();
+                $("#hueBreadcrumbText").show().focus();
             });
 
             $("#hueBreadcrumbText").keyup(function(e){
@@ -427,6 +428,27 @@ from django.utils.translation import ugettext as _
                     viewModel.retrieveData();
                 }
             });
+
+            $("#hueBreadcrumbText").blur(function(){
+                $(this).hide();
+                $(".hueBreadcrumb").show();
+                $("#editBreadcrumb").show();
+            });
+
+            $.ajaxSetup({
+                error: function(x, e) {
+                    if (x.status == 500) {
+                        $.jHueNotify.error("${_('There was a problem with your request.')}");
+                        $("#hueBreadcrumbText").blur();
+                    }
+                }
+            });
+
+            $(window).bind("hashchange", function() {
+                viewModel.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + window.location.hash.substring(2));
+                viewModel.retrieveData();
+            });
+
 
         });
 
@@ -471,7 +493,7 @@ from django.utils.translation import ugettext as _
                 label:breadcrumb.label,
                 show:function () {
                     viewModel.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + this.url);
-                    viewModel.retrieveData();
+                    window.location.hash = this.url;
                 }
             }
         }
@@ -542,13 +564,12 @@ from django.utils.translation import ugettext as _
                     if ($("#hueBreadcrumbText").is(":visible")){
                         $(".hueBreadcrumb").show();
                         $("#hueBreadcrumbText").hide();
+                        $("#editBreadcrumb").show();
                     }
                 });
             };
 
             self.updateFileList = function (files, page, breadcrumbs, currentDirPath) {
-                window.location.hash = currentDirPath;
-
                 self.page(new Page(page));
                 self.files(ko.utils.arrayMap(files, function (file) {
                     return new File(file);
@@ -610,7 +631,7 @@ from django.utils.translation import ugettext as _
             self.viewFile = function (file) {
                 if (file.type == "dir") {
                     self.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + "." + file.path);
-                    self.retrieveData();
+                    window.location.hash = file.path;
                 }
                 else {
                     location.href = "${url('filebrowser.views.view', path=urlencode('/'))}" + file.path;

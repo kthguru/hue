@@ -23,8 +23,7 @@ from django.utils.translation import ugettext as _
         <div class="subnavContainer">
             <div class="subnav">
                 <p class="pull-right">
-                    <input type="text" class="input-medium search-query" placeholder="${_('Search for file name')}" data-bind="value: searchQuery">
-                    <a href="#" class="btn" data-bind="click: filter">${_('Search')}</a>
+                    <input type="text" class="input-xlarge search-query" placeholder="${_('Search for file name')}" data-bind="value: searchQuery">
                 </p>
                 <p style="padding: 4px">
                     <button class="btn fileToolbarBtn" title="${_('Rename')}" rel="tooltip" data-bind="click: renameFile, enable: selectedFiles().length == 1"><i class="icon-font"></i> ${_('Rename')}</button>
@@ -48,7 +47,7 @@ from django.utils.translation import ugettext as _
                     <li data-bind="visible: label == '/'"><a href="#" data-bind="click: show"><span class="divider" data-bind="text: label"></span></a></li>
                     <li data-bind="visible: label != '/'"><a href="#" data-bind="text: label, click: show"></a><span class="divider">/</span></li>
                 </ul>
-                <input id="hueBreadcrumbText" type="text" style="margin-top:4px;margin-right:4px;display:none" data-bind="value: currentPath" />
+                <input id="hueBreadcrumbText" type="text" class="input-xlarge" style="margin-top:4px;margin-right:4px;display:none" data-bind="value: currentPath" />
             </li>
         </ul>
     % else:
