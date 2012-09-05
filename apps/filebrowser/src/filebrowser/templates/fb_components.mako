@@ -43,10 +43,12 @@ from django.utils.translation import ugettext as _
         <ul class="nav nav-pills hueBreadcrumbBar">
             <li><a href="${url('filebrowser.views.view', path=urlencode(path))}?default_to_home"><i class="icon-home"></i> ${_('Home')}</a></li>
             <li>
-                <ul class="hueBreadcrumb" data-bind="foreach: breadcrumbs">
+                <span style="float:right; margin-top:10px;"><i id="editBreadcrumb" class="icon-pencil"></i></span>
+                <ul class="hueBreadcrumb" data-bind="foreach: breadcrumbs" style="padding-right:40px">
                     <li data-bind="visible: label == '/'"><a href="#" data-bind="click: show"><span class="divider" data-bind="text: label"></span></a></li>
                     <li data-bind="visible: label != '/'"><a href="#" data-bind="text: label, click: show"></a><span class="divider">/</span></li>
                 </ul>
+                <input id="hueBreadcrumbText" type="text" style="margin-top:4px;margin-right:4px;display:none" data-bind="value: currentPath" />
             </li>
         </ul>
     % else:

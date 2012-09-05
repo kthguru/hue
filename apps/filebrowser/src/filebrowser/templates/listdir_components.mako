@@ -415,6 +415,19 @@ from django.utils.translation import ugettext as _
                     viewModel.filter();
                 }, 500);
             });
+
+            $("#editBreadcrumb").click(function(){
+                $(".hueBreadcrumb").hide();
+                $("#hueBreadcrumbText").show();
+            });
+
+            $("#hueBreadcrumbText").keyup(function(e){
+                if (e.keyCode == 13){
+                    viewModel.targetPath("${url('filebrowser.views.view', path=urlencode('/'))}" + $(this).val().substring(1));
+                    viewModel.retrieveData();
+                }
+            });
+
         });
 
 
@@ -526,6 +539,10 @@ from django.utils.translation import ugettext as _
                 self.isLoading(true);
                 $.getJSON(self.targetPath() + "?pagesize=" + self.recordsPerPage() + "&pagenum=" + self.targetPageNum() + "&filter=" + self.searchQuery() + "&sortby=" + self.sortBy() + "&descending=" + self.sortDescending() + "&format=json", function (data) {
                     self.updateFileList(data.files, data.page, data.breadcrumbs, data.current_dir_path);
+                    if ($("#hueBreadcrumbText").is(":visible")){
+                        $(".hueBreadcrumb").show();
+                        $("#hueBreadcrumbText").hide();
+                    }
                 });
             };
 
