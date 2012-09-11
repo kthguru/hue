@@ -99,11 +99,11 @@ def jobs(request):
   """
   check_permission = not conf.SHARE_JOBS.get() and not request.user.is_superuser
 
-  jobs = get_matching_jobs(request, check_permission)
+  user = request.GET.get('user', request.user.username)
+  jobs = get_matching_jobs(request, check_permission, user=user)
 
   matching_jobs = sort_if_necessary(request, jobs)
   state = request.GET.get('state', 'all')
-  user = request.GET.get('user', request.user.username)
   text = request.GET.get('text', '')
   retired = request.GET.get('retired', '')
   return render("jobs.mako", request, {
